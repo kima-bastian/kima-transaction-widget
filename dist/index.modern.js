@@ -1005,6 +1005,7 @@ const initialState = {
   pendingTxs: 0,
   pendingTxData: [],
   kimaExplorerUrl: 'explorer.kima.finance',
+  redirectUrl: '',
   mode: ModeOptions.bridge,
   sourceChain: '',
   targetChain: '',
@@ -1231,6 +1232,9 @@ const optionSlice = createSlice({
     },
     setSelectedBankAccount: (state, action) => {
       state.selectedBankAccount = action.payload;
+    },
+    setRedirectUrl: (state, action) => {
+      state.redirectUrl = action.payload;
     }
   }
 });
@@ -1287,7 +1291,8 @@ const {
   setPendingTxs,
   setDepasifyAccounts,
   setSelectedAccount,
-  setSelectedBankAccount
+  setSelectedBankAccount,
+  setRedirectUrl
 } = optionSlice.actions;
 var optionReducer = optionSlice.reducer;
 
@@ -1307,6 +1312,7 @@ const selectNetworkOption = state => state.option.networkOption;
 const selectTokenOptions = state => state.option.tokenOptions;
 const selectTheme = state => state.option.theme;
 const selectKimaExplorer = state => state.option.kimaExplorerUrl;
+const selectRedirectUrl = state => state.option.redirectUrl;
 const selectSourceChain = state => state.option.sourceChain;
 const selectTargetChain = state => state.option.targetChain;
 const selectTargetAddress = state => state.option.targetAddress;
@@ -2839,12 +2845,32 @@ const StepBox = ({
   const theme = useSelector(selectTheme);
   const explorerUrl = useSelector(selectKimaExplorer);
   const networkOption = useSelector(selectNetworkOption);
+  const redirectUrl = useSelector(selectRedirectUrl);
   const CHAIN_NAMES_TO_EXPLORER = networkOption === NetworkOptions.mainnet ? CHAIN_NAMES_TO_EXPLORER_MAINNET : CHAIN_NAMES_TO_EXPLORER_TESTNET;
+  const [successTrigger, setSuccessTrigger] = useState(false);
+  useEffect(() => {
+    if (step === 4) {
+      setTimeout(() => {
+        setSuccessTrigger(true);
+      }, 2000);
+    }
+  }, [step]);
+  useEffect(() => {
+    if (successTrigger && redirectUrl) {
+      setTimeout(() => {
+        window.location.replace(redirectUrl);
+      }, 3000);
+    }
+  }, [successTrigger]);
   return React.createElement("div", {
     className: 'kima-stepbox'
   }, React.createElement("div", {
     className: 'content-wrapper'
-  }, stepInfo$1.map((item, index) => React.createElement("div", {
+  }, successTrigger && redirectUrl ? React.createElement("div", null, React.createElement("h1", null, "Onramp transaction succeeded!"), React.createElement("div", null, React.createElement("p", {
+    className: 'text-center'
+  }, "You will now be redirected to the source page"), React.createElement(ExternalLink, {
+    to: redirectUrl
+  }, "Go back"))) : stepInfo$1.map((item, index) => React.createElement("div", {
     key: item.title,
     className: 'step-item'
   }, React.createElement("div", {
@@ -3068,7 +3094,7 @@ const TransactionWidget = ({
     className: 'topbar'
   }, React.createElement("div", {
     className: 'title'
-  }, React.createElement("h3", null, "Transferring ", formatterFloat.format((data === null || data === void 0 ? void 0 : data.amount) || 0), ' ', (data === null || data === void 0 ? void 0 : data.symbol) || 'USDK', "\u00A0\u00A0", `(${percent}%)`)), !minimized ? React.createElement("div", {
+  }, React.createElement("h3", null, "Transferring ", data !== null && data !== void 0 && data.amount ? formatterFloat.format(data.amount) : '', ' ', (data === null || data === void 0 ? void 0 : data.symbol) || '', "\u00A0\u00A0", `(${percent}%)`)), !minimized ? React.createElement("div", {
     className: 'control-buttons'
   }, React.createElement("button", {
     className: 'icon-button',
@@ -11303,25 +11329,19 @@ const ConfirmOnrampDetails = () => {
   const theme = useSelector(selectTheme);
   const amount = useSelector(selectAmount);
   const targetNetwork = useSelector(selectTargetChain);
-  const {
-    isReady,
-    walletAddress
-  } = useIsWalletReady();
   const targetAddress = useSelector(selectTargetAddress);
   const targetNetworkOption = useMemo(() => networkOptions.filter(network => network.id === targetNetwork)[0], [networkOptions, targetNetwork]);
   const selectedCoin = useSelector(selectSelectedToken);
   const selectedAccount = useSelector(selectSelectedAccount);
   const selectedBankAccount = useSelector(selectSelectedBankAccount);
-  const sourceWalletAddress = useMemo(() => {
-    return getShortenedAddress(walletAddress || '');
-  }, [walletAddress]);
+  console.log("amount: ", amount);
   return React.createElement("div", {
     className: `confirm-details ${theme.colorMode}`
   }, React.createElement("div", {
     className: 'detail-item'
   }, React.createElement("span", {
     className: 'label'
-  }, "Target wallet:"), React.createElement("p", null, isReady ? sourceWalletAddress : getShortenedAddress(targetAddress)), React.createElement("span", {
+  }, "Target wallet:"), React.createElement("p", null, getShortenedAddress(targetAddress)), React.createElement("span", {
     className: 'kima-card-network-label'
   }, React.createElement(targetNetworkOption.icon, null), targetNetworkOption.label)), React.createElement("div", {
     className: 'detail-item'
@@ -11454,6 +11474,7 @@ const OnrampForm = ({
   const selectedCoin = useSelector(selectSelectedToken);
   const sourceNetwork = useSelector(selectSourceChain);
   const targetNetwork = useSelector(selectTargetChain);
+  const targetAddress = useSelector(selectTargetAddress);
   const selectedBankAccount = useSelector(selectSelectedBankAccount);
   const [amountValue, setAmountValue] = useState('');
   const amount = useSelector(selectAmount);
@@ -11479,11 +11500,15 @@ const OnrampForm = ({
     className: 'form-item'
   }, React.createElement("span", {
     className: 'label'
-  }, "Target Network"), React.createElement(NetworkDropdown, null)), React.createElement("div", {
+  }, "Target Network"), React.createElement(NetworkDropdown, null)), transactionOption ? React.createElement("div", {
+    className: `form-item ${theme.colorMode}`
+  }, React.createElement("span", {
+    className: 'label'
+  }, "Target Address:"), React.createElement("strong", null, targetAddress || "...")) : React.createElement("div", {
     className: 'form-item wallet-button-item'
   }, React.createElement("span", {
     className: 'label'
-  }, "Connect wallet:"), React.createElement(WalletButton, null)), !isReady && React.createElement("div", null, React.createElement("h4", {
+  }, "Connect wallet:"), React.createElement(WalletButton, null)), !isReady && !transactionOption && React.createElement("div", null, React.createElement("h4", {
     className: 'text-center'
   }, "or"), React.createElement("div", {
     className: `form-item ${theme.colorMode}`
@@ -11503,7 +11528,7 @@ const OnrampForm = ({
     className: `form-item ${theme.colorMode}`
   }, React.createElement("span", {
     className: 'label'
-  }, "Balance:"), (selectedBankAccount === null || selectedBankAccount === void 0 ? void 0 : selectedBankAccount.balance) !== undefined ? `${selectedBankAccount.balance} EUR` : '...'), mode === ModeOptions.bridge || mode === ModeOptions.onramp ? React.createElement("div", {
+  }, "Balance:"), (selectedBankAccount === null || selectedBankAccount === void 0 ? void 0 : selectedBankAccount.balance) !== undefined ? `${selectedBankAccount.balance} EUR` : '...'), !transactionOption ? React.createElement("div", {
     className: `form-item ${theme.colorMode}`
   }, React.createElement("span", {
     className: 'label'
@@ -11524,7 +11549,7 @@ const OnrampForm = ({
     className: 'label'
   }, "Amount:"), React.createElement("div", {
     className: `amount-label ${theme.colorMode}`
-  }, React.createElement("span", null, (transactionOption === null || transactionOption === void 0 ? void 0 : transactionOption.amount) || ''), React.createElement("div", {
+  }, React.createElement("span", null, transactionOption.amount || ''), React.createElement("div", {
     className: 'coin-wrapper'
   }, React.createElement(Icon, null), selectedCoin))), mode === ModeOptions.bridge && serviceFee > 0 ? React.createElement(CustomCheckbox, {
     text: sourceNetwork === ChainName.BTC ? `Deduct ${formatterFloat.format(serviceFee)} BTC fee` : `Deduct $${formatterFloat.format(serviceFee)} fee`,
@@ -11565,6 +11590,7 @@ const TransferWidget = ({
   const selectedToken = useSelector(selectSelectedToken);
   const backendUrl = useSelector(selectBackendUrl);
   const nodeProviderQuery = useSelector(selectNodeProviderQuery);
+  const redirectUrl = useSelector(selectRedirectUrl);
   const bankDetails = useSelector(selectBankDetails);
   const kycStatus = useSelector(selectKycStatus);
   const expireTime = useSelector(selectExpireTime);
@@ -11615,7 +11641,7 @@ const TransferWidget = ({
     return approved;
   }, [approved, isBTCSigned, sourceChain]);
   useEffect(() => {
-    if (!walletAddress) return;
+    if (!walletAddress || transactionOption) return;
     dispatch(setTargetAddress(walletAddress));
     if (!compliantOption) return;
     (async function () {
@@ -11801,7 +11827,7 @@ const TransferWidget = ({
     if (mode === ModeOptions.onramp) {
       setSubmitting(true);
       const params = {
-        originAddress: walletAddress,
+        originAddress: '',
         originChain: 'FIAT',
         targetAddress: targetAddress || walletAddress,
         targetChain: targetChain,
@@ -11824,7 +11850,7 @@ const TransferWidget = ({
       await fetchWrapper.post(`${backendUrl}/auth`, JSON.stringify(params));
       const result = await fetchWrapper.post(`${backendUrl}/submit/onramp`, onrampParams);
       if ((result === null || result === void 0 ? void 0 : result.code) !== 0) {
-        toast$1.error("Something went wrong");
+        toast$1.error('Something went wrong');
       }
       const txId = result.kimaTxHash;
       let selectedBankAccountCopy = {
@@ -11986,8 +12012,9 @@ const TransferWidget = ({
     if (mode === ModeOptions.onramp) {
       if (formStep === 0) {
         if (!isReady && (targetAddress === null || targetAddress === void 0 ? void 0 : targetAddress.length) < 10) return toast$1.error('Invalid address');
-        if (parseFloat(amount) < 0 || (selectedBankAccount === null || selectedBankAccount === void 0 ? void 0 : selectedBankAccount.balance) < parseFloat(amount)) return toast$1.error('Invalid amount');
+        if (!transactionOption && (amount.length === 0 || parseFloat(amount) < 0 || (selectedBankAccount === null || selectedBankAccount === void 0 ? void 0 : selectedBankAccount.balance) < parseFloat(amount))) return toast$1.error('Invalid amount');
         if (!targetChain) return toast$1.error('Invalid network selected');
+        if (!selectedBankAccount) return toast$1.error('Invalid bank account');
         setFormStep(1);
         return;
       }
@@ -12169,7 +12196,7 @@ const TransferWidget = ({
     to: helpURL ? helpURL : 'https://docs.kima.finance/demo'
   }, React.createElement("div", {
     className: 'menu-button'
-  }, "I need help")), React.createElement("button", {
+  }, "I need help")), !redirectUrl && React.createElement("button", {
     className: 'icon-button',
     onClick: () => {
       if (isApproving || isSubmitting || isSigning) return;
@@ -12282,6 +12309,7 @@ const KimaTransactionWidget = ({
   kimaNodeProviderQuery,
   kimaExplorer: _kimaExplorer = 'explorer.kima.finance',
   feeURL: _feeURL = 'https://fee.kima.finance',
+  redirectURL,
   errorHandler: _errorHandler = () => void 0,
   closeHandler: _closeHandler = () => void 0,
   successHandler: _successHandler = () => void 0,
@@ -12296,7 +12324,11 @@ const KimaTransactionWidget = ({
   useEffect(() => {
     dispatch(setTheme(theme));
     setThemeMode(theme.colorMode === ColorModeOptions.light ? 'light' : 'dark');
-    if (transactionOption) dispatch(setTransactionOption(transactionOption));
+    if (transactionOption) {
+      dispatch(setTransactionOption(transactionOption));
+      dispatch(setTargetAddress(transactionOption.targetAddress));
+      dispatch(setAmount(transactionOption.amount.toString()));
+    }
     dispatch(setKimaExplorer(_kimaExplorer));
     dispatch(setCompliantOption(_compliantOption));
     dispatch(setErrorHandler(_errorHandler));
@@ -12306,6 +12338,7 @@ const KimaTransactionWidget = ({
     dispatch(setSwitchChainHandler(_switchChainHandler));
     dispatch(setBackendUrl(kimaBackendUrl));
     dispatch(setNodeProviderQuery(kimaNodeProviderQuery));
+    dispatch(setRedirectUrl(redirectURL));
     dispatch(setMode(mode));
     dispatch(setProvider(provider));
     dispatch(setDappOption(_dAppOption));
@@ -12333,6 +12366,13 @@ const KimaTransactionWidget = ({
           dispatch(setDepasifyAccounts(accounts.accountsWithBankInfo));
           dispatch(setSelectedAccount(accounts.accountsWithBankInfo[0]));
           dispatch(setSelectedBankAccount(accounts.accountsWithBankInfo[0].bankAccounts[0]));
+          if (transactionOption) {
+            const networks = await fetchWrapper.get(`${kimaNodeProviderQuery}/kima-finance/kima-blockchain/chains/get_available_chains/FIAT`);
+            if (!networks.Chains.includes(transactionOption.targetChain)) {
+              return toast.error("Specified network not supported!");
+            }
+            dispatch(setTargetChain(transactionOption.targetChain));
+          }
         } catch (error) {
           console.error(error);
           toast.error("can't get accounts from depasify");

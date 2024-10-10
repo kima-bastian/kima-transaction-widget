@@ -15,6 +15,7 @@ interface Props {
     compliantOption?: boolean;
     helpURL?: string;
     feeURL?: string;
+    redirectURL?: string;
     transactionOption?: TransactionOption;
     paymentTitleOption?: PaymentTitleOption;
     kimaBackendUrl: string;
@@ -27,5 +28,5 @@ interface Props {
     switchChainHandler?: (chainId: number) => void;
     keplrHandler?: (e: any) => void;
 }
-export declare const KimaTransactionWidget: ({ mode, txId, autoSwitchChain, defaultToken, networkOption, provider, dAppOption, theme, titleOption, paymentTitleOption, useFIAT, helpURL, compliantOption, transactionOption, kimaBackendUrl, kimaNodeProviderQuery, kimaExplorer, feeURL, errorHandler, closeHandler, successHandler, switchChainHandler, keplrHandler }: Props) => React.JSX.Element;
+export declare const KimaTransactionWidget: ({ mode, txId, autoSwitchChain, defaultToken, networkOption, provider, dAppOption, theme, titleOption, paymentTitleOption, useFIAT, helpURL, compliantOption, transactionOption, kimaBackendUrl, kimaNodeProviderQuery, kimaExplorer, feeURL, redirectURL, errorHandler, closeHandler, successHandler, switchChainHandler, keplrHandler }: Props) => React.JSX.Element;
 export {};

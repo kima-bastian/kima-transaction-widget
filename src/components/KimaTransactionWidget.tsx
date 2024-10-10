@@ -41,7 +41,8 @@ import {
   setNetworkOption,
   setDepasifyAccounts,
   setSelectedAccount,
-  setSelectedBankAccount
+  setSelectedBankAccount,
+  setRedirectUrl
 } from '../store/optionSlice'
 import '../index.css'
 import { selectSubmitted } from '../store/selectors'
@@ -66,6 +67,7 @@ interface Props {
   compliantOption?: boolean
   helpURL?: string
   feeURL?: string
+  redirectURL?: string
   transactionOption?: TransactionOption
   paymentTitleOption?: PaymentTitleOption
   kimaBackendUrl: string
@@ -98,6 +100,7 @@ export const KimaTransactionWidget = ({
   kimaNodeProviderQuery,
   kimaExplorer = 'explorer.kima.finance',
   feeURL = 'https://fee.kima.finance',
+  redirectURL,
   errorHandler = () => void 0,
   closeHandler = () => void 0,
   successHandler = () => void 0,
@@ -112,7 +115,11 @@ export const KimaTransactionWidget = ({
     dispatch(setTheme(theme))
     setThemeMode(theme.colorMode === ColorModeOptions.light ? 'light' : 'dark')
 
-    if (transactionOption) dispatch(setTransactionOption(transactionOption))
+    if (transactionOption) {
+      dispatch(setTransactionOption(transactionOption))
+      dispatch(setTargetAddress(transactionOption.targetAddress))
+      dispatch(setAmount(transactionOption.amount.toString()))
+    }
 
     dispatch(setKimaExplorer(kimaExplorer))
     dispatch(setCompliantOption(compliantOption))
@@ -123,6 +130,7 @@ export const KimaTransactionWidget = ({
     dispatch(setSwitchChainHandler(switchChainHandler))
     dispatch(setBackendUrl(kimaBackendUrl))
     dispatch(setNodeProviderQuery(kimaNodeProviderQuery))
+    dispatch(setRedirectUrl(redirectURL))
     dispatch(setMode(mode))
     dispatch(setProvider(provider))
     dispatch(setDappOption(dAppOption))
@@ -153,6 +161,20 @@ export const KimaTransactionWidget = ({
           dispatch(setSelectedAccount(accounts.accountsWithBankInfo[0]))
           dispatch(setSelectedBankAccount(accounts.accountsWithBankInfo[0].bankAccounts[0]))
           
+          // logic for getting network options
+          if (transactionOption){
+            
+            const networks: any = await fetchWrapper.get(
+              `${kimaNodeProviderQuery}/kima-finance/kima-blockchain/chains/get_available_chains/FIAT`
+            )
+
+            if(!networks.Chains.includes(transactionOption.targetChain)){
+              return toast.error("Specified network not supported!")
+            }
+
+            dispatch(setTargetChain(transactionOption.targetChain))
+          }
+
         } catch (error) {
           console.error(error);
           toast.error("can't get accounts from depasify")

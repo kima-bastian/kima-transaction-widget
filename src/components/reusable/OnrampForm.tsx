@@ -14,6 +14,7 @@ import {
   selectFeeDeduct,
   selectAmount,
   selectSelectedBankAccount,
+  selectTargetAddress
 } from '../../store/selectors'
 import { AddressInput, CoinDropdown, CustomCheckbox, WalletButton } from '.'
 import { setAmount, setFeeDeduct } from '../../store/optionSlice'
@@ -42,6 +43,7 @@ const OnrampForm = ({
   const selectedCoin = useSelector(selectSelectedToken)
   const sourceNetwork = useSelector(selectSourceChain)
   const targetNetwork = useSelector(selectTargetChain)
+  const targetAddress = useSelector(selectTargetAddress)
   const selectedBankAccount = useSelector(selectSelectedBankAccount)
   const [amountValue, setAmountValue] = useState('')
   const amount = useSelector(selectAmount)
@@ -71,17 +73,23 @@ const OnrampForm = ({
       <p className='payment-title' style={paymentTitleOption?.style}>
         {paymentTitleOption?.title}
       </p>
+
       <div className='form-item'>
         <span className='label'>Target Network</span>
-        <NetworkDropdown />
+          <NetworkDropdown />
       </div>
-      {
+      {transactionOption ? (
+        <div className={`form-item ${theme.colorMode}`}>
+          <span className='label'>Target Address:</span>
+          <strong>{targetAddress || "..."}</strong>
+        </div>
+      ) : (
         <div className='form-item wallet-button-item'>
           <span className='label'>Connect wallet:</span>
           <WalletButton />
         </div>
-      }
-      {!isReady && (
+      )}
+      {!isReady && !transactionOption && (
         <div>
           <h4 className='text-center'>or</h4>
           <div className={`form-item ${theme.colorMode}`}>
@@ -101,9 +109,11 @@ const OnrampForm = ({
       </div>
       <div className={`form-item ${theme.colorMode}`}>
         <span className='label'>Balance:</span>
-        {selectedBankAccount?.balance !== undefined ? `${selectedBankAccount.balance} EUR` : '...'}
+        {selectedBankAccount?.balance !== undefined
+          ? `${selectedBankAccount.balance} EUR`
+          : '...'}
       </div>
-      {mode === ModeOptions.bridge || mode === ModeOptions.onramp ? (
+      {!transactionOption ? (
         <div className={`form-item ${theme.colorMode}`}>
           <span className='label'>Amount:</span>
           <div className='amount-label-container'>
@@ -128,7 +138,7 @@ const OnrampForm = ({
         <div className={`form-item ${theme.colorMode}`}>
           <span className='label'>Amount:</span>
           <div className={`amount-label ${theme.colorMode}`}>
-            <span>{transactionOption?.amount || ''}</span>
+            <span>{transactionOption.amount || ''}</span>
             <div className='coin-wrapper'>
               {<Icon />}
               {selectedCoin}

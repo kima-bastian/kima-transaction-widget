@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react'
 import { useSelector } from 'react-redux'
 // import { formatterFloat } from '../../helpers/functions'
-import useIsWalletReady from '../../hooks/useIsWalletReady'
+// import useIsWalletReady from '../../hooks/useIsWalletReady'
 import {
   selectAmount,
   // selectFeeDeduct,
@@ -23,7 +23,7 @@ const ConfirmOnrampDetails = () => {
   // const serviceFee = useSelector(selectServiceFee)
   // const originNetwork = useSelector(selectSourceChain)
   const targetNetwork = useSelector(selectTargetChain)
-  const { isReady, walletAddress } = useIsWalletReady()
+  // const { walletAddress } = useIsWalletReady()
   const targetAddress = useSelector(selectTargetAddress);
   const targetNetworkOption = useMemo(
     () => networkOptions.filter((network) => network.id === targetNetwork)[0],
@@ -33,9 +33,9 @@ const ConfirmOnrampDetails = () => {
   const selectedAccount = useSelector(selectSelectedAccount)
   const selectedBankAccount = useSelector(selectSelectedBankAccount)
 
-  const sourceWalletAddress = useMemo(() => {
-    return getShortenedAddress(walletAddress || '')
-  }, [walletAddress])
+  // const sourceWalletAddress = useMemo(() => {
+  //   return getShortenedAddress(walletAddress || '')
+  // }, [walletAddress])
 
   // const amountToShow = useMemo(() => {
   //   if (originNetwork === ChainName.BTC || targetNetwork === ChainName.BTC) {
@@ -45,12 +45,14 @@ const ConfirmOnrampDetails = () => {
   //   return formatterFloat.format(feeDeduct ? +amount : +amount + serviceFee)
   // }, [amount, serviceFee, originNetwork, targetNetwork, feeDeduct])
 
+  console.log("amount: ", amount);
+
   return (
     <div className={`confirm-details ${theme.colorMode}`}>
       <div className='detail-item'>
         <span className='label'>Target wallet:</span>
         <p>
-          {isReady ? sourceWalletAddress:getShortenedAddress(targetAddress)}
+          {getShortenedAddress(targetAddress)}
         </p>
         <span className='kima-card-network-label'>
           <targetNetworkOption.icon />

@@ -1026,6 +1026,7 @@ var initialState = {
   pendingTxs: 0,
   pendingTxData: [],
   kimaExplorerUrl: 'explorer.kima.finance',
+  redirectUrl: '',
   mode: exports.ModeOptions.bridge,
   sourceChain: '',
   targetChain: '',
@@ -1262,6 +1263,9 @@ var optionSlice = createSlice({
     },
     setSelectedBankAccount: function setSelectedBankAccount(state, action) {
       state.selectedBankAccount = action.payload;
+    },
+    setRedirectUrl: function setRedirectUrl(state, action) {
+      state.redirectUrl = action.payload;
     }
   }
 });
@@ -1314,7 +1318,8 @@ var _optionSlice$actions = optionSlice.actions,
   setPendingTxs = _optionSlice$actions.setPendingTxs,
   setDepasifyAccounts = _optionSlice$actions.setDepasifyAccounts,
   setSelectedAccount = _optionSlice$actions.setSelectedAccount,
-  setSelectedBankAccount = _optionSlice$actions.setSelectedBankAccount;
+  setSelectedBankAccount = _optionSlice$actions.setSelectedBankAccount,
+  setRedirectUrl = _optionSlice$actions.setRedirectUrl;
 var optionReducer = optionSlice.reducer;
 
 var configureStore = toolkitRaw.configureStore;
@@ -1505,6 +1510,9 @@ var selectTheme = function selectTheme(state) {
 };
 var selectKimaExplorer = function selectKimaExplorer(state) {
   return state.option.kimaExplorerUrl;
+};
+var selectRedirectUrl = function selectRedirectUrl(state) {
+  return state.option.redirectUrl;
 };
 var selectSourceChain = function selectSourceChain(state) {
   return state.option.sourceChain;
@@ -3348,12 +3356,34 @@ var StepBox = function StepBox(_ref) {
   var theme = reactRedux.useSelector(selectTheme);
   var explorerUrl = reactRedux.useSelector(selectKimaExplorer);
   var networkOption = reactRedux.useSelector(selectNetworkOption);
+  var redirectUrl = reactRedux.useSelector(selectRedirectUrl);
   var CHAIN_NAMES_TO_EXPLORER = networkOption === exports.NetworkOptions.mainnet ? CHAIN_NAMES_TO_EXPLORER_MAINNET : CHAIN_NAMES_TO_EXPLORER_TESTNET;
+  var _useState = React.useState(false),
+    successTrigger = _useState[0],
+    setSuccessTrigger = _useState[1];
+  React.useEffect(function () {
+    if (step === 4) {
+      setTimeout(function () {
+        setSuccessTrigger(true);
+      }, 2000);
+    }
+  }, [step]);
+  React.useEffect(function () {
+    if (successTrigger && redirectUrl) {
+      setTimeout(function () {
+        window.location.replace(redirectUrl);
+      }, 3000);
+    }
+  }, [successTrigger]);
   return React__default.createElement("div", {
     className: 'kima-stepbox'
   }, React__default.createElement("div", {
     className: 'content-wrapper'
-  }, stepInfo$1.map(function (item, index) {
+  }, successTrigger && redirectUrl ? React__default.createElement("div", null, React__default.createElement("h1", null, "Onramp transaction succeeded!"), React__default.createElement("div", null, React__default.createElement("p", {
+    className: 'text-center'
+  }, "You will now be redirected to the source page"), React__default.createElement(ExternalLink, {
+    to: redirectUrl
+  }, "Go back"))) : stepInfo$1.map(function (item, index) {
     return React__default.createElement("div", {
       key: item.title,
       className: 'step-item'
@@ -3608,7 +3638,7 @@ var TransactionWidget = function TransactionWidget(_ref) {
     className: 'topbar'
   }, React__default.createElement("div", {
     className: 'title'
-  }, React__default.createElement("h3", null, "Transferring ", formatterFloat.format((data === null || data === void 0 ? void 0 : data.amount) || 0), ' ', (data === null || data === void 0 ? void 0 : data.symbol) || 'USDK', "\xA0\xA0", "(" + percent + "%)")), !minimized ? React__default.createElement("div", {
+  }, React__default.createElement("h3", null, "Transferring ", data !== null && data !== void 0 && data.amount ? formatterFloat.format(data.amount) : '', ' ', (data === null || data === void 0 ? void 0 : data.symbol) || '', "\xA0\xA0", "(" + percent + "%)")), !minimized ? React__default.createElement("div", {
     className: 'control-buttons'
   }, React__default.createElement("button", {
     className: 'icon-button',
@@ -12033,9 +12063,6 @@ var ConfirmOnrampDetails = function ConfirmOnrampDetails() {
   var theme = reactRedux.useSelector(selectTheme);
   var amount = reactRedux.useSelector(selectAmount);
   var targetNetwork = reactRedux.useSelector(selectTargetChain);
-  var _useIsWalletReady = useIsWalletReady(),
-    isReady = _useIsWalletReady.isReady,
-    walletAddress = _useIsWalletReady.walletAddress;
   var targetAddress = reactRedux.useSelector(selectTargetAddress);
   var targetNetworkOption = React.useMemo(function () {
     return networkOptions.filter(function (network) {
@@ -12045,16 +12072,14 @@ var ConfirmOnrampDetails = function ConfirmOnrampDetails() {
   var selectedCoin = reactRedux.useSelector(selectSelectedToken);
   var selectedAccount = reactRedux.useSelector(selectSelectedAccount);
   var selectedBankAccount = reactRedux.useSelector(selectSelectedBankAccount);
-  var sourceWalletAddress = React.useMemo(function () {
-    return getShortenedAddress(walletAddress || '');
-  }, [walletAddress]);
+  console.log("amount: ", amount);
   return React__default.createElement("div", {
     className: "confirm-details " + theme.colorMode
   }, React__default.createElement("div", {
     className: 'detail-item'
   }, React__default.createElement("span", {
     className: 'label'
-  }, "Target wallet:"), React__default.createElement("p", null, isReady ? sourceWalletAddress : getShortenedAddress(targetAddress)), React__default.createElement("span", {
+  }, "Target wallet:"), React__default.createElement("p", null, getShortenedAddress(targetAddress)), React__default.createElement("span", {
     className: 'kima-card-network-label'
   }, React__default.createElement(targetNetworkOption.icon, null), targetNetworkOption.label)), React__default.createElement("div", {
     className: 'detail-item'
@@ -12200,6 +12225,7 @@ var OnrampForm = function OnrampForm(_ref) {
   var selectedCoin = reactRedux.useSelector(selectSelectedToken);
   var sourceNetwork = reactRedux.useSelector(selectSourceChain);
   var targetNetwork = reactRedux.useSelector(selectTargetChain);
+  var targetAddress = reactRedux.useSelector(selectTargetAddress);
   var selectedBankAccount = reactRedux.useSelector(selectSelectedBankAccount);
   var _useState = React.useState(''),
     amountValue = _useState[0],
@@ -12228,11 +12254,15 @@ var OnrampForm = function OnrampForm(_ref) {
     className: 'form-item'
   }, React__default.createElement("span", {
     className: 'label'
-  }, "Target Network"), React__default.createElement(NetworkDropdown, null)), React__default.createElement("div", {
+  }, "Target Network"), React__default.createElement(NetworkDropdown, null)), transactionOption ? React__default.createElement("div", {
+    className: "form-item " + theme.colorMode
+  }, React__default.createElement("span", {
+    className: 'label'
+  }, "Target Address:"), React__default.createElement("strong", null, targetAddress || "...")) : React__default.createElement("div", {
     className: 'form-item wallet-button-item'
   }, React__default.createElement("span", {
     className: 'label'
-  }, "Connect wallet:"), React__default.createElement(WalletButton, null)), !isReady && React__default.createElement("div", null, React__default.createElement("h4", {
+  }, "Connect wallet:"), React__default.createElement(WalletButton, null)), !isReady && !transactionOption && React__default.createElement("div", null, React__default.createElement("h4", {
     className: 'text-center'
   }, "or"), React__default.createElement("div", {
     className: "form-item " + theme.colorMode
@@ -12252,7 +12282,7 @@ var OnrampForm = function OnrampForm(_ref) {
     className: "form-item " + theme.colorMode
   }, React__default.createElement("span", {
     className: 'label'
-  }, "Balance:"), (selectedBankAccount === null || selectedBankAccount === void 0 ? void 0 : selectedBankAccount.balance) !== undefined ? selectedBankAccount.balance + " EUR" : '...'), mode === exports.ModeOptions.bridge || mode === exports.ModeOptions.onramp ? React__default.createElement("div", {
+  }, "Balance:"), (selectedBankAccount === null || selectedBankAccount === void 0 ? void 0 : selectedBankAccount.balance) !== undefined ? selectedBankAccount.balance + " EUR" : '...'), !transactionOption ? React__default.createElement("div", {
     className: "form-item " + theme.colorMode
   }, React__default.createElement("span", {
     className: 'label'
@@ -12273,7 +12303,7 @@ var OnrampForm = function OnrampForm(_ref) {
     className: 'label'
   }, "Amount:"), React__default.createElement("div", {
     className: "amount-label " + theme.colorMode
-  }, React__default.createElement("span", null, (transactionOption === null || transactionOption === void 0 ? void 0 : transactionOption.amount) || ''), React__default.createElement("div", {
+  }, React__default.createElement("span", null, transactionOption.amount || ''), React__default.createElement("div", {
     className: 'coin-wrapper'
   }, React__default.createElement(Icon, null), selectedCoin))), mode === exports.ModeOptions.bridge && serviceFee > 0 ? React__default.createElement(CustomCheckbox, {
     text: sourceNetwork === exports.SupportNetworks.BTC ? "Deduct " + formatterFloat.format(serviceFee) + " BTC fee" : "Deduct $" + formatterFloat.format(serviceFee) + " fee",
@@ -12322,6 +12352,7 @@ var TransferWidget = function TransferWidget(_ref) {
   var selectedToken = reactRedux.useSelector(selectSelectedToken);
   var backendUrl = reactRedux.useSelector(selectBackendUrl);
   var nodeProviderQuery = reactRedux.useSelector(selectNodeProviderQuery);
+  var redirectUrl = reactRedux.useSelector(selectRedirectUrl);
   var bankDetails = reactRedux.useSelector(selectBankDetails);
   var kycStatus = reactRedux.useSelector(selectKycStatus);
   var expireTime = reactRedux.useSelector(selectExpireTime);
@@ -12387,7 +12418,7 @@ var TransferWidget = function TransferWidget(_ref) {
     return approved;
   }, [approved, isBTCSigned, sourceChain]);
   React.useEffect(function () {
-    if (!walletAddress) return;
+    if (!walletAddress || transactionOption) return;
     dispatch(setTargetAddress(walletAddress));
     if (!compliantOption) return;
     (function () {
@@ -12794,7 +12825,7 @@ var TransferWidget = function TransferWidget(_ref) {
         if (mode === exports.ModeOptions.onramp) {
           setSubmitting(true);
           var params = {
-            originAddress: walletAddress,
+            originAddress: '',
             originChain: 'FIAT',
             targetAddress: targetAddress || walletAddress,
             targetChain: targetChain,
@@ -12816,7 +12847,7 @@ var TransferWidget = function TransferWidget(_ref) {
           return Promise.resolve(fetchWrapper.post(backendUrl + "/auth", JSON.stringify(params))).then(function () {
             return Promise.resolve(fetchWrapper.post(backendUrl + "/submit/onramp", onrampParams)).then(function (result) {
               if ((result === null || result === void 0 ? void 0 : result.code) !== 0) {
-                toast.toast.error("Something went wrong");
+                toast.toast.error('Something went wrong');
               }
               var txId = result.kimaTxHash;
               var selectedBankAccountCopy = _extends({}, selectedBankAccount);
@@ -12840,8 +12871,9 @@ var TransferWidget = function TransferWidget(_ref) {
     if (mode === exports.ModeOptions.onramp) {
       if (formStep === 0) {
         if (!isReady && (targetAddress === null || targetAddress === void 0 ? void 0 : targetAddress.length) < 10) return toast.toast.error('Invalid address');
-        if (parseFloat(amount) < 0 || (selectedBankAccount === null || selectedBankAccount === void 0 ? void 0 : selectedBankAccount.balance) < parseFloat(amount)) return toast.toast.error('Invalid amount');
+        if (!transactionOption && (amount.length === 0 || parseFloat(amount) < 0 || (selectedBankAccount === null || selectedBankAccount === void 0 ? void 0 : selectedBankAccount.balance) < parseFloat(amount))) return toast.toast.error('Invalid amount');
         if (!targetChain) return toast.toast.error('Invalid network selected');
+        if (!selectedBankAccount) return toast.toast.error('Invalid bank account');
         setFormStep(1);
         return;
       }
@@ -13035,7 +13067,7 @@ var TransferWidget = function TransferWidget(_ref) {
     to: helpURL ? helpURL : 'https://docs.kima.finance/demo'
   }, React__default.createElement("div", {
     className: 'menu-button'
-  }, "I need help")), React__default.createElement("button", {
+  }, "I need help")), !redirectUrl && React__default.createElement("button", {
     className: 'icon-button',
     onClick: function onClick() {
       if (isApproving || isSubmitting || isSigning) return;
@@ -13159,6 +13191,7 @@ var KimaTransactionWidget = function KimaTransactionWidget(_ref) {
     kimaExplorer = _ref$kimaExplorer === void 0 ? 'explorer.kima.finance' : _ref$kimaExplorer,
     _ref$feeURL = _ref.feeURL,
     feeURL = _ref$feeURL === void 0 ? 'https://fee.kima.finance' : _ref$feeURL,
+    redirectURL = _ref.redirectURL,
     _ref$errorHandler = _ref.errorHandler,
     errorHandler = _ref$errorHandler === void 0 ? function () {
       return void 0;
@@ -13186,7 +13219,11 @@ var KimaTransactionWidget = function KimaTransactionWidget(_ref) {
   React.useEffect(function () {
     dispatch(setTheme(theme));
     setThemeMode(theme.colorMode === exports.ColorModeOptions.light ? 'light' : 'dark');
-    if (transactionOption) dispatch(setTransactionOption(transactionOption));
+    if (transactionOption) {
+      dispatch(setTransactionOption(transactionOption));
+      dispatch(setTargetAddress(transactionOption.targetAddress));
+      dispatch(setAmount(transactionOption.amount.toString()));
+    }
     dispatch(setKimaExplorer(kimaExplorer));
     dispatch(setCompliantOption(compliantOption));
     dispatch(setErrorHandler(errorHandler));
@@ -13196,6 +13233,7 @@ var KimaTransactionWidget = function KimaTransactionWidget(_ref) {
     dispatch(setSwitchChainHandler(switchChainHandler));
     dispatch(setBackendUrl(kimaBackendUrl));
     dispatch(setNodeProviderQuery(kimaNodeProviderQuery));
+    dispatch(setRedirectUrl(redirectURL));
     dispatch(setMode(mode));
     dispatch(setProvider(provider));
     dispatch(setDappOption(dAppOption));
@@ -13224,18 +13262,27 @@ var KimaTransactionWidget = function KimaTransactionWidget(_ref) {
     if (mode === exports.ModeOptions.onramp) {
       (function () {
         try {
-          var _temp2 = _catch(function () {
+          return _catch(function () {
             return Promise.resolve(fetchWrapper.get(kimaBackendUrl + "/depasify/accounts")).then(function (accounts) {
               console.log("accounts: ", accounts);
               dispatch(setDepasifyAccounts(accounts.accountsWithBankInfo));
               dispatch(setSelectedAccount(accounts.accountsWithBankInfo[0]));
               dispatch(setSelectedBankAccount(accounts.accountsWithBankInfo[0].bankAccounts[0]));
+              return function () {
+                if (transactionOption) {
+                  return Promise.resolve(fetchWrapper.get(kimaNodeProviderQuery + "/kima-finance/kima-blockchain/chains/get_available_chains/FIAT")).then(function (networks) {
+                    if (!networks.Chains.includes(transactionOption.targetChain)) {
+                      return toast__default.error("Specified network not supported!");
+                    }
+                    dispatch(setTargetChain(transactionOption.targetChain));
+                  });
+                }
+              }();
             });
           }, function (error) {
             console.error(error);
             toast__default.error("can't get accounts from depasify");
           });
-          return _temp2 && _temp2.then ? _temp2.then(function () {}) : void 0;
         } catch (e) {
           Promise.reject(e);
         }
@@ -13248,9 +13295,9 @@ var KimaTransactionWidget = function KimaTransactionWidget(_ref) {
       } else {
         (function () {
           try {
-            var _temp5 = function _temp5() {
+            var _temp4 = function _temp4() {
               return _catch(function () {
-                var _temp3 = function () {
+                var _temp2 = function () {
                   if (transactionOption !== null && transactionOption !== void 0 && transactionOption.targetAddress) {
                     return Promise.resolve(fetchWrapper.post(kimaBackendUrl + "/compliant", JSON.stringify({
                       address: transactionOption === null || transactionOption === void 0 ? void 0 : transactionOption.targetAddress
@@ -13259,13 +13306,13 @@ var KimaTransactionWidget = function KimaTransactionWidget(_ref) {
                     });
                   }
                 }();
-                if (_temp3 && _temp3.then) return _temp3.then(function () {});
+                if (_temp2 && _temp2.then) return _temp2.then(function () {});
               }, function (e) {
                 toast__default.error('xplorisk check failed');
                 console.log('xplorisk check failed', e);
               });
             };
-            var _temp4 = _catch(function () {
+            var _temp3 = _catch(function () {
               return Promise.resolve(fetchWrapper.get(kimaNodeProviderQuery + "/kima-finance/kima-blockchain/chains/get_available_chains/" + ((transactionOption === null || transactionOption === void 0 ? void 0 : transactionOption.targetChain) || exports.SupportNetworks.ETHEREUM))).then(function (networks) {
                 console.log("networks available: ", networks);
                 dispatch(setSourceChain(networks.Chains[0]));
@@ -13274,7 +13321,7 @@ var KimaTransactionWidget = function KimaTransactionWidget(_ref) {
               toast__default.error('rpc disconnected!');
               console.log('rpc disconnected', e);
             });
-            return _temp4 && _temp4.then ? _temp4.then(_temp5) : _temp5(_temp4);
+            return _temp3 && _temp3.then ? _temp3.then(_temp4) : _temp4(_temp3);
           } catch (e) {
             Promise.reject(e);
           }

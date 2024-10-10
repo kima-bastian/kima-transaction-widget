@@ -5,6 +5,7 @@ import {
   ModeOptions,
   ColorModeOptions,
   NetworkOptions,
+  SupportNetworks,
   // DAppOptions
 } from '@kimafinance/kima-transaction-widget'
 import '@kimafinance/kima-transaction-widget/dist/index.css'
@@ -47,12 +48,13 @@ const App = () => {
             //     fontWeight: '500'
             //   }
             // }}
-            // transactionOption={{
-            //   targetChain: SupportNetworks.SOLANA,
-            //   targetAddress: 'TQfYistjV6aMKSC1jxUfkvnsRnjG2KEoFv',
-            //   amount: 5
-            // }}
+            transactionOption={{
+              targetChain: SupportNetworks.PEAQ,
+              targetAddress: '0x152CFF35d84E6a6b95A5EDb4cee50961670D377D',
+              amount: 5
+            }}
             // txId={-1}
+            redirectURL='https://invest.penomo.com/dashboard'
             errorHandler={(e: any) => {
               console.log('error:', e)
             }}

@@ -58,6 +58,7 @@ export interface OptionState {
   backendUrl: string // URL for kima-transaction-backend component
   nodeProviderQuery: string // REST API endpoint to query kima node
   kimaExplorerUrl: string // URL for kima explore (testnet, staging or demo)
+  redirectUrl: string // URL for redirecting after a transaction is completed succesfully
   txId: number // transaction id to monitor it's status
   selectedToken: string // Currently selected token
   expireTime: string // Bitcoi HTLC expiration time
@@ -86,6 +87,7 @@ const initialState: OptionState = {
   pendingTxs: 0,
   pendingTxData: [],
   kimaExplorerUrl: 'explorer.kima.finance',
+  redirectUrl: '',
   mode: ModeOptions.bridge,
   sourceChain: '',
   targetChain: '',
@@ -315,6 +317,9 @@ export const optionSlice = createSlice({
     setSelectedBankAccount: (state, action: PayloadAction<any> ) => {
       state.selectedBankAccount = action.payload
     },
+    setRedirectUrl: (state, action: PayloadAction<any>) => {
+      state.redirectUrl = action.payload;
+    }
   }
 })
 
@@ -371,7 +376,8 @@ export const {
   setPendingTxs,
   setDepasifyAccounts,
   setSelectedAccount,
-  setSelectedBankAccount
+  setSelectedBankAccount,
+  setRedirectUrl
 } = optionSlice.actions
 
 export default optionSlice.reducer

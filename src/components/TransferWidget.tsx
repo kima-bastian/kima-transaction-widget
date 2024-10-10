@@ -64,7 +64,8 @@ import {
   selectPendingTxs,
   selectSelectedBankAccount,
   selectSelectedAccount,
-  selectSelectedToken
+  selectSelectedToken,
+  selectRedirectUrl
 } from '../store/selectors'
 import useIsWalletReady from '../hooks/useIsWalletReady'
 import useServiceFee from '../hooks/useServiceFee'
@@ -99,7 +100,7 @@ import PendingTxPopup from './modals/PendingTxPopup'
 import { broadcastTransaction, getUTXOs } from '../utils/btc/utils'
 import * as btc from '@kimafinance/btc-signer'
 import ConfirmOnrampDetails from './reusable/ConfirmOnrampDetails'
-import OnrampForm from './reusable/OnrampForm';
+import OnrampForm from './reusable/OnrampForm'
 
 interface Props {
   theme: ThemeOptions
@@ -142,6 +143,7 @@ export const TransferWidget = ({
   const selectedToken = useSelector(selectSelectedToken)
   const backendUrl = useSelector(selectBackendUrl)
   const nodeProviderQuery = useSelector(selectNodeProviderQuery)
+  const redirectUrl = useSelector(selectRedirectUrl)
   const bankDetails = useSelector(selectBankDetails)
   const kycStatus = useSelector(selectKycStatus)
   const expireTime = useSelector(selectExpireTime)
@@ -180,8 +182,8 @@ export const TransferWidget = ({
   }, [approved, isBTCSigned, sourceChain])
 
   useEffect(() => {
-    if (!walletAddress) return
-    dispatch(setTargetAddress(walletAddress))
+    if (!walletAddress || transactionOption) return
+    dispatch(setTargetAddress(walletAddress as string))
 
     if (!compliantOption) return
     ;(async function () {
@@ -444,7 +446,7 @@ export const TransferWidget = ({
 
       // build onramp transaction
       const params = {
-        originAddress: walletAddress,
+        originAddress: '',
         originChain: 'FIAT',
         targetAddress: targetAddress || walletAddress,
         targetChain: targetChain,
@@ -474,22 +476,22 @@ export const TransferWidget = ({
       )
 
       if (result?.code !== 0) {
-        toast.error("Something went wrong");
+        toast.error('Something went wrong')
       }
 
-      const txId = result.kimaTxHash;
+      const txId = result.kimaTxHash
 
-      let selectedBankAccountCopy = {...selectedBankAccount};
-      selectedBankAccountCopy.balance -= parseFloat(amount);
-      dispatch(setSelectedBankAccount(selectedBankAccountCopy));
+      let selectedBankAccountCopy = { ...selectedBankAccount }
+      selectedBankAccountCopy.balance -= parseFloat(amount)
+      dispatch(setSelectedBankAccount(selectedBankAccountCopy))
 
       setSubmitting(false)
-      dispatch(setTxId(txId));
-      dispatch(setSubmitted(true));
+      dispatch(setTxId(txId))
+      dispatch(setSubmitted(true))
       return
     }
 
-    if (fee < 0 ) {
+    if (fee < 0) {
       toast.error('Fee is not calculated!')
       errorHandler('Fee is not calculated!')
       return
@@ -698,13 +700,16 @@ export const TransferWidget = ({
         if (!isReady && targetAddress?.length < 10)
           return toast.error('Invalid address')
 
-        if (
+        if (!transactionOption &&
+          (amount.length === 0 ||
           parseFloat(amount) < 0 ||
-          selectedBankAccount?.balance < parseFloat(amount)
+          selectedBankAccount?.balance < parseFloat(amount))
         )
           return toast.error('Invalid amount')
 
         if (!targetChain) return toast.error('Invalid network selected')
+
+        if (!selectedBankAccount) return toast.error('Invalid bank account')
 
         // just set form step to 1
         setFormStep(1)
@@ -953,19 +958,21 @@ export const TransferWidget = ({
             >
               <div className='menu-button'>I need help</div>
             </ExternalLink>
-            <button
-              className='icon-button'
-              onClick={() => {
-                if (isApproving || isSubmitting || isSigning) return
-                dispatch(initialize())
-                closeHandler()
-              }}
-              disabled={isApproving || isSubmitting || isSigning}
-            >
-              <CrossIcon
-                fill={theme.colorMode === 'light' ? 'black' : 'white'}
-              />
-            </button>
+            {!redirectUrl && (
+              <button
+                className='icon-button'
+                onClick={() => {
+                  if (isApproving || isSubmitting || isSigning) return
+                  dispatch(initialize())
+                  closeHandler()
+                }}
+                disabled={isApproving || isSubmitting || isSigning}
+              >
+                <CrossIcon
+                  fill={theme.colorMode === 'light' ? 'black' : 'white'}
+                />
+              </button>
+            )}
           </div>
         </div>
       </div>

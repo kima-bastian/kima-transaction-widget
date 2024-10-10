@@ -11,6 +11,7 @@ export const selectTokenOptions = (state: RootState) =>
 export const selectTheme = (state: RootState) => state.option.theme
 export const selectKimaExplorer = (state: RootState) =>
   state.option.kimaExplorerUrl
+export const selectRedirectUrl = (state: RootState) => state.option.redirectUrl
 export const selectSourceChain = (state: RootState) => state.option.sourceChain
 export const selectTargetChain = (state: RootState) => state.option.targetChain
 export const selectTargetAddress = (state: RootState) =>

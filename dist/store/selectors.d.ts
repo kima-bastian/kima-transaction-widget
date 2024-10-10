@@ -3,6 +3,7 @@ export declare const selectNetworkOption: (state: RootState) => any;
 export declare const selectTokenOptions: (state: RootState) => any;
 export declare const selectTheme: (state: RootState) => any;
 export declare const selectKimaExplorer: (state: RootState) => any;
+export declare const selectRedirectUrl: (state: RootState) => any;
 export declare const selectSourceChain: (state: RootState) => any;
 export declare const selectTargetChain: (state: RootState) => any;
 export declare const selectTargetAddress: (state: RootState) => any;
