@@ -37,9 +37,11 @@ import {
   setUuid,
   setKeplrHandler,
   setKimaExplorer,
+  setSelectedToken,
   setNetworkOption,
-  setGraphqlProviderQuery,
-  setTargetCurrency
+  setDepasifyAccounts,
+  setSelectedAccount,
+  setSelectedBankAccount
 } from '../store/optionSlice'
 import '../index.css'
 import { selectSubmitted } from '../store/selectors'
@@ -56,6 +58,7 @@ interface Props {
   mode: ModeOptions
   txId?: number
   useFIAT?: boolean
+  defaultToken?: string
   autoSwitchChain?: boolean
   dAppOption?: DAppOptions
   provider?: Web3Provider
@@ -67,7 +70,6 @@ interface Props {
   paymentTitleOption?: PaymentTitleOption
   kimaBackendUrl: string
   kimaNodeProviderQuery: string
-  kimaGraphqlProviderQuery: string
   kimaExplorer?: string
   networkOption?: NetworkOptions
   errorHandler?: (e: any) => void
@@ -81,6 +83,7 @@ export const KimaTransactionWidget = ({
   mode,
   txId,
   autoSwitchChain = true,
+  defaultToken = 'USDT',
   networkOption = NetworkOptions.testnet,
   provider,
   dAppOption = DAppOptions.None,
@@ -93,9 +96,8 @@ export const KimaTransactionWidget = ({
   transactionOption,
   kimaBackendUrl,
   kimaNodeProviderQuery,
-  kimaExplorer = 'https://explorer.kima.finance',
+  kimaExplorer = 'explorer.kima.finance',
   feeURL = 'https://fee.kima.finance',
-  kimaGraphqlProviderQuery = 'https://graphql.kima.finance/v1/graphql',
   errorHandler = () => void 0,
   closeHandler = () => void 0,
   successHandler = () => void 0,
@@ -121,11 +123,11 @@ export const KimaTransactionWidget = ({
     dispatch(setSwitchChainHandler(switchChainHandler))
     dispatch(setBackendUrl(kimaBackendUrl))
     dispatch(setNodeProviderQuery(kimaNodeProviderQuery))
-    dispatch(setGraphqlProviderQuery(kimaGraphqlProviderQuery))
     dispatch(setMode(mode))
     dispatch(setProvider(provider))
     dispatch(setDappOption(dAppOption))
     dispatch(setWalletAutoConnect(autoSwitchChain))
+    dispatch(setSelectedToken(defaultToken))
     dispatch(setUseFIAT(useFIAT))
     dispatch(setNetworkOption(networkOption))
     if (useFIAT) {
@@ -141,6 +143,24 @@ export const KimaTransactionWidget = ({
       })()
     }
 
+    if (mode === ModeOptions.onramp) {
+      // fetch available accounts from sandbox
+      ;(async function (){
+        try {
+          const accounts: any = await fetchWrapper.get(`${kimaBackendUrl}/depasify/accounts`);
+          console.log("accounts: ", accounts);
+          dispatch(setDepasifyAccounts(accounts.accountsWithBankInfo));
+          dispatch(setSelectedAccount(accounts.accountsWithBankInfo[0]))
+          dispatch(setSelectedBankAccount(accounts.accountsWithBankInfo[0].bankAccounts[0]))
+          
+        } catch (error) {
+          console.error(error);
+          toast.error("can't get accounts from depasify")
+        }
+      })()
+
+    }
+
     if (mode === ModeOptions.payment) {
       dispatch(
         setTargetChain(transactionOption?.targetChain || ChainName.ETHEREUM)
@@ -153,7 +173,6 @@ export const KimaTransactionWidget = ({
         dispatch(
           setSourceChain(transactionOption?.targetChain || ChainName.ETHEREUM)
         )
-        dispatch(setTargetCurrency(transactionOption?.currency || 'USDK'))
       } else {
         ;(async function () {
           try {
@@ -162,6 +181,8 @@ export const KimaTransactionWidget = ({
                 transactionOption?.targetChain || ChainName.ETHEREUM
               }`
             )
+
+            console.log("networks available: ", networks);
             dispatch(setSourceChain(networks.Chains[0]))
           } catch (e) {
             toast.error('rpc disconnected!')
@@ -206,6 +227,13 @@ export const KimaTransactionWidget = ({
       dispatch(setSourceChain('ETH'))
     }
   }, [dAppOption, mode])
+
+  useEffect(() => {
+    if (mode === ModeOptions.onramp) {
+      dispatch(setTargetChain(""));
+      dispatch(setSourceChain("FIAT"))
+    }
+  }, [mode])
 
   return submitted ? (
     <TransactionWidget theme={theme} />

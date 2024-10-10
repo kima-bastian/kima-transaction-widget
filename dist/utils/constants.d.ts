@@ -10,7 +10,8 @@ export declare enum ChainName {
     POLYGON_ZKEVM = "ZKE",
     TRON = "TRX",
     FIAT = "FIAT",
-    BTC = "BTC"
+    BTC = "BTC",
+    PEAQ = "PEAQ"
 }
 export declare enum SupportedChainIdTestnet {
     ETHEREUM = 11155111,
@@ -19,7 +20,8 @@ export declare enum SupportedChainIdTestnet {
     BSC = 97,
     ARBITRUM = 421614,
     OPTIMISM = 11155420,
-    POLYGON_ZKEM = 2442
+    POLYGON_ZKEM = 2442,
+    PEAQ = 9990
 }
 export declare const CHAIN_NAMES_TO_IDS_TESTNET: {
     [chainName: string]: SupportedChainIdTestnet;
@@ -31,7 +33,8 @@ export declare enum SupportedChainIdMainnet {
     BSC = 56,
     ARBITRUM = 42161,
     OPTIMISM = 10,
-    POLYGON_ZKEM = 1101
+    POLYGON_ZKEM = 1101,
+    PEAQ = 2241
 }
 export declare const CHAIN_NAMES_TO_IDS_MAINNET: {
     [chainName: string]: SupportedChainIdMainnet;

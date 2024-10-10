@@ -1,5 +1,3 @@
-import React from 'react'
-
 import {
   KimaTransactionWidget,
   KimaProvider,
@@ -7,11 +5,9 @@ import {
   ModeOptions,
   ColorModeOptions,
   NetworkOptions,
-  SupportNetworks,
-  DAppOptions
   // DAppOptions
-} from 'kima-transaction-widget'
-import 'kima-transaction-widget/dist/index.css'
+} from '@kimafinance/kima-transaction-widget'
+import '@kimafinance/kima-transaction-widget/dist/index.css'
 
 const App = () => {
   return (
@@ -30,17 +26,15 @@ const App = () => {
               colorMode: ColorModeOptions.light,
               fontSize: FontSizeOptions.medium
             }}
-            // mode={ModeOptions.status}
-            // txId={2}
-            mode={ModeOptions.payment}
+            mode={ModeOptions.onramp}
             networkOption={NetworkOptions.testnet}
-            dAppOption={DAppOptions.LPAdd}
-            kimaBackendUrl='http://localhost:3001'
-            kimaNodeProviderQuery='https://api-testnet.kima.finance'
+            // dAppOption={DAppOptions.LPAdd}
+            kimaBackendUrl='https://kima-transaction-backend-onramp-221056059036.us-central1.run.app'
+            kimaNodeProviderQuery='https://kima-blockchain-simulator-onramp-221056059036.us-central1.run.app'
             kimaExplorer='https://explorer-testnet.kima.finance'
             feeURL='https://fee.kima.finance'
-            kimaGraphqlProviderQuery='https://graphql-testnet.kima.finance/v1/graphql'
             // autoSwitchChain={false}
+            defaultToken={'USDC'}
             // useFIAT={true}
             // titleOption={{
             //   initialTitle: 'New Purchase'
@@ -53,12 +47,12 @@ const App = () => {
             //     fontWeight: '500'
             //   }
             // }}
-            transactionOption={{
-              targetChain: SupportNetworks.POLYGON,
-              targetAddress: '0x10c033E050e10510a951a56e4A14B4CD3de6CA67',
-              amount: 5,
-              currency: 'USDK'
-            }}
+            // transactionOption={{
+            //   targetChain: SupportNetworks.SOLANA,
+            //   targetAddress: 'TQfYistjV6aMKSC1jxUfkvnsRnjG2KEoFv',
+            //   amount: 5
+            // }}
+            // txId={-1}
             errorHandler={(e: any) => {
               console.log('error:', e)
             }}

@@ -88,7 +88,7 @@ const polygon = {
   name: 'Polygon Mainnet',
   currency: 'MATIC',
   explorerUrl: 'https://polygonscan.com',
-  rpcUrl: 'https://polygon-rpc.com/'
+  rpcUrl: 'https://polygon.llamarpc.com'
 }
 
 const arbitrumSepolia = {
@@ -104,7 +104,7 @@ const arbitrum = {
   name: 'Arbitrum Mainnet',
   currency: 'ETH',
   explorerUrl: 'https://arbiscan.io',
-  rpcUrl: 'https://arb1.arbitrum.io/rpc'
+  rpcUrl: 'https://arbitrum.llamarpc.com'
 }
 
 const optimismSepola = {
@@ -120,7 +120,7 @@ const optimism = {
   name: 'OP Mainnet',
   currency: 'ETH',
   explorerUrl: 'https://optimistic.etherscan.io',
-  rpcUrl: 'https://mainnet.optimism.io'
+  rpcUrl: 'https://optimism.llamarpc.com'
 }
 
 const avalancheFuji = {
@@ -153,6 +153,14 @@ const zkEVM = {
   currency: 'ETH',
   explorerUrl: 'https://zkevm.polygonscan.com',
   rpcUrl: 'https://zkevm-rpc.com'
+}
+
+const agung = {
+  chainId: 9990,
+  name: 'Peaq Agung',
+  currency: 'AGNG',
+  explorerUrl: 'https://agung.subscan.io',
+  rpcUrl: 'https://rpcpc1-qa.agung.peaq.network'
 }
 
 // 3. Create modal
@@ -221,7 +229,8 @@ export const KimaProvider = ({
             arbitrumSepolia,
             optimismSepola,
             avalancheFuji,
-            zkEVMTestnet
+            zkEVMTestnet,
+            agung
           ],
     projectId: walletConnectProjectId || 'e579511a495b5c312b572b036e60555a',
     enableAnalytics: false,

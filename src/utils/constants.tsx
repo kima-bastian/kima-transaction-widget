@@ -12,6 +12,7 @@ import {
   KEURICON,
   TronIcon,
   BTCIcon,
+  PeaqIcon,
   USDCIcon
 } from '../assets/icons'
 
@@ -26,7 +27,8 @@ export enum ChainName {
   POLYGON_ZKEVM = 'ZKE',
   TRON = 'TRX',
   FIAT = 'FIAT',
-  BTC = 'BTC'
+  BTC = 'BTC',
+  PEAQ = 'PEAQ'
 }
 
 export enum SupportedChainIdTestnet {
@@ -36,7 +38,8 @@ export enum SupportedChainIdTestnet {
   BSC = 97,
   ARBITRUM = 421614,
   OPTIMISM = 11155420,
-  POLYGON_ZKEM = 2442
+  POLYGON_ZKEM = 2442,
+  PEAQ = 9990
 }
 
 export const CHAIN_NAMES_TO_IDS_TESTNET: {
@@ -48,7 +51,8 @@ export const CHAIN_NAMES_TO_IDS_TESTNET: {
   [ChainName.BSC]: SupportedChainIdTestnet.BSC,
   [ChainName.OPTIMISM]: SupportedChainIdTestnet.OPTIMISM,
   [ChainName.ARBITRUM]: SupportedChainIdTestnet.ARBITRUM,
-  [ChainName.POLYGON_ZKEVM]: SupportedChainIdTestnet.POLYGON_ZKEM
+  [ChainName.POLYGON_ZKEVM]: SupportedChainIdTestnet.POLYGON_ZKEM,
+  [ChainName.PEAQ]: SupportedChainIdTestnet.PEAQ
 }
 
 export enum SupportedChainIdMainnet {
@@ -58,7 +62,8 @@ export enum SupportedChainIdMainnet {
   BSC = 56,
   ARBITRUM = 42161,
   OPTIMISM = 10,
-  POLYGON_ZKEM = 1101
+  POLYGON_ZKEM = 1101,
+  PEAQ = 2241
 }
 
 export const CHAIN_NAMES_TO_IDS_MAINNET: {
@@ -70,7 +75,8 @@ export const CHAIN_NAMES_TO_IDS_MAINNET: {
   [ChainName.BSC]: SupportedChainIdMainnet.BSC,
   [ChainName.OPTIMISM]: SupportedChainIdMainnet.OPTIMISM,
   [ChainName.ARBITRUM]: SupportedChainIdMainnet.ARBITRUM,
-  [ChainName.POLYGON_ZKEVM]: SupportedChainIdMainnet.POLYGON_ZKEM
+  [ChainName.POLYGON_ZKEVM]: SupportedChainIdMainnet.POLYGON_ZKEM,
+  [ChainName.PEAQ]: SupportedChainIdMainnet.PEAQ
 }
 
 export const CHAIN_NAMES_TO_STRING: { [chainName: string]: string } = {
@@ -84,7 +90,8 @@ export const CHAIN_NAMES_TO_STRING: { [chainName: string]: string } = {
   [ChainName.POLYGON_ZKEVM]: 'Polygon zkEVM',
   [ChainName.TRON]: 'Tron',
   [ChainName.FIAT]: 'Pay with FIAT',
-  [ChainName.BTC]: 'Bitcoin'
+  [ChainName.BTC]: 'Bitcoin',
+  [ChainName.PEAQ]: 'Peaq'
 }
 
 export const CHAIN_STRING_TO_NAME: { [chainName: string]: ChainName } = {
@@ -98,7 +105,8 @@ export const CHAIN_STRING_TO_NAME: { [chainName: string]: ChainName } = {
   ['Polygon zkEVM']: ChainName.POLYGON_ZKEVM,
   ['Tron']: ChainName.TRON,
   ['Pay with FIAT']: ChainName.FIAT,
-  ['Bitcoin']: ChainName.BTC
+  ['Bitcoin']: ChainName.BTC,
+  ['Peaq']: ChainName.PEAQ
 }
 
 export const CHAIN_NAMES_TO_EXPLORER_TESTNET: { [chainName: string]: string } =
@@ -112,7 +120,8 @@ export const CHAIN_NAMES_TO_EXPLORER_TESTNET: { [chainName: string]: string } =
     [ChainName.ARBITRUM]: 'sepolia.arbiscan.io',
     [ChainName.POLYGON_ZKEVM]: 'cardona-zkevm.polygonscan.com',
     [ChainName.TRON]: 'nile.tronscan.org/#',
-    [ChainName.BTC]: 'mempool.space/testnet'
+    [ChainName.BTC]: 'mempool.space/testnet',
+    [ChainName.PEAQ]: 'peaq-testnet.subscan.io/'
   }
 
 export const CHAIN_NAMES_TO_EXPLORER_MAINNET: { [chainName: string]: string } =
@@ -126,7 +135,8 @@ export const CHAIN_NAMES_TO_EXPLORER_MAINNET: { [chainName: string]: string } =
     [ChainName.ARBITRUM]: 'arbiscan.io',
     [ChainName.POLYGON_ZKEVM]: 'zkevm.polygonscan.com',
     [ChainName.TRON]: 'tronscan.org/#',
-    [ChainName.BTC]: 'mempool.space'
+    [ChainName.BTC]: 'mempool.space',
+    [ChainName.PEAQ]: 'https://krest.subscan.io/'
   }
 
 export const CHAIN_IDS_TO_NAMES_TESTNET: { [chainId: number]: string } = {
@@ -136,7 +146,8 @@ export const CHAIN_IDS_TO_NAMES_TESTNET: { [chainId: number]: string } = {
   [SupportedChainIdTestnet.BSC]: ChainName.BSC,
   [SupportedChainIdTestnet.OPTIMISM]: ChainName.OPTIMISM,
   [SupportedChainIdTestnet.ARBITRUM]: ChainName.ARBITRUM,
-  [SupportedChainIdTestnet.POLYGON_ZKEM]: ChainName.POLYGON_ZKEVM
+  [SupportedChainIdTestnet.POLYGON_ZKEM]: ChainName.POLYGON_ZKEVM,
+  [SupportedChainIdTestnet.PEAQ]: ChainName.PEAQ
 }
 
 export const CHAIN_IDS_TO_NAMES_MAINNET: { [chainId: number]: string } = {
@@ -146,7 +157,8 @@ export const CHAIN_IDS_TO_NAMES_MAINNET: { [chainId: number]: string } = {
   [SupportedChainIdMainnet.BSC]: ChainName.BSC,
   [SupportedChainIdMainnet.OPTIMISM]: ChainName.OPTIMISM,
   [SupportedChainIdMainnet.ARBITRUM]: ChainName.ARBITRUM,
-  [SupportedChainIdMainnet.POLYGON_ZKEM]: ChainName.POLYGON_ZKEVM
+  [SupportedChainIdMainnet.POLYGON_ZKEM]: ChainName.POLYGON_ZKEVM,
+  [SupportedChainIdMainnet.PEAQ]: ChainName.PEAQ
 }
 
 export const networkOptions = [
@@ -204,6 +216,11 @@ export const networkOptions = [
     id: ChainName.TRON,
     label: 'Tron',
     icon: TronIcon
+  },
+  {
+    id: ChainName.PEAQ,
+    label: 'Peaq',
+    icon: PeaqIcon
   }
 ]
 export const getNetworkOption = (id: string) => {
@@ -222,7 +239,8 @@ export const isEVMChain = (chainId: string) =>
   chainId === ChainName.BSC ||
   chainId === ChainName.OPTIMISM ||
   chainId === ChainName.ARBITRUM ||
-  chainId === ChainName.POLYGON_ZKEVM
+  chainId === ChainName.POLYGON_ZKEVM || 
+  chainId === ChainName.PEAQ
 
 type CoinOptions = {
   [key: string]: any
@@ -237,10 +255,6 @@ export const COIN_LIST: CoinOptions = {
     symbol: 'USDT',
     icon: USDTIcon
   },
-  USDC: {
-    symbol: 'USDC',
-    icon: USDCIcon
-  },
   KEUR: {
     symbol: 'KEUR',
     icon: KEURICON
@@ -248,6 +262,10 @@ export const COIN_LIST: CoinOptions = {
   WBTC: {
     symbol: 'WBTC',
     icon: BTCIcon
+  },
+  USDC: {
+    symbol: "USDC",
+    icon: USDCIcon
   }
 }
 

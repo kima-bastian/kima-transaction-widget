@@ -13,13 +13,12 @@ export declare enum FontSizeOptions {
 export declare enum ModeOptions {
     payment = "payment",
     bridge = "bridge",
-    status = "status"
+    status = "status",
+    onramp = "onramp"
 }
 export declare enum CurrencyOptions {
     USDK = "USDK",
-    USDC = "USDC",
     USDT = "USDT",
-    WBTC = "WBTC",
     G$ = "GDOLLAR"
 }
 export declare enum ColorModeOptions {
@@ -35,7 +34,6 @@ export interface TransactionOption {
     targetChain: SupportNetworks;
     targetAddress: string;
     amount: number;
-    currency: string;
 }
 export interface TitleOption {
     initialTitle?: string;
@@ -63,8 +61,7 @@ export interface TransactionData {
     targetChain?: string;
     tssPullHash?: string;
     tssReleaseHash?: string;
-    sourceSymbol?: string;
-    targetSymbol?: string;
+    symbol?: string;
     amount?: number;
     kimaTxHash?: string;
     failReason?: string;

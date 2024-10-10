@@ -19,14 +19,13 @@ export enum FontSizeOptions {
 export enum ModeOptions {
   payment = 'payment',
   bridge = 'bridge',
-  status = 'status'
+  status = 'status',
+  onramp = 'onramp'
 }
 
 export enum CurrencyOptions {
   USDK = 'USDK',
-  USDC = 'USDC',
   USDT = 'USDT',
-  WBTC = 'WBTC',
   G$ = 'GDOLLAR'
 }
 
@@ -45,7 +44,6 @@ export interface TransactionOption {
   targetChain: SupportNetworks
   targetAddress: string
   amount: number
-  currency: string
 }
 
 export interface TitleOption {
@@ -78,8 +76,7 @@ export interface TransactionData {
   targetChain?: string
   tssPullHash?: string
   tssReleaseHash?: string
-  sourceSymbol?: string
-  targetSymbol?: string
+  symbol?: string
   amount?: number
   kimaTxHash?: string
   failReason?: string

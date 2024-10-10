@@ -58,13 +58,11 @@ export const selectFeeDeduct = (state: RootState) => state.option.feeDeduct
 export const selectBackendUrl = (state: RootState) => state.option.backendUrl
 export const selectNodeProviderQuery = (state: RootState) =>
   state.option.nodeProviderQuery
-export const selectGraphqlProviderQuery = (state: RootState) =>
-  state.option.graphqlProviderQuery
 export const selectTxId = (state: RootState) => state.option.txId
-export const selectSourceCurrency = (state: RootState) =>
-  state.option.sourceCurrency
-export const selectTargetCurrency = (state: RootState) =>
-  state.option.targetCurrency
+export const selectSelectedToken = (state: RootState) =>
+  state.option.selectedToken
+export const selectAvailableTokenList = (state: RootState) =>
+  state.option.availableTokenList
 export const selectCompliantOption = (state: RootState) =>
   state.option.compliantOption
 export const selectSourceCompliant = (state: RootState) =>
@@ -82,3 +80,9 @@ export const selectExpireTime = (state: RootState) => state.option.expireTime
 export const selectPendingTxs = (state: RootState) => state.option.pendingTxs
 export const selectPendingTxData = (state: RootState) =>
   state.option.pendingTxData
+export const selectSelectedAccount = (state: RootState) =>
+  state.option.selectedAccount
+export const selectSelectedBankAccount = (state: RootState) => 
+  state.option.selectedBankAccount
+export const selectAccounts = (state: RootState) =>
+  state.option.accounts

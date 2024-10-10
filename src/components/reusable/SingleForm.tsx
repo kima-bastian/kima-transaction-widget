@@ -9,10 +9,10 @@ import {
   selectTargetChain,
   selectTheme,
   selectTransactionOption,
+  selectSelectedToken,
   selectServiceFee,
   selectFeeDeduct,
-  selectAmount,
-  selectTargetCurrency
+  selectAmount
 } from '../../store/selectors'
 import { BankInput, CoinDropdown, CustomCheckbox, WalletButton } from './'
 import { setAmount, setFeeDeduct } from '../../store/optionSlice'
@@ -36,13 +36,12 @@ const SingleForm = ({
   const compliantOption = useSelector(selectCompliantOption)
   const targetCompliant = useSelector(selectTargetCompliant)
   const transactionOption = useSelector(selectTransactionOption)
+  const selectedCoin = useSelector(selectSelectedToken)
   const sourceNetwork = useSelector(selectSourceChain)
   const targetNetwork = useSelector(selectTargetChain)
   const [amountValue, setAmountValue] = useState('')
   const amount = useSelector(selectAmount)
-  const targetCurrency = useSelector(selectTargetCurrency)
-  const TargetIcon =
-    COIN_LIST[targetCurrency || 'USDK']?.icon || COIN_LIST['USDK'].icon
+  const Icon = COIN_LIST[selectedCoin || 'USDK']?.icon || COIN_LIST['USDK'].icon
 
   const errorMessage = useMemo(
     () =>
@@ -70,9 +69,8 @@ const SingleForm = ({
         </p>
       ) : null}
       <div className='form-item'>
-        <span className='label'>Source Network:</span>
+        <span className='label'>Source Network</span>
         <NetworkDropdown />
-        <CoinDropdown />
       </div>
 
       <div
@@ -88,8 +86,7 @@ const SingleForm = ({
         {mode === ModeOptions.bridge && (
           <div className='form-item'>
             <span className='label'>Target Network:</span>
-            <NetworkDropdown isSourceChain={false} />
-            <CoinDropdown isSourceChain={false} />
+            <NetworkDropdown isOriginChain={false} />
           </div>
         )}
       </div>
@@ -105,7 +102,9 @@ const SingleForm = ({
         )
       ) : null}
 
-      {mode === ModeOptions.bridge ? (
+      //TODO: Add dropdown for bank account selection
+
+      {mode === ModeOptions.bridge || mode === ModeOptions.onramp ? (
         <div className={`form-item ${theme.colorMode}`}>
           <span className='label'>Amount:</span>
           <div className='amount-label-container'>
@@ -123,6 +122,7 @@ const SingleForm = ({
                 dispatch(setAmount(_amount.toFixed(decimal)))
               }}
             />
+            <CoinDropdown />
           </div>
         </div>
       ) : (
@@ -131,8 +131,8 @@ const SingleForm = ({
           <div className={`amount-label ${theme.colorMode}`}>
             <span>{transactionOption?.amount || ''}</span>
             <div className='coin-wrapper'>
-              {<TargetIcon />}
-              {targetCurrency}
+              {<Icon />}
+              {selectedCoin}
             </div>
           </div>
         </div>

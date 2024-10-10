@@ -1,31 +1,23 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
 import {
-  selectSourceCurrency,
-  selectTargetCurrency,
+  // selectAvailableTokenList,
+  selectSelectedToken,
   selectTheme
 } from '../../store/selectors'
 import { COIN_LIST } from '../../utils/constants'
-import { useDispatch } from 'react-redux'
-import useCurrencyOptions from '../../hooks/useCurrencyOptions'
-import { setSourceCurrency, setTargetCurrency } from '../../store/optionSlice'
 
-const CoinDropdown = ({
-  isSourceChain = true
-}: {
-  isSourceChain?: boolean
-}) => {
+const CoinDropdown = () => {
   const ref = useRef<any>()
-  const dispatch = useDispatch()
   const [collapsed, setCollapsed] = useState(true)
-  const sourceCurrency = useSelector(selectSourceCurrency)
-  const targetCurrency = useSelector(selectTargetCurrency)
-  const { tokenList } = useCurrencyOptions()
+  const selectedCoin = useSelector(selectSelectedToken)
+  // const tokenList = useSelector(selectAvailableTokenList)
+  const tokenList = ['USDC'] // Use just for demo
   const theme = useSelector(selectTheme)
-  const Icon = useMemo(() => {
-    const selectedCoin = isSourceChain ? sourceCurrency : targetCurrency
-    return COIN_LIST[selectedCoin || 'USDK']?.icon || COIN_LIST['USDK'].icon
-  }, [sourceCurrency, targetCurrency, isSourceChain])
+  const Icon = COIN_LIST[selectedCoin || 'USDK']?.icon || COIN_LIST['USDK'].icon
+
+  console.log("tokenlist: ", tokenList);
+  console.log("selectedCoin: ", selectedCoin);
 
   useEffect(() => {
     const bodyMouseDowntHandler = (e: any) => {
@@ -50,7 +42,7 @@ const CoinDropdown = ({
     >
       <div className='coin-wrapper'>
         {<Icon />}
-        {isSourceChain ? sourceCurrency : targetCurrency}
+        {selectedCoin}
       </div>
       <div
         className={`coin-menu ${theme.colorMode} ${collapsed ? 'collapsed' : ''}`}
@@ -58,17 +50,7 @@ const CoinDropdown = ({
         {tokenList.map((token) => {
           const CoinIcon = COIN_LIST[token].icon || COIN_LIST['USDK'].icon
           return (
-            <div
-              className='coin-item'
-              key={COIN_LIST[token]?.symbol}
-              onClick={() => {
-                if (isSourceChain) {
-                  dispatch(setSourceCurrency(COIN_LIST[token]?.symbol))
-                } else {
-                  dispatch(setTargetCurrency(COIN_LIST[token]?.symbol))
-                }
-              }}
-            >
+            <div className='coin-item' key={COIN_LIST[token]?.symbol}>
               {<CoinIcon />}
               <p>{COIN_LIST[token]?.symbol}</p>
             </div>

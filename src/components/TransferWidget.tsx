@@ -29,12 +29,14 @@ import {
   setFeeDeduct,
   setPendingTxData,
   setPendingTxs,
+  setSelectedToken,
   setSourceCompliant,
   setSubmitted,
   setTargetAddress,
   setTargetCompliant,
   setTheme,
-  setTxId
+  setTxId,
+  setSelectedBankAccount
 } from '../store/optionSlice'
 import '../index.css'
 import {
@@ -60,8 +62,9 @@ import {
   selectBitcoinAddress,
   selectBitcoinPubkey,
   selectPendingTxs,
-  selectSourceCurrency,
-  selectTargetCurrency
+  selectSelectedBankAccount,
+  selectSelectedAccount,
+  selectSelectedToken
 } from '../store/selectors'
 import useIsWalletReady from '../hooks/useIsWalletReady'
 import useServiceFee from '../hooks/useServiceFee'
@@ -95,6 +98,8 @@ import { sleep } from '../helpers/functions'
 import PendingTxPopup from './modals/PendingTxPopup'
 import { broadcastTransaction, getUTXOs } from '../utils/btc/utils'
 import * as btc from '@kimafinance/btc-signer'
+import ConfirmOnrampDetails from './reusable/ConfirmOnrampDetails'
+import OnrampForm from './reusable/OnrampForm';
 
 interface Props {
   theme: ThemeOptions
@@ -115,8 +120,7 @@ export const TransferWidget = ({
   const mainRef = useRef<HTMLDivElement>(null)
 
   // State variables for UI
-  // const [isWizard, setWizard] = useState(false)
-  const isWizard = false
+  const [isWizard, setWizard] = useState(false)
   const [formStep, setFormStep] = useState(0)
   const [wizardStep, setWizardStep] = useState(0)
 
@@ -134,8 +138,8 @@ export const TransferWidget = ({
   const errorHandler = useSelector(selectErrorHandler)
   const keplrHandler = useSelector(selectKeplrHandler)
   const closeHandler = useSelector(selectCloseHandler)
-  const sourceCurrency = useSelector(selectSourceCurrency)
-  const targetCurrency = useSelector(selectTargetCurrency)
+  // const { options: selectedToken } = useCurrencyOptions()
+  const selectedToken = useSelector(selectSelectedToken)
   const backendUrl = useSelector(selectBackendUrl)
   const nodeProviderQuery = useSelector(selectNodeProviderQuery)
   const bankDetails = useSelector(selectBankDetails)
@@ -144,6 +148,8 @@ export const TransferWidget = ({
   const bitcoinAddress = useSelector(selectBitcoinAddress)
   const bitcoinPubkey = useSelector(selectBitcoinPubkey)
   const transactionOption = useSelector(selectTransactionOption)
+  const selectedAccount = useSelector(selectSelectedAccount)
+  let selectedBankAccount = useSelector(selectSelectedBankAccount)
 
   // Hooks for wallet connection, allowance
   const [isCancellingApprove, setCancellingApprove] = useState(false)
@@ -235,7 +241,12 @@ export const TransferWidget = ({
   }, [nodeProviderQuery])
 
   useEffect(() => {
-    if (!isReady) {
+    console.log('selected token use effect: ', selectedToken)
+    dispatch(setSelectedToken(selectedToken))
+  }, [selectedToken])
+
+  useEffect(() => {
+    if (!isReady && mode !== ModeOptions.onramp) {
       if (formStep > 0) setFormStep(0)
       if (wizardStep > 0) setWizardStep(1)
     }
@@ -250,12 +261,12 @@ export const TransferWidget = ({
     for (let i = 0; i < poolBalance.length; i++) {
       if (poolBalance[i].chainName === targetChain) {
         for (let j = 0; j < poolBalance[i].balance.length; j++) {
-          if (poolBalance[i].balance[j].tokenSymbol !== targetCurrency) continue
+          if (poolBalance[i].balance[j].tokenSymbol !== selectedToken) continue
           if (+poolBalance[i].balance[j].amount >= +amount + fee) {
             return true
           }
 
-          const symbol = targetCurrency
+          const symbol = selectedToken
           const errorString = `Tried to transfer ${amount} ${symbol}, but ${
             CHAIN_NAMES_TO_STRING[targetChain]
           } pool has only ${+poolBalance[i].balance[j].amount} ${symbol}`
@@ -428,7 +439,57 @@ export const TransferWidget = ({
   }
 
   const handleSubmit = async () => {
-    if (fee < 0) {
+    if (mode === ModeOptions.onramp) {
+      setSubmitting(true)
+
+      // build onramp transaction
+      const params = {
+        originAddress: walletAddress,
+        originChain: 'FIAT',
+        targetAddress: targetAddress || walletAddress,
+        targetChain: targetChain,
+        symbol: selectedToken,
+        amount,
+        fee: 1,
+        htlcCreationHash: '',
+        htlcCreationVout: 0,
+        htlcExpirationTimestamp: '0',
+        htlcVersion: '',
+        senderPubKey: ''
+      }
+
+      const onrampParams = JSON.stringify({
+        ...params,
+        onramp: true,
+        sourceAccountId: selectedAccount?.accountId,
+        sourceBankAccountId: selectedBankAccount?.id
+      })
+
+      console.log('onramp params: ', onrampParams)
+
+      await fetchWrapper.post(`${backendUrl}/auth`, JSON.stringify(params))
+      const result: any = await fetchWrapper.post(
+        `${backendUrl}/submit/onramp`,
+        onrampParams
+      )
+
+      if (result?.code !== 0) {
+        toast.error("Something went wrong");
+      }
+
+      const txId = result.kimaTxHash;
+
+      let selectedBankAccountCopy = {...selectedBankAccount};
+      selectedBankAccountCopy.balance -= parseFloat(amount);
+      dispatch(setSelectedBankAccount(selectedBankAccountCopy));
+
+      setSubmitting(false)
+      dispatch(setTxId(txId));
+      dispatch(setSubmitted(true));
+      return
+    }
+
+    if (fee < 0 ) {
       toast.error('Fee is not calculated!')
       errorHandler('Fee is not calculated!')
       return
@@ -560,8 +621,7 @@ export const TransferWidget = ({
               ? transactionOption?.targetAddress
               : targetAddress,
           targetChain: targetChain,
-          originSymbol: sourceCurrency,
-          targetSymbol: targetCurrency,
+          symbol: selectedToken,
           amount: feeDeduct ? (+amount - fee).toFixed(8) : amount,
           fee: feeParam,
           htlcCreationHash: btcHash,
@@ -579,8 +639,7 @@ export const TransferWidget = ({
               ? transactionOption?.targetAddress
               : targetAddress,
           targetChain: targetChain,
-          originSymbol: sourceCurrency,
-          targetSymbol: targetCurrency,
+          symbol: selectedToken,
           amount: feeDeduct ? (+amount - fee).toFixed(8) : amount,
           fee: feeParam,
           htlcCreationHash: '',
@@ -591,7 +650,7 @@ export const TransferWidget = ({
         })
       }
 
-      console.log(params)
+      console.log('tx params: ', params)
       await fetchWrapper.post(`${backendUrl}/auth`, params)
       const result: any = await fetchWrapper.post(
         `${backendUrl}/submit`,
@@ -626,15 +685,35 @@ export const TransferWidget = ({
     } catch (e) {
       errorHandler(e)
       setSubmitting(false)
-      console.log(e?.status !== 500 ? 'rpc disconnected' : '', e)
+      console.log(e?.status !== 500 ? 'rpc disconnected here' : '', e)
       toast.error('rpc disconnected')
       toast.error('Failed to submit transaction')
     }
   }
 
   const onNext = () => {
+    // Check if is onramp tx
+    if (mode === ModeOptions.onramp) {
+      if (formStep === 0) {
+        if (!isReady && targetAddress?.length < 10)
+          return toast.error('Invalid address')
+
+        if (
+          parseFloat(amount) < 0 ||
+          selectedBankAccount?.balance < parseFloat(amount)
+        )
+          return toast.error('Invalid amount')
+
+        if (!targetChain) return toast.error('Invalid network selected')
+
+        // just set form step to 1
+        setFormStep(1)
+        return
+      }
+    }
+
     if (isWizard && wizardStep < 5) {
-      if (wizardStep === 1 && !isReady) {
+      if (wizardStep == 1 && !isReady) {
         toast.error('Wallet is not connected!')
         errorHandler('Wallet is not connected!')
         return
@@ -690,7 +769,7 @@ export const TransferWidget = ({
           return
         }
 
-        if (fee < 0) {
+        if (fee < 0 && mode !== ModeOptions.onramp) {
           toast.error('Fee is not calculated!')
           errorHandler('Fee is not calculated!')
           return
@@ -745,6 +824,10 @@ export const TransferWidget = ({
 
   const getButtonLabel = () => {
     if ((isWizard && wizardStep === 5) || (!isWizard && formStep === 1)) {
+      if (mode === ModeOptions.onramp) {
+        return isSubmitting ? 'Submitting...' : 'Submit'
+      }
+
       if (sourceChain === ChainName.FIAT || targetChain === ChainName.FIAT) {
         if (isVerifying) return 'KYC Verifying...'
         if (kycStatus !== 'approved') {
@@ -852,13 +935,15 @@ export const TransferWidget = ({
         <div className='topbar'>
           <div className='title'>
             <h3>
-              {(isWizard && wizardStep === 3) || (!isWizard && formStep > 0)
-                ? titleOption?.confirmTitle
+              {mode === ModeOptions.onramp
+                ? 'Onramp transaction'
+                : (isWizard && wizardStep === 3) || (!isWizard && formStep > 0)
                   ? titleOption?.confirmTitle
-                  : 'Transfer Details'
-                : titleOption?.initialTitle
-                  ? titleOption?.initialTitle
-                  : 'New Transfer'}
+                    ? titleOption?.confirmTitle
+                    : 'Transfer Details'
+                  : titleOption?.initialTitle
+                    ? titleOption?.initialTitle
+                    : 'New Transfer'}
             </h3>
           </div>
           <div className='control-buttons'>
@@ -887,7 +972,28 @@ export const TransferWidget = ({
 
       <div className='kima-card-content' ref={mainRef}>
         {isWizard ? (
-          wizardStep === 0 ? (
+          mode !== ModeOptions.onramp ? (
+            wizardStep === 0 ? (
+              <NetworkSelect />
+            ) : wizardStep === 1 ? (
+              <div className='connect-wallet-step'>
+                <p>Connect your wallet</p>
+                <WalletButton errorBelow={true} />
+              </div>
+            ) : wizardStep === 2 ? (
+              <NetworkSelect isOriginChain={false} />
+            ) : wizardStep === 3 ? (
+              <AddressInputWizard />
+            ) : wizardStep === 4 ? (
+              <CoinSelect />
+            ) : (
+              <ConfirmDetails
+                isApproved={
+                  sourceChain === ChainName.FIAT ? isSigned : isApproved
+                }
+              />
+            )
+          ) : wizardStep === 0 ? (
             <NetworkSelect />
           ) : wizardStep === 1 ? (
             <div className='connect-wallet-step'>
@@ -895,10 +1001,6 @@ export const TransferWidget = ({
               <WalletButton errorBelow={true} />
             </div>
           ) : wizardStep === 2 ? (
-            <NetworkSelect isOriginChain={false} />
-          ) : wizardStep === 3 ? (
-            <AddressInputWizard />
-          ) : wizardStep === 4 ? (
             <CoinSelect />
           ) : (
             <ConfirmDetails
@@ -907,12 +1009,20 @@ export const TransferWidget = ({
               }
             />
           )
+        ) : mode !== ModeOptions.onramp ? (
+          formStep === 0 ? (
+            <SingleForm paymentTitleOption={paymentTitleOption} />
+          ) : (
+            <ConfirmDetails
+              isApproved={
+                sourceChain === ChainName.FIAT ? isSigned : isApproved
+              }
+            />
+          )
         ) : formStep === 0 ? (
-          <SingleForm paymentTitleOption={paymentTitleOption} />
+          <OnrampForm />
         ) : (
-          <ConfirmDetails
-            isApproved={sourceChain === ChainName.FIAT ? isSigned : isApproved}
-          />
+          <ConfirmOnrampDetails />
         )}
       </div>
 
@@ -922,19 +1032,24 @@ export const TransferWidget = ({
             fill={theme.colorMode === 'light' ? 'black' : '#C5C5C5'}
           />
         </ExternalLink>
+
         <div className='button-group'>
-          {/* <SecondaryButton
-            clickHandler={() => {
-              if (isApproving || isSubmitting || isSigning || isBTCSigning)
-                return
-              setWizard((prev) => !prev)
-            }}
-            disabled={isApproving || isSubmitting || isSigning || isBTCSigning}
-            theme={theme.colorMode}
-            style={{ style: { width: '12em', marginLeft: 'auto' } }}
-          >
-            Switch to {isWizard ? 'Form' : 'Wizard'}
-          </SecondaryButton> */}
+          {mode !== ModeOptions.onramp && (
+            <SecondaryButton
+              clickHandler={() => {
+                if (isApproving || isSubmitting || isSigning || isBTCSigning)
+                  return
+                setWizard((prev) => !prev)
+              }}
+              disabled={
+                isApproving || isSubmitting || isSigning || isBTCSigning
+              }
+              theme={theme.colorMode}
+              style={{ style: { width: '12em', marginLeft: 'auto' } }}
+            >
+              Switch to {isWizard ? 'Form' : 'Wizard'}
+            </SecondaryButton>
+          )}
           <SecondaryButton
             clickHandler={onBack}
             theme={theme.colorMode}
@@ -945,17 +1060,12 @@ export const TransferWidget = ({
               : 'Cancel'}
           </SecondaryButton>
           {allowance > 0 &&
-          ((isWizard && wizardStep === 5) || (!isWizard && formStep === 1)) ? (
+          ((isWizard && wizardStep === 5) ||
+            (!isWizard && formStep === 1 && mode !== ModeOptions.onramp)) ? (
             <PrimaryButton
               clickHandler={onCancelApprove}
               isLoading={isCancellingApprove}
-              disabled={
-                isCancellingApprove ||
-                isApproving ||
-                isSubmitting ||
-                isSigning ||
-                isBTCSigning
-              }
+              disabled={isCancellingApprove}
             >
               {isCancellingApprove ? 'Cancelling Approval' : 'Cancel Approve'}
             </PrimaryButton>

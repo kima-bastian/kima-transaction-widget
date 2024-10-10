@@ -22,8 +22,10 @@ import { DAppOptions, ModeOptions } from '../../interface'
 import { fetchWrapper } from '../../helpers/fetch-wrapper'
 import toast from 'react-hot-toast'
 
+import { Loading180Ring } from '../../assets/loading'
+
 const NetworkDropdown = React.memo(
-  ({ isSourceChain = true }: { isSourceChain?: boolean }) => {
+  ({ isOriginChain = true }: { isOriginChain?: boolean }) => {
     const [collapsed, setCollapsed] = useState(true)
     const [availableNetworks, setAvailableNetworks] = useState<
       Array<ChainName>
@@ -41,14 +43,22 @@ const NetworkDropdown = React.memo(
     const selectedNetwork = useMemo(() => {
       const index = networkOptions.findIndex(
         (option) =>
-          option.id === (isSourceChain ? originNetwork : targetNetwork)
+          option.id === (isOriginChain ? originNetwork : targetNetwork)
       )
+      console.log('network: ', networkOptions[index])
       if (index >= 0) return networkOptions[index]
-      return networkOptions[3]
-    }, [originNetwork, targetNetwork, networkOptions])
+
+      console.log('network 3: ', networkOptions[3])
+      if (availableNetworks.length !== 0) {
+        return networkOptions.find(
+          (networkOption) => networkOption.id === availableNetworks[0]
+        )
+      }
+      return null
+    }, [originNetwork, targetNetwork, networkOptions, availableNetworks])
 
     const networks = useMemo(() => {
-      if (isSourceChain && mode === ModeOptions.bridge) {
+      if (isOriginChain && mode === ModeOptions.bridge) {
         return networkOptions
       }
 
@@ -58,13 +68,55 @@ const NetworkDropdown = React.memo(
       )
     }, [
       networkOptions,
-      isSourceChain,
+      isOriginChain,
       availableNetworks,
       dAppOption,
       originNetwork
     ])
     const theme = useSelector(selectTheme)
     const dispatch = useDispatch()
+
+    useEffect(() => {
+      if (!nodeProviderQuery || mode != ModeOptions.onramp) return
+      ;(async function () {
+        try {
+          let chains: ChainName[] = []
+          const networks: any = await fetchWrapper.get(
+            `${nodeProviderQuery}/kima-finance/kima-blockchain/chains/get_available_chains/${originNetwork}`
+          )
+
+          // console.log('origin network: ', originNetwork)
+          // console.log('networks: ', networks)
+
+          chains = networks.Chains
+          if (useFIAT) chains.push(ChainName.FIAT)
+
+          // console.log('available networks before: ', availableNetworks)
+          setAvailableNetworks(chains)
+          
+
+          if (isOriginChain && !targetNetwork) {
+            dispatch(setTargetChain(chains[0]))
+          }
+
+          if (sourceChangeRef.current) {
+            sourceChangeRef.current = false
+            dispatch(
+              setTargetChain(
+                chains.findIndex((chain) => chain === targetNetwork) < 0 ||
+                  targetNetwork === originNetwork
+                  ? chains[0]
+                  : targetNetwork
+              )
+            )
+            dispatch(setTargetChainFetching(false))
+          }
+        } catch (e) {
+          console.log('rpc disconnected', e)
+          toast.error('rpc disconnected')
+        }
+      })()
+    }, [nodeProviderQuery, targetNetwork, mode, isOriginChain, useFIAT])
 
     useEffect(() => {
       if (!nodeProviderQuery || mode !== ModeOptions.bridge) return
@@ -84,7 +136,7 @@ const NetworkDropdown = React.memo(
 
           setAvailableNetworks(chains)
 
-          if (isSourceChain && !targetNetwork) {
+          if (isOriginChain && !targetNetwork) {
             dispatch(setTargetChain(chains[0]))
           }
 
@@ -110,7 +162,7 @@ const NetworkDropdown = React.memo(
       originNetwork,
       targetNetwork,
       mode,
-      isSourceChain,
+      isOriginChain,
       useFIAT
     ])
 
@@ -161,15 +213,22 @@ const NetworkDropdown = React.memo(
           collapsed ? 'collapsed' : ''
         }`}
         onClick={() => {
-          if (!autoSwitchChain && isSourceChain) return
+          if (!autoSwitchChain && isOriginChain && mode !== ModeOptions.onramp)
+            return
           setCollapsed((prev) => !prev)
         }}
         ref={ref}
       >
-        <div className='network-wrapper'>
-          {<selectedNetwork.icon />}
-          <span>{selectedNetwork.label}</span>
-        </div>
+        {availableNetworks.length != 0 && selectedNetwork ? (
+          <div className='network-wrapper'>
+            <selectedNetwork.icon />
+            <span>{selectedNetwork.label}</span>
+          </div>
+        ) : (
+          <div className='network-wrapper'>
+            <Loading180Ring width={24} height={24} fill='white' />
+          </div>
+        )}
         <div
           className={`network-menu custom-scrollbar ${theme.colorMode} ${
             collapsed ? 'collapsed' : ''
@@ -180,7 +239,8 @@ const NetworkDropdown = React.memo(
               className='network-menu-item'
               key={network.label}
               onClick={async () => {
-                if (isSourceChain) {
+                if (isOriginChain) {
+                  console.log('origin chain')
                   dispatch(setTargetChainFetching(true))
                   dispatch(setSourceChain(network.id))
                   sourceChangeRef.current = true

@@ -23,6 +23,7 @@ import { useSelector } from 'react-redux'
 import {
   selectBitcoinAddress,
   selectErrorHandler,
+  selectMode,
   selectNetworkOption,
   selectSourceChain,
   selectTargetChain,
@@ -35,7 +36,7 @@ import {
   useWeb3ModalProvider,
   useWeb3ModalEvents
 } from '@web3modal/ethers5/react'
-import { NetworkOptions, Web3ModalAccountInfo } from '../interface'
+import { ModeOptions, NetworkOptions, Web3ModalAccountInfo } from '../interface'
 import { useDispatch } from 'react-redux'
 import {
   setBitcoinAddress,
@@ -64,6 +65,7 @@ function useIsWalletReady(): {
 } {
   const dispatch = useDispatch()
   const autoSwitch = useSelector(selectWalletAutoConnect)
+  const mode = useSelector(selectMode)
   const { publicKey: solanaAddress } = useSolanaWallet()
   const { address: tronAddress } = useTronWallet()
   const { walletProvider: evmProvider } = useWeb3ModalProvider()
@@ -230,7 +232,7 @@ function useIsWalletReady(): {
           }
         }
 
-        if (evmChainId && autoSwitch)
+        if (evmChainId && autoSwitch && mode !== ModeOptions.onramp)
           return createWalletStatus(
             false,
             `Wallet not connected to ${

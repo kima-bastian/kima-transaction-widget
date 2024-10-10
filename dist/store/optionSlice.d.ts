@@ -45,12 +45,11 @@ export interface OptionState {
     serviceFee: number;
     backendUrl: string;
     nodeProviderQuery: string;
-    graphqlProviderQuery: string;
     kimaExplorerUrl: string;
     txId: number;
-    sourceCurrency: string;
-    targetCurrency: string;
+    selectedToken: string;
     expireTime: string;
+    availableTokenList: Array<string>;
     compliantOption: boolean;
     sourceCompliant: string;
     targetCompliant: string;
@@ -63,6 +62,9 @@ export interface OptionState {
     pendingTxs: number;
     pendingTxData: Array<PendingTxData>;
     networkOption: NetworkOptions;
+    accounts: [];
+    selectedAccount: any;
+    selectedBankAccount: any;
 }
 export declare const optionSlice: toolkitRaw.Slice<OptionState, {
     initialize: (state: {
@@ -102,7 +104,6 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             targetChain: import("../interface").SupportNetworks;
             targetAddress: string;
             amount: number;
-            currency: string;
         } | undefined;
         errorHandler: Function;
         keplrHandler: Function;
@@ -113,12 +114,11 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
         serviceFee: number;
         backendUrl: string;
         nodeProviderQuery: string;
-        graphqlProviderQuery: string;
         kimaExplorerUrl: string;
         txId: number;
-        sourceCurrency: string;
-        targetCurrency: string;
+        selectedToken: string;
         expireTime: string;
+        availableTokenList: Array<string>;
         compliantOption: boolean;
         sourceCompliant: string;
         targetCompliant: string;
@@ -139,6 +139,9 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             hash: string;
         }[];
         networkOption: NetworkOptions;
+        accounts: [];
+        selectedAccount: any;
+        selectedBankAccount: any;
     }) => void;
     setNetworkOption: (state: {
         theme: {
@@ -177,7 +180,6 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             targetChain: import("../interface").SupportNetworks;
             targetAddress: string;
             amount: number;
-            currency: string;
         } | undefined;
         errorHandler: Function;
         keplrHandler: Function;
@@ -188,12 +190,11 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
         serviceFee: number;
         backendUrl: string;
         nodeProviderQuery: string;
-        graphqlProviderQuery: string;
         kimaExplorerUrl: string;
         txId: number;
-        sourceCurrency: string;
-        targetCurrency: string;
+        selectedToken: string;
         expireTime: string;
+        availableTokenList: Array<string>;
         compliantOption: boolean;
         sourceCompliant: string;
         targetCompliant: string;
@@ -214,6 +215,9 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             hash: string;
         }[];
         networkOption: NetworkOptions;
+        accounts: [];
+        selectedAccount: any;
+        selectedBankAccount: any;
     }, action: PayloadAction<NetworkOptions>) => void;
     setPendingTxs: (state: {
         theme: {
@@ -252,7 +256,6 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             targetChain: import("../interface").SupportNetworks;
             targetAddress: string;
             amount: number;
-            currency: string;
         } | undefined;
         errorHandler: Function;
         keplrHandler: Function;
@@ -263,12 +266,11 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
         serviceFee: number;
         backendUrl: string;
         nodeProviderQuery: string;
-        graphqlProviderQuery: string;
         kimaExplorerUrl: string;
         txId: number;
-        sourceCurrency: string;
-        targetCurrency: string;
+        selectedToken: string;
         expireTime: string;
+        availableTokenList: Array<string>;
         compliantOption: boolean;
         sourceCompliant: string;
         targetCompliant: string;
@@ -289,6 +291,9 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             hash: string;
         }[];
         networkOption: NetworkOptions;
+        accounts: [];
+        selectedAccount: any;
+        selectedBankAccount: any;
     }, action: PayloadAction<number>) => void;
     setPendingTxData: (state: {
         theme: {
@@ -327,7 +332,6 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             targetChain: import("../interface").SupportNetworks;
             targetAddress: string;
             amount: number;
-            currency: string;
         } | undefined;
         errorHandler: Function;
         keplrHandler: Function;
@@ -338,12 +342,11 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
         serviceFee: number;
         backendUrl: string;
         nodeProviderQuery: string;
-        graphqlProviderQuery: string;
         kimaExplorerUrl: string;
         txId: number;
-        sourceCurrency: string;
-        targetCurrency: string;
+        selectedToken: string;
         expireTime: string;
+        availableTokenList: Array<string>;
         compliantOption: boolean;
         sourceCompliant: string;
         targetCompliant: string;
@@ -364,6 +367,9 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             hash: string;
         }[];
         networkOption: NetworkOptions;
+        accounts: [];
+        selectedAccount: any;
+        selectedBankAccount: any;
     }, action: PayloadAction<Array<PendingTxData>>) => void;
     setTokenOptions: (state: {
         theme: {
@@ -402,7 +408,6 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             targetChain: import("../interface").SupportNetworks;
             targetAddress: string;
             amount: number;
-            currency: string;
         } | undefined;
         errorHandler: Function;
         keplrHandler: Function;
@@ -413,12 +418,11 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
         serviceFee: number;
         backendUrl: string;
         nodeProviderQuery: string;
-        graphqlProviderQuery: string;
         kimaExplorerUrl: string;
         txId: number;
-        sourceCurrency: string;
-        targetCurrency: string;
+        selectedToken: string;
         expireTime: string;
+        availableTokenList: Array<string>;
         compliantOption: boolean;
         sourceCompliant: string;
         targetCompliant: string;
@@ -439,6 +443,9 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             hash: string;
         }[];
         networkOption: NetworkOptions;
+        accounts: [];
+        selectedAccount: any;
+        selectedBankAccount: any;
     }, action: PayloadAction<TokenOptions>) => void;
     setTheme: (state: {
         theme: {
@@ -477,7 +484,6 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             targetChain: import("../interface").SupportNetworks;
             targetAddress: string;
             amount: number;
-            currency: string;
         } | undefined;
         errorHandler: Function;
         keplrHandler: Function;
@@ -488,12 +494,11 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
         serviceFee: number;
         backendUrl: string;
         nodeProviderQuery: string;
-        graphqlProviderQuery: string;
         kimaExplorerUrl: string;
         txId: number;
-        sourceCurrency: string;
-        targetCurrency: string;
+        selectedToken: string;
         expireTime: string;
+        availableTokenList: Array<string>;
         compliantOption: boolean;
         sourceCompliant: string;
         targetCompliant: string;
@@ -514,6 +519,9 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             hash: string;
         }[];
         networkOption: NetworkOptions;
+        accounts: [];
+        selectedAccount: any;
+        selectedBankAccount: any;
     }, action: PayloadAction<ThemeOptions>) => void;
     setKimaExplorer: (state: {
         theme: {
@@ -552,7 +560,6 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             targetChain: import("../interface").SupportNetworks;
             targetAddress: string;
             amount: number;
-            currency: string;
         } | undefined;
         errorHandler: Function;
         keplrHandler: Function;
@@ -563,12 +570,11 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
         serviceFee: number;
         backendUrl: string;
         nodeProviderQuery: string;
-        graphqlProviderQuery: string;
         kimaExplorerUrl: string;
         txId: number;
-        sourceCurrency: string;
-        targetCurrency: string;
+        selectedToken: string;
         expireTime: string;
+        availableTokenList: Array<string>;
         compliantOption: boolean;
         sourceCompliant: string;
         targetCompliant: string;
@@ -589,6 +595,9 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             hash: string;
         }[];
         networkOption: NetworkOptions;
+        accounts: [];
+        selectedAccount: any;
+        selectedBankAccount: any;
     }, action: PayloadAction<string>) => void;
     setSourceChain: (state: {
         theme: {
@@ -627,7 +636,6 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             targetChain: import("../interface").SupportNetworks;
             targetAddress: string;
             amount: number;
-            currency: string;
         } | undefined;
         errorHandler: Function;
         keplrHandler: Function;
@@ -638,12 +646,11 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
         serviceFee: number;
         backendUrl: string;
         nodeProviderQuery: string;
-        graphqlProviderQuery: string;
         kimaExplorerUrl: string;
         txId: number;
-        sourceCurrency: string;
-        targetCurrency: string;
+        selectedToken: string;
         expireTime: string;
+        availableTokenList: Array<string>;
         compliantOption: boolean;
         sourceCompliant: string;
         targetCompliant: string;
@@ -664,6 +671,9 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             hash: string;
         }[];
         networkOption: NetworkOptions;
+        accounts: [];
+        selectedAccount: any;
+        selectedBankAccount: any;
     }, action: PayloadAction<string>) => void;
     setTargetChain: (state: {
         theme: {
@@ -702,7 +712,6 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             targetChain: import("../interface").SupportNetworks;
             targetAddress: string;
             amount: number;
-            currency: string;
         } | undefined;
         errorHandler: Function;
         keplrHandler: Function;
@@ -713,12 +722,11 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
         serviceFee: number;
         backendUrl: string;
         nodeProviderQuery: string;
-        graphqlProviderQuery: string;
         kimaExplorerUrl: string;
         txId: number;
-        sourceCurrency: string;
-        targetCurrency: string;
+        selectedToken: string;
         expireTime: string;
+        availableTokenList: Array<string>;
         compliantOption: boolean;
         sourceCompliant: string;
         targetCompliant: string;
@@ -739,6 +747,9 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             hash: string;
         }[];
         networkOption: NetworkOptions;
+        accounts: [];
+        selectedAccount: any;
+        selectedBankAccount: any;
     }, action: PayloadAction<string>) => void;
     setTargetAddress: (state: {
         theme: {
@@ -777,7 +788,6 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             targetChain: import("../interface").SupportNetworks;
             targetAddress: string;
             amount: number;
-            currency: string;
         } | undefined;
         errorHandler: Function;
         keplrHandler: Function;
@@ -788,12 +798,11 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
         serviceFee: number;
         backendUrl: string;
         nodeProviderQuery: string;
-        graphqlProviderQuery: string;
         kimaExplorerUrl: string;
         txId: number;
-        sourceCurrency: string;
-        targetCurrency: string;
+        selectedToken: string;
         expireTime: string;
+        availableTokenList: Array<string>;
         compliantOption: boolean;
         sourceCompliant: string;
         targetCompliant: string;
@@ -814,6 +823,9 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             hash: string;
         }[];
         networkOption: NetworkOptions;
+        accounts: [];
+        selectedAccount: any;
+        selectedBankAccount: any;
     }, action: PayloadAction<string>) => void;
     setBitcoinAddress: (state: {
         theme: {
@@ -852,7 +864,6 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             targetChain: import("../interface").SupportNetworks;
             targetAddress: string;
             amount: number;
-            currency: string;
         } | undefined;
         errorHandler: Function;
         keplrHandler: Function;
@@ -863,12 +874,11 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
         serviceFee: number;
         backendUrl: string;
         nodeProviderQuery: string;
-        graphqlProviderQuery: string;
         kimaExplorerUrl: string;
         txId: number;
-        sourceCurrency: string;
-        targetCurrency: string;
+        selectedToken: string;
         expireTime: string;
+        availableTokenList: Array<string>;
         compliantOption: boolean;
         sourceCompliant: string;
         targetCompliant: string;
@@ -889,6 +899,9 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             hash: string;
         }[];
         networkOption: NetworkOptions;
+        accounts: [];
+        selectedAccount: any;
+        selectedBankAccount: any;
     }, action: PayloadAction<string>) => void;
     setBitcoinPubkey: (state: {
         theme: {
@@ -927,7 +940,6 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             targetChain: import("../interface").SupportNetworks;
             targetAddress: string;
             amount: number;
-            currency: string;
         } | undefined;
         errorHandler: Function;
         keplrHandler: Function;
@@ -938,12 +950,11 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
         serviceFee: number;
         backendUrl: string;
         nodeProviderQuery: string;
-        graphqlProviderQuery: string;
         kimaExplorerUrl: string;
         txId: number;
-        sourceCurrency: string;
-        targetCurrency: string;
+        selectedToken: string;
         expireTime: string;
+        availableTokenList: Array<string>;
         compliantOption: boolean;
         sourceCompliant: string;
         targetCompliant: string;
@@ -964,6 +975,9 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             hash: string;
         }[];
         networkOption: NetworkOptions;
+        accounts: [];
+        selectedAccount: any;
+        selectedBankAccount: any;
     }, action: PayloadAction<string>) => void;
     setSolanaConnectModal: (state: {
         theme: {
@@ -1002,7 +1016,6 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             targetChain: import("../interface").SupportNetworks;
             targetAddress: string;
             amount: number;
-            currency: string;
         } | undefined;
         errorHandler: Function;
         keplrHandler: Function;
@@ -1013,12 +1026,11 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
         serviceFee: number;
         backendUrl: string;
         nodeProviderQuery: string;
-        graphqlProviderQuery: string;
         kimaExplorerUrl: string;
         txId: number;
-        sourceCurrency: string;
-        targetCurrency: string;
+        selectedToken: string;
         expireTime: string;
+        availableTokenList: Array<string>;
         compliantOption: boolean;
         sourceCompliant: string;
         targetCompliant: string;
@@ -1039,6 +1051,9 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             hash: string;
         }[];
         networkOption: NetworkOptions;
+        accounts: [];
+        selectedAccount: any;
+        selectedBankAccount: any;
     }, action: PayloadAction<boolean>) => void;
     setTronConnectModal: (state: {
         theme: {
@@ -1077,7 +1092,6 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             targetChain: import("../interface").SupportNetworks;
             targetAddress: string;
             amount: number;
-            currency: string;
         } | undefined;
         errorHandler: Function;
         keplrHandler: Function;
@@ -1088,12 +1102,11 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
         serviceFee: number;
         backendUrl: string;
         nodeProviderQuery: string;
-        graphqlProviderQuery: string;
         kimaExplorerUrl: string;
         txId: number;
-        sourceCurrency: string;
-        targetCurrency: string;
+        selectedToken: string;
         expireTime: string;
+        availableTokenList: Array<string>;
         compliantOption: boolean;
         sourceCompliant: string;
         targetCompliant: string;
@@ -1114,6 +1127,9 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             hash: string;
         }[];
         networkOption: NetworkOptions;
+        accounts: [];
+        selectedAccount: any;
+        selectedBankAccount: any;
     }, action: PayloadAction<boolean>) => void;
     setHelpPopup: (state: {
         theme: {
@@ -1152,7 +1168,6 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             targetChain: import("../interface").SupportNetworks;
             targetAddress: string;
             amount: number;
-            currency: string;
         } | undefined;
         errorHandler: Function;
         keplrHandler: Function;
@@ -1163,12 +1178,11 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
         serviceFee: number;
         backendUrl: string;
         nodeProviderQuery: string;
-        graphqlProviderQuery: string;
         kimaExplorerUrl: string;
         txId: number;
-        sourceCurrency: string;
-        targetCurrency: string;
+        selectedToken: string;
         expireTime: string;
+        availableTokenList: Array<string>;
         compliantOption: boolean;
         sourceCompliant: string;
         targetCompliant: string;
@@ -1189,6 +1203,9 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             hash: string;
         }[];
         networkOption: NetworkOptions;
+        accounts: [];
+        selectedAccount: any;
+        selectedBankAccount: any;
     }, action: PayloadAction<boolean>) => void;
     setHashPopup: (state: {
         theme: {
@@ -1227,7 +1244,6 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             targetChain: import("../interface").SupportNetworks;
             targetAddress: string;
             amount: number;
-            currency: string;
         } | undefined;
         errorHandler: Function;
         keplrHandler: Function;
@@ -1238,12 +1254,11 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
         serviceFee: number;
         backendUrl: string;
         nodeProviderQuery: string;
-        graphqlProviderQuery: string;
         kimaExplorerUrl: string;
         txId: number;
-        sourceCurrency: string;
-        targetCurrency: string;
+        selectedToken: string;
         expireTime: string;
+        availableTokenList: Array<string>;
         compliantOption: boolean;
         sourceCompliant: string;
         targetCompliant: string;
@@ -1264,6 +1279,9 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             hash: string;
         }[];
         networkOption: NetworkOptions;
+        accounts: [];
+        selectedAccount: any;
+        selectedBankAccount: any;
     }, action: PayloadAction<boolean>) => void;
     setPendingTxPopup: (state: {
         theme: {
@@ -1302,7 +1320,6 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             targetChain: import("../interface").SupportNetworks;
             targetAddress: string;
             amount: number;
-            currency: string;
         } | undefined;
         errorHandler: Function;
         keplrHandler: Function;
@@ -1313,12 +1330,11 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
         serviceFee: number;
         backendUrl: string;
         nodeProviderQuery: string;
-        graphqlProviderQuery: string;
         kimaExplorerUrl: string;
         txId: number;
-        sourceCurrency: string;
-        targetCurrency: string;
+        selectedToken: string;
         expireTime: string;
+        availableTokenList: Array<string>;
         compliantOption: boolean;
         sourceCompliant: string;
         targetCompliant: string;
@@ -1339,6 +1355,9 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             hash: string;
         }[];
         networkOption: NetworkOptions;
+        accounts: [];
+        selectedAccount: any;
+        selectedBankAccount: any;
     }, action: PayloadAction<boolean>) => void;
     setBankPopup: (state: {
         theme: {
@@ -1377,7 +1396,6 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             targetChain: import("../interface").SupportNetworks;
             targetAddress: string;
             amount: number;
-            currency: string;
         } | undefined;
         errorHandler: Function;
         keplrHandler: Function;
@@ -1388,12 +1406,11 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
         serviceFee: number;
         backendUrl: string;
         nodeProviderQuery: string;
-        graphqlProviderQuery: string;
         kimaExplorerUrl: string;
         txId: number;
-        sourceCurrency: string;
-        targetCurrency: string;
+        selectedToken: string;
         expireTime: string;
+        availableTokenList: Array<string>;
         compliantOption: boolean;
         sourceCompliant: string;
         targetCompliant: string;
@@ -1414,6 +1431,9 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             hash: string;
         }[];
         networkOption: NetworkOptions;
+        accounts: [];
+        selectedAccount: any;
+        selectedBankAccount: any;
     }, action: PayloadAction<boolean>) => void;
     setProvider: (state: {
         theme: {
@@ -1452,7 +1472,6 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             targetChain: import("../interface").SupportNetworks;
             targetAddress: string;
             amount: number;
-            currency: string;
         } | undefined;
         errorHandler: Function;
         keplrHandler: Function;
@@ -1463,12 +1482,11 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
         serviceFee: number;
         backendUrl: string;
         nodeProviderQuery: string;
-        graphqlProviderQuery: string;
         kimaExplorerUrl: string;
         txId: number;
-        sourceCurrency: string;
-        targetCurrency: string;
+        selectedToken: string;
         expireTime: string;
+        availableTokenList: Array<string>;
         compliantOption: boolean;
         sourceCompliant: string;
         targetCompliant: string;
@@ -1489,6 +1507,9 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             hash: string;
         }[];
         networkOption: NetworkOptions;
+        accounts: [];
+        selectedAccount: any;
+        selectedBankAccount: any;
     }, action: PayloadAction<any>) => void;
     setDappOption: (state: {
         theme: {
@@ -1527,7 +1548,6 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             targetChain: import("../interface").SupportNetworks;
             targetAddress: string;
             amount: number;
-            currency: string;
         } | undefined;
         errorHandler: Function;
         keplrHandler: Function;
@@ -1538,12 +1558,11 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
         serviceFee: number;
         backendUrl: string;
         nodeProviderQuery: string;
-        graphqlProviderQuery: string;
         kimaExplorerUrl: string;
         txId: number;
-        sourceCurrency: string;
-        targetCurrency: string;
+        selectedToken: string;
         expireTime: string;
+        availableTokenList: Array<string>;
         compliantOption: boolean;
         sourceCompliant: string;
         targetCompliant: string;
@@ -1564,6 +1583,9 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             hash: string;
         }[];
         networkOption: NetworkOptions;
+        accounts: [];
+        selectedAccount: any;
+        selectedBankAccount: any;
     }, action: PayloadAction<DAppOptions>) => void;
     setWalletAutoConnect: (state: {
         theme: {
@@ -1602,7 +1624,6 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             targetChain: import("../interface").SupportNetworks;
             targetAddress: string;
             amount: number;
-            currency: string;
         } | undefined;
         errorHandler: Function;
         keplrHandler: Function;
@@ -1613,12 +1634,11 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
         serviceFee: number;
         backendUrl: string;
         nodeProviderQuery: string;
-        graphqlProviderQuery: string;
         kimaExplorerUrl: string;
         txId: number;
-        sourceCurrency: string;
-        targetCurrency: string;
+        selectedToken: string;
         expireTime: string;
+        availableTokenList: Array<string>;
         compliantOption: boolean;
         sourceCompliant: string;
         targetCompliant: string;
@@ -1639,6 +1659,9 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             hash: string;
         }[];
         networkOption: NetworkOptions;
+        accounts: [];
+        selectedAccount: any;
+        selectedBankAccount: any;
     }, action: PayloadAction<boolean>) => void;
     setSolanaProvider: (state: {
         theme: {
@@ -1677,7 +1700,6 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             targetChain: import("../interface").SupportNetworks;
             targetAddress: string;
             amount: number;
-            currency: string;
         } | undefined;
         errorHandler: Function;
         keplrHandler: Function;
@@ -1688,12 +1710,11 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
         serviceFee: number;
         backendUrl: string;
         nodeProviderQuery: string;
-        graphqlProviderQuery: string;
         kimaExplorerUrl: string;
         txId: number;
-        sourceCurrency: string;
-        targetCurrency: string;
+        selectedToken: string;
         expireTime: string;
+        availableTokenList: Array<string>;
         compliantOption: boolean;
         sourceCompliant: string;
         targetCompliant: string;
@@ -1714,6 +1735,9 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             hash: string;
         }[];
         networkOption: NetworkOptions;
+        accounts: [];
+        selectedAccount: any;
+        selectedBankAccount: any;
     }, action: PayloadAction<any>) => void;
     setTronProvider: (state: {
         theme: {
@@ -1752,7 +1776,6 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             targetChain: import("../interface").SupportNetworks;
             targetAddress: string;
             amount: number;
-            currency: string;
         } | undefined;
         errorHandler: Function;
         keplrHandler: Function;
@@ -1763,12 +1786,11 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
         serviceFee: number;
         backendUrl: string;
         nodeProviderQuery: string;
-        graphqlProviderQuery: string;
         kimaExplorerUrl: string;
         txId: number;
-        sourceCurrency: string;
-        targetCurrency: string;
+        selectedToken: string;
         expireTime: string;
+        availableTokenList: Array<string>;
         compliantOption: boolean;
         sourceCompliant: string;
         targetCompliant: string;
@@ -1789,6 +1811,9 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             hash: string;
         }[];
         networkOption: NetworkOptions;
+        accounts: [];
+        selectedAccount: any;
+        selectedBankAccount: any;
     }, action: PayloadAction<any>) => void;
     setSubmitted: (state: {
         theme: {
@@ -1827,7 +1852,6 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             targetChain: import("../interface").SupportNetworks;
             targetAddress: string;
             amount: number;
-            currency: string;
         } | undefined;
         errorHandler: Function;
         keplrHandler: Function;
@@ -1838,12 +1862,11 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
         serviceFee: number;
         backendUrl: string;
         nodeProviderQuery: string;
-        graphqlProviderQuery: string;
         kimaExplorerUrl: string;
         txId: number;
-        sourceCurrency: string;
-        targetCurrency: string;
+        selectedToken: string;
         expireTime: string;
+        availableTokenList: Array<string>;
         compliantOption: boolean;
         sourceCompliant: string;
         targetCompliant: string;
@@ -1864,6 +1887,9 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             hash: string;
         }[];
         networkOption: NetworkOptions;
+        accounts: [];
+        selectedAccount: any;
+        selectedBankAccount: any;
     }, action: PayloadAction<boolean>) => void;
     setTransactionOption: (state: {
         theme: {
@@ -1902,7 +1928,6 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             targetChain: import("../interface").SupportNetworks;
             targetAddress: string;
             amount: number;
-            currency: string;
         } | undefined;
         errorHandler: Function;
         keplrHandler: Function;
@@ -1913,12 +1938,11 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
         serviceFee: number;
         backendUrl: string;
         nodeProviderQuery: string;
-        graphqlProviderQuery: string;
         kimaExplorerUrl: string;
         txId: number;
-        sourceCurrency: string;
-        targetCurrency: string;
+        selectedToken: string;
         expireTime: string;
+        availableTokenList: Array<string>;
         compliantOption: boolean;
         sourceCompliant: string;
         targetCompliant: string;
@@ -1939,6 +1963,9 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             hash: string;
         }[];
         networkOption: NetworkOptions;
+        accounts: [];
+        selectedAccount: any;
+        selectedBankAccount: any;
     }, action: PayloadAction<TransactionOption>) => void;
     setAmount: (state: {
         theme: {
@@ -1977,7 +2004,6 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             targetChain: import("../interface").SupportNetworks;
             targetAddress: string;
             amount: number;
-            currency: string;
         } | undefined;
         errorHandler: Function;
         keplrHandler: Function;
@@ -1988,12 +2014,11 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
         serviceFee: number;
         backendUrl: string;
         nodeProviderQuery: string;
-        graphqlProviderQuery: string;
         kimaExplorerUrl: string;
         txId: number;
-        sourceCurrency: string;
-        targetCurrency: string;
+        selectedToken: string;
         expireTime: string;
+        availableTokenList: Array<string>;
         compliantOption: boolean;
         sourceCompliant: string;
         targetCompliant: string;
@@ -2014,6 +2039,9 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             hash: string;
         }[];
         networkOption: NetworkOptions;
+        accounts: [];
+        selectedAccount: any;
+        selectedBankAccount: any;
     }, action: PayloadAction<string>) => void;
     setErrorHandler: (state: {
         theme: {
@@ -2052,7 +2080,6 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             targetChain: import("../interface").SupportNetworks;
             targetAddress: string;
             amount: number;
-            currency: string;
         } | undefined;
         errorHandler: Function;
         keplrHandler: Function;
@@ -2063,12 +2090,11 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
         serviceFee: number;
         backendUrl: string;
         nodeProviderQuery: string;
-        graphqlProviderQuery: string;
         kimaExplorerUrl: string;
         txId: number;
-        sourceCurrency: string;
-        targetCurrency: string;
+        selectedToken: string;
         expireTime: string;
+        availableTokenList: Array<string>;
         compliantOption: boolean;
         sourceCompliant: string;
         targetCompliant: string;
@@ -2089,6 +2115,9 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             hash: string;
         }[];
         networkOption: NetworkOptions;
+        accounts: [];
+        selectedAccount: any;
+        selectedBankAccount: any;
     }, action: PayloadAction<Function>) => void;
     setKeplrHandler: (state: {
         theme: {
@@ -2127,7 +2156,6 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             targetChain: import("../interface").SupportNetworks;
             targetAddress: string;
             amount: number;
-            currency: string;
         } | undefined;
         errorHandler: Function;
         keplrHandler: Function;
@@ -2138,12 +2166,11 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
         serviceFee: number;
         backendUrl: string;
         nodeProviderQuery: string;
-        graphqlProviderQuery: string;
         kimaExplorerUrl: string;
         txId: number;
-        sourceCurrency: string;
-        targetCurrency: string;
+        selectedToken: string;
         expireTime: string;
+        availableTokenList: Array<string>;
         compliantOption: boolean;
         sourceCompliant: string;
         targetCompliant: string;
@@ -2164,6 +2191,9 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             hash: string;
         }[];
         networkOption: NetworkOptions;
+        accounts: [];
+        selectedAccount: any;
+        selectedBankAccount: any;
     }, action: PayloadAction<Function>) => void;
     setCloseHandler: (state: {
         theme: {
@@ -2202,7 +2232,6 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             targetChain: import("../interface").SupportNetworks;
             targetAddress: string;
             amount: number;
-            currency: string;
         } | undefined;
         errorHandler: Function;
         keplrHandler: Function;
@@ -2213,12 +2242,11 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
         serviceFee: number;
         backendUrl: string;
         nodeProviderQuery: string;
-        graphqlProviderQuery: string;
         kimaExplorerUrl: string;
         txId: number;
-        sourceCurrency: string;
-        targetCurrency: string;
+        selectedToken: string;
         expireTime: string;
+        availableTokenList: Array<string>;
         compliantOption: boolean;
         sourceCompliant: string;
         targetCompliant: string;
@@ -2239,6 +2267,9 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             hash: string;
         }[];
         networkOption: NetworkOptions;
+        accounts: [];
+        selectedAccount: any;
+        selectedBankAccount: any;
     }, action: PayloadAction<Function>) => void;
     setSwitchChainHandler: (state: {
         theme: {
@@ -2277,7 +2308,6 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             targetChain: import("../interface").SupportNetworks;
             targetAddress: string;
             amount: number;
-            currency: string;
         } | undefined;
         errorHandler: Function;
         keplrHandler: Function;
@@ -2288,12 +2318,11 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
         serviceFee: number;
         backendUrl: string;
         nodeProviderQuery: string;
-        graphqlProviderQuery: string;
         kimaExplorerUrl: string;
         txId: number;
-        sourceCurrency: string;
-        targetCurrency: string;
+        selectedToken: string;
         expireTime: string;
+        availableTokenList: Array<string>;
         compliantOption: boolean;
         sourceCompliant: string;
         targetCompliant: string;
@@ -2314,6 +2343,9 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             hash: string;
         }[];
         networkOption: NetworkOptions;
+        accounts: [];
+        selectedAccount: any;
+        selectedBankAccount: any;
     }, action: PayloadAction<Function>) => void;
     setInitChainFromProvider: (state: {
         theme: {
@@ -2352,7 +2384,6 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             targetChain: import("../interface").SupportNetworks;
             targetAddress: string;
             amount: number;
-            currency: string;
         } | undefined;
         errorHandler: Function;
         keplrHandler: Function;
@@ -2363,12 +2394,11 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
         serviceFee: number;
         backendUrl: string;
         nodeProviderQuery: string;
-        graphqlProviderQuery: string;
         kimaExplorerUrl: string;
         txId: number;
-        sourceCurrency: string;
-        targetCurrency: string;
+        selectedToken: string;
         expireTime: string;
+        availableTokenList: Array<string>;
         compliantOption: boolean;
         sourceCompliant: string;
         targetCompliant: string;
@@ -2389,6 +2419,9 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             hash: string;
         }[];
         networkOption: NetworkOptions;
+        accounts: [];
+        selectedAccount: any;
+        selectedBankAccount: any;
     }, action: PayloadAction<boolean>) => void;
     setSuccessHandler: (state: {
         theme: {
@@ -2427,7 +2460,6 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             targetChain: import("../interface").SupportNetworks;
             targetAddress: string;
             amount: number;
-            currency: string;
         } | undefined;
         errorHandler: Function;
         keplrHandler: Function;
@@ -2438,12 +2470,11 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
         serviceFee: number;
         backendUrl: string;
         nodeProviderQuery: string;
-        graphqlProviderQuery: string;
         kimaExplorerUrl: string;
         txId: number;
-        sourceCurrency: string;
-        targetCurrency: string;
+        selectedToken: string;
         expireTime: string;
+        availableTokenList: Array<string>;
         compliantOption: boolean;
         sourceCompliant: string;
         targetCompliant: string;
@@ -2464,6 +2495,9 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             hash: string;
         }[];
         networkOption: NetworkOptions;
+        accounts: [];
+        selectedAccount: any;
+        selectedBankAccount: any;
     }, action: PayloadAction<Function>) => void;
     setServiceFee: (state: {
         theme: {
@@ -2502,7 +2536,6 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             targetChain: import("../interface").SupportNetworks;
             targetAddress: string;
             amount: number;
-            currency: string;
         } | undefined;
         errorHandler: Function;
         keplrHandler: Function;
@@ -2513,12 +2546,11 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
         serviceFee: number;
         backendUrl: string;
         nodeProviderQuery: string;
-        graphqlProviderQuery: string;
         kimaExplorerUrl: string;
         txId: number;
-        sourceCurrency: string;
-        targetCurrency: string;
+        selectedToken: string;
         expireTime: string;
+        availableTokenList: Array<string>;
         compliantOption: boolean;
         sourceCompliant: string;
         targetCompliant: string;
@@ -2539,6 +2571,9 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             hash: string;
         }[];
         networkOption: NetworkOptions;
+        accounts: [];
+        selectedAccount: any;
+        selectedBankAccount: any;
     }, action: PayloadAction<number>) => void;
     setMode: (state: {
         theme: {
@@ -2577,7 +2612,6 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             targetChain: import("../interface").SupportNetworks;
             targetAddress: string;
             amount: number;
-            currency: string;
         } | undefined;
         errorHandler: Function;
         keplrHandler: Function;
@@ -2588,12 +2622,11 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
         serviceFee: number;
         backendUrl: string;
         nodeProviderQuery: string;
-        graphqlProviderQuery: string;
         kimaExplorerUrl: string;
         txId: number;
-        sourceCurrency: string;
-        targetCurrency: string;
+        selectedToken: string;
         expireTime: string;
+        availableTokenList: Array<string>;
         compliantOption: boolean;
         sourceCompliant: string;
         targetCompliant: string;
@@ -2614,6 +2647,9 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             hash: string;
         }[];
         networkOption: NetworkOptions;
+        accounts: [];
+        selectedAccount: any;
+        selectedBankAccount: any;
     }, action: PayloadAction<ModeOptions>) => void;
     setFeeDeduct: (state: {
         theme: {
@@ -2652,7 +2688,6 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             targetChain: import("../interface").SupportNetworks;
             targetAddress: string;
             amount: number;
-            currency: string;
         } | undefined;
         errorHandler: Function;
         keplrHandler: Function;
@@ -2663,12 +2698,11 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
         serviceFee: number;
         backendUrl: string;
         nodeProviderQuery: string;
-        graphqlProviderQuery: string;
         kimaExplorerUrl: string;
         txId: number;
-        sourceCurrency: string;
-        targetCurrency: string;
+        selectedToken: string;
         expireTime: string;
+        availableTokenList: Array<string>;
         compliantOption: boolean;
         sourceCompliant: string;
         targetCompliant: string;
@@ -2689,6 +2723,9 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             hash: string;
         }[];
         networkOption: NetworkOptions;
+        accounts: [];
+        selectedAccount: any;
+        selectedBankAccount: any;
     }, action: PayloadAction<boolean>) => void;
     setBackendUrl: (state: {
         theme: {
@@ -2727,7 +2764,6 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             targetChain: import("../interface").SupportNetworks;
             targetAddress: string;
             amount: number;
-            currency: string;
         } | undefined;
         errorHandler: Function;
         keplrHandler: Function;
@@ -2738,12 +2774,11 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
         serviceFee: number;
         backendUrl: string;
         nodeProviderQuery: string;
-        graphqlProviderQuery: string;
         kimaExplorerUrl: string;
         txId: number;
-        sourceCurrency: string;
-        targetCurrency: string;
+        selectedToken: string;
         expireTime: string;
+        availableTokenList: Array<string>;
         compliantOption: boolean;
         sourceCompliant: string;
         targetCompliant: string;
@@ -2764,6 +2799,9 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             hash: string;
         }[];
         networkOption: NetworkOptions;
+        accounts: [];
+        selectedAccount: any;
+        selectedBankAccount: any;
     }, action: PayloadAction<string>) => void;
     setNodeProviderQuery: (state: {
         theme: {
@@ -2802,7 +2840,6 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             targetChain: import("../interface").SupportNetworks;
             targetAddress: string;
             amount: number;
-            currency: string;
         } | undefined;
         errorHandler: Function;
         keplrHandler: Function;
@@ -2813,12 +2850,11 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
         serviceFee: number;
         backendUrl: string;
         nodeProviderQuery: string;
-        graphqlProviderQuery: string;
         kimaExplorerUrl: string;
         txId: number;
-        sourceCurrency: string;
-        targetCurrency: string;
+        selectedToken: string;
         expireTime: string;
+        availableTokenList: Array<string>;
         compliantOption: boolean;
         sourceCompliant: string;
         targetCompliant: string;
@@ -2839,81 +2875,9 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             hash: string;
         }[];
         networkOption: NetworkOptions;
-    }, action: PayloadAction<string>) => void;
-    setGraphqlProviderQuery: (state: {
-        theme: {
-            colorMode?: import("../interface").ColorModeOptions | undefined;
-            fontSize?: import("../interface").FontSizeOptions | undefined;
-            fontFamily?: string | undefined;
-            backgroundColorLight?: string | undefined;
-            backgroundColorDark?: string | undefined;
-        };
-        mode: ModeOptions;
-        sourceChain: string;
-        targetChain: string;
-        targetAddress: string;
-        bitcoinAddress: string;
-        bitcoinPubkey: string;
-        tokenOptions: {
-            [x: string]: {
-                [x: string]: string;
-            };
-        };
-        solanaConnectModal: boolean;
-        tronConnectModal: boolean;
-        helpPopup: boolean;
-        hashPopup: boolean;
-        bankPopup: boolean;
-        pendingTxPopup: boolean;
-        walletAutoConnect: boolean;
-        provider: any;
-        dAppOption: DAppOptions;
-        solanaProvider: any;
-        tronProvider: any;
-        submitted: boolean;
-        amount: string;
-        feeDeduct: boolean;
-        transactionOption?: {
-            targetChain: import("../interface").SupportNetworks;
-            targetAddress: string;
-            amount: number;
-            currency: string;
-        } | undefined;
-        errorHandler: Function;
-        keplrHandler: Function;
-        closeHandler: Function;
-        successHandler: Function;
-        switchChainHandler: Function;
-        initChainFromProvider: boolean;
-        serviceFee: number;
-        backendUrl: string;
-        nodeProviderQuery: string;
-        graphqlProviderQuery: string;
-        kimaExplorerUrl: string;
-        txId: number;
-        sourceCurrency: string;
-        targetCurrency: string;
-        expireTime: string;
-        compliantOption: boolean;
-        sourceCompliant: string;
-        targetCompliant: string;
-        useFIAT: boolean;
-        bankDetails: {
-            iban: string;
-            recipient: string;
-        };
-        targetNetworkFetching: boolean;
-        signature: string;
-        uuid: string;
-        kycStatus: string;
-        pendingTxs: number;
-        pendingTxData: {
-            expireTime: string;
-            amount: string;
-            status: string;
-            hash: string;
-        }[];
-        networkOption: NetworkOptions;
+        accounts: [];
+        selectedAccount: any;
+        selectedBankAccount: any;
     }, action: PayloadAction<string>) => void;
     setTxId: (state: {
         theme: {
@@ -2952,7 +2916,6 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             targetChain: import("../interface").SupportNetworks;
             targetAddress: string;
             amount: number;
-            currency: string;
         } | undefined;
         errorHandler: Function;
         keplrHandler: Function;
@@ -2963,12 +2926,11 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
         serviceFee: number;
         backendUrl: string;
         nodeProviderQuery: string;
-        graphqlProviderQuery: string;
         kimaExplorerUrl: string;
         txId: number;
-        sourceCurrency: string;
-        targetCurrency: string;
+        selectedToken: string;
         expireTime: string;
+        availableTokenList: Array<string>;
         compliantOption: boolean;
         sourceCompliant: string;
         targetCompliant: string;
@@ -2989,8 +2951,11 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             hash: string;
         }[];
         networkOption: NetworkOptions;
+        accounts: [];
+        selectedAccount: any;
+        selectedBankAccount: any;
     }, action: PayloadAction<number>) => void;
-    setSourceCurrency: (state: {
+    setSelectedToken: (state: {
         theme: {
             colorMode?: import("../interface").ColorModeOptions | undefined;
             fontSize?: import("../interface").FontSizeOptions | undefined;
@@ -3027,7 +2992,6 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             targetChain: import("../interface").SupportNetworks;
             targetAddress: string;
             amount: number;
-            currency: string;
         } | undefined;
         errorHandler: Function;
         keplrHandler: Function;
@@ -3038,12 +3002,11 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
         serviceFee: number;
         backendUrl: string;
         nodeProviderQuery: string;
-        graphqlProviderQuery: string;
         kimaExplorerUrl: string;
         txId: number;
-        sourceCurrency: string;
-        targetCurrency: string;
+        selectedToken: string;
         expireTime: string;
+        availableTokenList: Array<string>;
         compliantOption: boolean;
         sourceCompliant: string;
         targetCompliant: string;
@@ -3064,8 +3027,11 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             hash: string;
         }[];
         networkOption: NetworkOptions;
+        accounts: [];
+        selectedAccount: any;
+        selectedBankAccount: any;
     }, action: PayloadAction<string>) => void;
-    setTargetCurrency: (state: {
+    setAvailableTokenList: (state: {
         theme: {
             colorMode?: import("../interface").ColorModeOptions | undefined;
             fontSize?: import("../interface").FontSizeOptions | undefined;
@@ -3102,7 +3068,6 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             targetChain: import("../interface").SupportNetworks;
             targetAddress: string;
             amount: number;
-            currency: string;
         } | undefined;
         errorHandler: Function;
         keplrHandler: Function;
@@ -3113,12 +3078,11 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
         serviceFee: number;
         backendUrl: string;
         nodeProviderQuery: string;
-        graphqlProviderQuery: string;
         kimaExplorerUrl: string;
         txId: number;
-        sourceCurrency: string;
-        targetCurrency: string;
+        selectedToken: string;
         expireTime: string;
+        availableTokenList: Array<string>;
         compliantOption: boolean;
         sourceCompliant: string;
         targetCompliant: string;
@@ -3139,7 +3103,10 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             hash: string;
         }[];
         networkOption: NetworkOptions;
-    }, action: PayloadAction<string>) => void;
+        accounts: [];
+        selectedAccount: any;
+        selectedBankAccount: any;
+    }, action: PayloadAction<Array<string>>) => void;
     setCompliantOption: (state: {
         theme: {
             colorMode?: import("../interface").ColorModeOptions | undefined;
@@ -3177,7 +3144,6 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             targetChain: import("../interface").SupportNetworks;
             targetAddress: string;
             amount: number;
-            currency: string;
         } | undefined;
         errorHandler: Function;
         keplrHandler: Function;
@@ -3188,12 +3154,11 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
         serviceFee: number;
         backendUrl: string;
         nodeProviderQuery: string;
-        graphqlProviderQuery: string;
         kimaExplorerUrl: string;
         txId: number;
-        sourceCurrency: string;
-        targetCurrency: string;
+        selectedToken: string;
         expireTime: string;
+        availableTokenList: Array<string>;
         compliantOption: boolean;
         sourceCompliant: string;
         targetCompliant: string;
@@ -3214,6 +3179,9 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             hash: string;
         }[];
         networkOption: NetworkOptions;
+        accounts: [];
+        selectedAccount: any;
+        selectedBankAccount: any;
     }, action: PayloadAction<boolean>) => void;
     setSourceCompliant: (state: {
         theme: {
@@ -3252,7 +3220,6 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             targetChain: import("../interface").SupportNetworks;
             targetAddress: string;
             amount: number;
-            currency: string;
         } | undefined;
         errorHandler: Function;
         keplrHandler: Function;
@@ -3263,12 +3230,11 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
         serviceFee: number;
         backendUrl: string;
         nodeProviderQuery: string;
-        graphqlProviderQuery: string;
         kimaExplorerUrl: string;
         txId: number;
-        sourceCurrency: string;
-        targetCurrency: string;
+        selectedToken: string;
         expireTime: string;
+        availableTokenList: Array<string>;
         compliantOption: boolean;
         sourceCompliant: string;
         targetCompliant: string;
@@ -3289,6 +3255,9 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             hash: string;
         }[];
         networkOption: NetworkOptions;
+        accounts: [];
+        selectedAccount: any;
+        selectedBankAccount: any;
     }, action: PayloadAction<string>) => void;
     setTargetCompliant: (state: {
         theme: {
@@ -3327,7 +3296,6 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             targetChain: import("../interface").SupportNetworks;
             targetAddress: string;
             amount: number;
-            currency: string;
         } | undefined;
         errorHandler: Function;
         keplrHandler: Function;
@@ -3338,12 +3306,11 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
         serviceFee: number;
         backendUrl: string;
         nodeProviderQuery: string;
-        graphqlProviderQuery: string;
         kimaExplorerUrl: string;
         txId: number;
-        sourceCurrency: string;
-        targetCurrency: string;
+        selectedToken: string;
         expireTime: string;
+        availableTokenList: Array<string>;
         compliantOption: boolean;
         sourceCompliant: string;
         targetCompliant: string;
@@ -3364,6 +3331,9 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             hash: string;
         }[];
         networkOption: NetworkOptions;
+        accounts: [];
+        selectedAccount: any;
+        selectedBankAccount: any;
     }, action: PayloadAction<string>) => void;
     setUseFIAT: (state: {
         theme: {
@@ -3402,7 +3372,6 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             targetChain: import("../interface").SupportNetworks;
             targetAddress: string;
             amount: number;
-            currency: string;
         } | undefined;
         errorHandler: Function;
         keplrHandler: Function;
@@ -3413,12 +3382,11 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
         serviceFee: number;
         backendUrl: string;
         nodeProviderQuery: string;
-        graphqlProviderQuery: string;
         kimaExplorerUrl: string;
         txId: number;
-        sourceCurrency: string;
-        targetCurrency: string;
+        selectedToken: string;
         expireTime: string;
+        availableTokenList: Array<string>;
         compliantOption: boolean;
         sourceCompliant: string;
         targetCompliant: string;
@@ -3439,6 +3407,9 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             hash: string;
         }[];
         networkOption: NetworkOptions;
+        accounts: [];
+        selectedAccount: any;
+        selectedBankAccount: any;
     }, action: PayloadAction<boolean>) => void;
     setBankDetails: (state: {
         theme: {
@@ -3477,7 +3448,6 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             targetChain: import("../interface").SupportNetworks;
             targetAddress: string;
             amount: number;
-            currency: string;
         } | undefined;
         errorHandler: Function;
         keplrHandler: Function;
@@ -3488,12 +3458,11 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
         serviceFee: number;
         backendUrl: string;
         nodeProviderQuery: string;
-        graphqlProviderQuery: string;
         kimaExplorerUrl: string;
         txId: number;
-        sourceCurrency: string;
-        targetCurrency: string;
+        selectedToken: string;
         expireTime: string;
+        availableTokenList: Array<string>;
         compliantOption: boolean;
         sourceCompliant: string;
         targetCompliant: string;
@@ -3514,6 +3483,9 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             hash: string;
         }[];
         networkOption: NetworkOptions;
+        accounts: [];
+        selectedAccount: any;
+        selectedBankAccount: any;
     }, action: PayloadAction<BankDetails>) => void;
     setTargetChainFetching: (state: {
         theme: {
@@ -3552,7 +3524,6 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             targetChain: import("../interface").SupportNetworks;
             targetAddress: string;
             amount: number;
-            currency: string;
         } | undefined;
         errorHandler: Function;
         keplrHandler: Function;
@@ -3563,12 +3534,11 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
         serviceFee: number;
         backendUrl: string;
         nodeProviderQuery: string;
-        graphqlProviderQuery: string;
         kimaExplorerUrl: string;
         txId: number;
-        sourceCurrency: string;
-        targetCurrency: string;
+        selectedToken: string;
         expireTime: string;
+        availableTokenList: Array<string>;
         compliantOption: boolean;
         sourceCompliant: string;
         targetCompliant: string;
@@ -3589,6 +3559,9 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             hash: string;
         }[];
         networkOption: NetworkOptions;
+        accounts: [];
+        selectedAccount: any;
+        selectedBankAccount: any;
     }, action: PayloadAction<boolean>) => void;
     setSignature: (state: {
         theme: {
@@ -3627,7 +3600,6 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             targetChain: import("../interface").SupportNetworks;
             targetAddress: string;
             amount: number;
-            currency: string;
         } | undefined;
         errorHandler: Function;
         keplrHandler: Function;
@@ -3638,12 +3610,11 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
         serviceFee: number;
         backendUrl: string;
         nodeProviderQuery: string;
-        graphqlProviderQuery: string;
         kimaExplorerUrl: string;
         txId: number;
-        sourceCurrency: string;
-        targetCurrency: string;
+        selectedToken: string;
         expireTime: string;
+        availableTokenList: Array<string>;
         compliantOption: boolean;
         sourceCompliant: string;
         targetCompliant: string;
@@ -3664,6 +3635,9 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             hash: string;
         }[];
         networkOption: NetworkOptions;
+        accounts: [];
+        selectedAccount: any;
+        selectedBankAccount: any;
     }, action: PayloadAction<string>) => void;
     setUuid: (state: {
         theme: {
@@ -3702,7 +3676,6 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             targetChain: import("../interface").SupportNetworks;
             targetAddress: string;
             amount: number;
-            currency: string;
         } | undefined;
         errorHandler: Function;
         keplrHandler: Function;
@@ -3713,12 +3686,11 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
         serviceFee: number;
         backendUrl: string;
         nodeProviderQuery: string;
-        graphqlProviderQuery: string;
         kimaExplorerUrl: string;
         txId: number;
-        sourceCurrency: string;
-        targetCurrency: string;
+        selectedToken: string;
         expireTime: string;
+        availableTokenList: Array<string>;
         compliantOption: boolean;
         sourceCompliant: string;
         targetCompliant: string;
@@ -3739,6 +3711,9 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             hash: string;
         }[];
         networkOption: NetworkOptions;
+        accounts: [];
+        selectedAccount: any;
+        selectedBankAccount: any;
     }, action: PayloadAction<string>) => void;
     setKYCStatus: (state: {
         theme: {
@@ -3777,7 +3752,6 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             targetChain: import("../interface").SupportNetworks;
             targetAddress: string;
             amount: number;
-            currency: string;
         } | undefined;
         errorHandler: Function;
         keplrHandler: Function;
@@ -3788,12 +3762,11 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
         serviceFee: number;
         backendUrl: string;
         nodeProviderQuery: string;
-        graphqlProviderQuery: string;
         kimaExplorerUrl: string;
         txId: number;
-        sourceCurrency: string;
-        targetCurrency: string;
+        selectedToken: string;
         expireTime: string;
+        availableTokenList: Array<string>;
         compliantOption: boolean;
         sourceCompliant: string;
         targetCompliant: string;
@@ -3814,6 +3787,9 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             hash: string;
         }[];
         networkOption: NetworkOptions;
+        accounts: [];
+        selectedAccount: any;
+        selectedBankAccount: any;
     }, action: PayloadAction<string>) => void;
     setExpireTime: (state: {
         theme: {
@@ -3852,7 +3828,6 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             targetChain: import("../interface").SupportNetworks;
             targetAddress: string;
             amount: number;
-            currency: string;
         } | undefined;
         errorHandler: Function;
         keplrHandler: Function;
@@ -3863,12 +3838,11 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
         serviceFee: number;
         backendUrl: string;
         nodeProviderQuery: string;
-        graphqlProviderQuery: string;
         kimaExplorerUrl: string;
         txId: number;
-        sourceCurrency: string;
-        targetCurrency: string;
+        selectedToken: string;
         expireTime: string;
+        availableTokenList: Array<string>;
         compliantOption: boolean;
         sourceCompliant: string;
         targetCompliant: string;
@@ -3889,8 +3863,239 @@ export declare const optionSlice: toolkitRaw.Slice<OptionState, {
             hash: string;
         }[];
         networkOption: NetworkOptions;
+        accounts: [];
+        selectedAccount: any;
+        selectedBankAccount: any;
     }, action: PayloadAction<string>) => void;
+    setDepasifyAccounts: (state: {
+        theme: {
+            colorMode?: import("../interface").ColorModeOptions | undefined;
+            fontSize?: import("../interface").FontSizeOptions | undefined;
+            fontFamily?: string | undefined;
+            backgroundColorLight?: string | undefined;
+            backgroundColorDark?: string | undefined;
+        };
+        mode: ModeOptions;
+        sourceChain: string;
+        targetChain: string;
+        targetAddress: string;
+        bitcoinAddress: string;
+        bitcoinPubkey: string;
+        tokenOptions: {
+            [x: string]: {
+                [x: string]: string;
+            };
+        };
+        solanaConnectModal: boolean;
+        tronConnectModal: boolean;
+        helpPopup: boolean;
+        hashPopup: boolean;
+        bankPopup: boolean;
+        pendingTxPopup: boolean;
+        walletAutoConnect: boolean;
+        provider: any;
+        dAppOption: DAppOptions;
+        solanaProvider: any;
+        tronProvider: any;
+        submitted: boolean;
+        amount: string;
+        feeDeduct: boolean;
+        transactionOption?: {
+            targetChain: import("../interface").SupportNetworks;
+            targetAddress: string;
+            amount: number;
+        } | undefined;
+        errorHandler: Function;
+        keplrHandler: Function;
+        closeHandler: Function;
+        successHandler: Function;
+        switchChainHandler: Function;
+        initChainFromProvider: boolean;
+        serviceFee: number;
+        backendUrl: string;
+        nodeProviderQuery: string;
+        kimaExplorerUrl: string;
+        txId: number;
+        selectedToken: string;
+        expireTime: string;
+        availableTokenList: Array<string>;
+        compliantOption: boolean;
+        sourceCompliant: string;
+        targetCompliant: string;
+        useFIAT: boolean;
+        bankDetails: {
+            iban: string;
+            recipient: string;
+        };
+        targetNetworkFetching: boolean;
+        signature: string;
+        uuid: string;
+        kycStatus: string;
+        pendingTxs: number;
+        pendingTxData: {
+            expireTime: string;
+            amount: string;
+            status: string;
+            hash: string;
+        }[];
+        networkOption: NetworkOptions;
+        accounts: [];
+        selectedAccount: any;
+        selectedBankAccount: any;
+    }, action: PayloadAction<[]>) => void;
+    setSelectedAccount: (state: {
+        theme: {
+            colorMode?: import("../interface").ColorModeOptions | undefined;
+            fontSize?: import("../interface").FontSizeOptions | undefined;
+            fontFamily?: string | undefined;
+            backgroundColorLight?: string | undefined;
+            backgroundColorDark?: string | undefined;
+        };
+        mode: ModeOptions;
+        sourceChain: string;
+        targetChain: string;
+        targetAddress: string;
+        bitcoinAddress: string;
+        bitcoinPubkey: string;
+        tokenOptions: {
+            [x: string]: {
+                [x: string]: string;
+            };
+        };
+        solanaConnectModal: boolean;
+        tronConnectModal: boolean;
+        helpPopup: boolean;
+        hashPopup: boolean;
+        bankPopup: boolean;
+        pendingTxPopup: boolean;
+        walletAutoConnect: boolean;
+        provider: any;
+        dAppOption: DAppOptions;
+        solanaProvider: any;
+        tronProvider: any;
+        submitted: boolean;
+        amount: string;
+        feeDeduct: boolean;
+        transactionOption?: {
+            targetChain: import("../interface").SupportNetworks;
+            targetAddress: string;
+            amount: number;
+        } | undefined;
+        errorHandler: Function;
+        keplrHandler: Function;
+        closeHandler: Function;
+        successHandler: Function;
+        switchChainHandler: Function;
+        initChainFromProvider: boolean;
+        serviceFee: number;
+        backendUrl: string;
+        nodeProviderQuery: string;
+        kimaExplorerUrl: string;
+        txId: number;
+        selectedToken: string;
+        expireTime: string;
+        availableTokenList: Array<string>;
+        compliantOption: boolean;
+        sourceCompliant: string;
+        targetCompliant: string;
+        useFIAT: boolean;
+        bankDetails: {
+            iban: string;
+            recipient: string;
+        };
+        targetNetworkFetching: boolean;
+        signature: string;
+        uuid: string;
+        kycStatus: string;
+        pendingTxs: number;
+        pendingTxData: {
+            expireTime: string;
+            amount: string;
+            status: string;
+            hash: string;
+        }[];
+        networkOption: NetworkOptions;
+        accounts: [];
+        selectedAccount: any;
+        selectedBankAccount: any;
+    }, action: PayloadAction<any>) => void;
+    setSelectedBankAccount: (state: {
+        theme: {
+            colorMode?: import("../interface").ColorModeOptions | undefined;
+            fontSize?: import("../interface").FontSizeOptions | undefined;
+            fontFamily?: string | undefined;
+            backgroundColorLight?: string | undefined;
+            backgroundColorDark?: string | undefined;
+        };
+        mode: ModeOptions;
+        sourceChain: string;
+        targetChain: string;
+        targetAddress: string;
+        bitcoinAddress: string;
+        bitcoinPubkey: string;
+        tokenOptions: {
+            [x: string]: {
+                [x: string]: string;
+            };
+        };
+        solanaConnectModal: boolean;
+        tronConnectModal: boolean;
+        helpPopup: boolean;
+        hashPopup: boolean;
+        bankPopup: boolean;
+        pendingTxPopup: boolean;
+        walletAutoConnect: boolean;
+        provider: any;
+        dAppOption: DAppOptions;
+        solanaProvider: any;
+        tronProvider: any;
+        submitted: boolean;
+        amount: string;
+        feeDeduct: boolean;
+        transactionOption?: {
+            targetChain: import("../interface").SupportNetworks;
+            targetAddress: string;
+            amount: number;
+        } | undefined;
+        errorHandler: Function;
+        keplrHandler: Function;
+        closeHandler: Function;
+        successHandler: Function;
+        switchChainHandler: Function;
+        initChainFromProvider: boolean;
+        serviceFee: number;
+        backendUrl: string;
+        nodeProviderQuery: string;
+        kimaExplorerUrl: string;
+        txId: number;
+        selectedToken: string;
+        expireTime: string;
+        availableTokenList: Array<string>;
+        compliantOption: boolean;
+        sourceCompliant: string;
+        targetCompliant: string;
+        useFIAT: boolean;
+        bankDetails: {
+            iban: string;
+            recipient: string;
+        };
+        targetNetworkFetching: boolean;
+        signature: string;
+        uuid: string;
+        kycStatus: string;
+        pendingTxs: number;
+        pendingTxData: {
+            expireTime: string;
+            amount: string;
+            status: string;
+            hash: string;
+        }[];
+        networkOption: NetworkOptions;
+        accounts: [];
+        selectedAccount: any;
+        selectedBankAccount: any;
+    }, action: PayloadAction<any>) => void;
 }, "option", "option", toolkitRaw.SliceSelectors<OptionState>>;
-export declare const initialize: toolkitRaw.ActionCreatorWithoutPayload<any>, setNetworkOption: toolkitRaw.ActionCreatorWithPayload<NetworkOptions, any>, setTokenOptions: toolkitRaw.ActionCreatorWithPayload<TokenOptions, any>, setKimaExplorer: toolkitRaw.ActionCreatorWithPayload<string, any>, setTheme: toolkitRaw.ActionCreatorWithPayload<ThemeOptions, any>, setSourceChain: toolkitRaw.ActionCreatorWithPayload<string, any>, setTargetChain: toolkitRaw.ActionCreatorWithPayload<string, any>, setTargetAddress: toolkitRaw.ActionCreatorWithPayload<string, any>, setBitcoinAddress: toolkitRaw.ActionCreatorWithPayload<string, any>, setBitcoinPubkey: toolkitRaw.ActionCreatorWithPayload<string, any>, setSolanaConnectModal: toolkitRaw.ActionCreatorWithPayload<boolean, any>, setTronConnectModal: toolkitRaw.ActionCreatorWithPayload<boolean, any>, setHelpPopup: toolkitRaw.ActionCreatorWithPayload<boolean, any>, setHashPopup: toolkitRaw.ActionCreatorWithPayload<boolean, any>, setPendingTxPopup: toolkitRaw.ActionCreatorWithPayload<boolean, any>, setBankPopup: toolkitRaw.ActionCreatorWithPayload<boolean, any>, setSolanaProvider: toolkitRaw.ActionCreatorWithPayload<any, any>, setTronProvider: toolkitRaw.ActionCreatorWithPayload<any, any>, setProvider: toolkitRaw.ActionCreatorWithPayload<any, any>, setDappOption: toolkitRaw.ActionCreatorWithPayload<DAppOptions, any>, setWalletAutoConnect: toolkitRaw.ActionCreatorWithPayload<boolean, any>, setSubmitted: toolkitRaw.ActionCreatorWithPayload<boolean, any>, setTransactionOption: toolkitRaw.ActionCreatorWithPayload<TransactionOption, any>, setAmount: toolkitRaw.ActionCreatorWithPayload<string, any>, setErrorHandler: toolkitRaw.ActionCreatorWithPayload<Function, any>, setKeplrHandler: toolkitRaw.ActionCreatorWithPayload<Function, any>, setCloseHandler: toolkitRaw.ActionCreatorWithPayload<Function, any>, setSuccessHandler: toolkitRaw.ActionCreatorWithPayload<Function, any>, setSwitchChainHandler: toolkitRaw.ActionCreatorWithPayload<Function, any>, setInitChainFromProvider: toolkitRaw.ActionCreatorWithPayload<boolean, any>, setServiceFee: toolkitRaw.ActionCreatorWithPayload<number, any>, setMode: toolkitRaw.ActionCreatorWithPayload<ModeOptions, any>, setFeeDeduct: toolkitRaw.ActionCreatorWithPayload<boolean, any>, setBackendUrl: toolkitRaw.ActionCreatorWithPayload<string, any>, setNodeProviderQuery: toolkitRaw.ActionCreatorWithPayload<string, any>, setGraphqlProviderQuery: toolkitRaw.ActionCreatorWithPayload<string, any>, setTxId: toolkitRaw.ActionCreatorWithPayload<number, any>, setSourceCurrency: toolkitRaw.ActionCreatorWithPayload<string, any>, setTargetCurrency: toolkitRaw.ActionCreatorWithPayload<string, any>, setCompliantOption: toolkitRaw.ActionCreatorWithPayload<boolean, any>, setSourceCompliant: toolkitRaw.ActionCreatorWithPayload<string, any>, setTargetCompliant: toolkitRaw.ActionCreatorWithPayload<string, any>, setUseFIAT: toolkitRaw.ActionCreatorWithPayload<boolean, any>, setBankDetails: toolkitRaw.ActionCreatorWithPayload<BankDetails, any>, setTargetChainFetching: toolkitRaw.ActionCreatorWithPayload<boolean, any>, setSignature: toolkitRaw.ActionCreatorWithPayload<string, any>, setUuid: toolkitRaw.ActionCreatorWithPayload<string, any>, setKYCStatus: toolkitRaw.ActionCreatorWithPayload<string, any>, setExpireTime: toolkitRaw.ActionCreatorWithPayload<string, any>, setPendingTxData: toolkitRaw.ActionCreatorWithPayload<PendingTxData[], any>, setPendingTxs: toolkitRaw.ActionCreatorWithPayload<number, any>;
+export declare const initialize: toolkitRaw.ActionCreatorWithoutPayload<any>, setNetworkOption: toolkitRaw.ActionCreatorWithPayload<NetworkOptions, any>, setTokenOptions: toolkitRaw.ActionCreatorWithPayload<TokenOptions, any>, setKimaExplorer: toolkitRaw.ActionCreatorWithPayload<string, any>, setTheme: toolkitRaw.ActionCreatorWithPayload<ThemeOptions, any>, setSourceChain: toolkitRaw.ActionCreatorWithPayload<string, any>, setTargetChain: toolkitRaw.ActionCreatorWithPayload<string, any>, setTargetAddress: toolkitRaw.ActionCreatorWithPayload<string, any>, setBitcoinAddress: toolkitRaw.ActionCreatorWithPayload<string, any>, setBitcoinPubkey: toolkitRaw.ActionCreatorWithPayload<string, any>, setSolanaConnectModal: toolkitRaw.ActionCreatorWithPayload<boolean, any>, setTronConnectModal: toolkitRaw.ActionCreatorWithPayload<boolean, any>, setHelpPopup: toolkitRaw.ActionCreatorWithPayload<boolean, any>, setHashPopup: toolkitRaw.ActionCreatorWithPayload<boolean, any>, setPendingTxPopup: toolkitRaw.ActionCreatorWithPayload<boolean, any>, setBankPopup: toolkitRaw.ActionCreatorWithPayload<boolean, any>, setSolanaProvider: toolkitRaw.ActionCreatorWithPayload<any, any>, setTronProvider: toolkitRaw.ActionCreatorWithPayload<any, any>, setProvider: toolkitRaw.ActionCreatorWithPayload<any, any>, setDappOption: toolkitRaw.ActionCreatorWithPayload<DAppOptions, any>, setWalletAutoConnect: toolkitRaw.ActionCreatorWithPayload<boolean, any>, setSubmitted: toolkitRaw.ActionCreatorWithPayload<boolean, any>, setTransactionOption: toolkitRaw.ActionCreatorWithPayload<TransactionOption, any>, setAmount: toolkitRaw.ActionCreatorWithPayload<string, any>, setErrorHandler: toolkitRaw.ActionCreatorWithPayload<Function, any>, setKeplrHandler: toolkitRaw.ActionCreatorWithPayload<Function, any>, setCloseHandler: toolkitRaw.ActionCreatorWithPayload<Function, any>, setSuccessHandler: toolkitRaw.ActionCreatorWithPayload<Function, any>, setSwitchChainHandler: toolkitRaw.ActionCreatorWithPayload<Function, any>, setInitChainFromProvider: toolkitRaw.ActionCreatorWithPayload<boolean, any>, setServiceFee: toolkitRaw.ActionCreatorWithPayload<number, any>, setMode: toolkitRaw.ActionCreatorWithPayload<ModeOptions, any>, setFeeDeduct: toolkitRaw.ActionCreatorWithPayload<boolean, any>, setBackendUrl: toolkitRaw.ActionCreatorWithPayload<string, any>, setNodeProviderQuery: toolkitRaw.ActionCreatorWithPayload<string, any>, setTxId: toolkitRaw.ActionCreatorWithPayload<number, any>, setSelectedToken: toolkitRaw.ActionCreatorWithPayload<string, any>, setAvailableTokenList: toolkitRaw.ActionCreatorWithPayload<string[], any>, setCompliantOption: toolkitRaw.ActionCreatorWithPayload<boolean, any>, setSourceCompliant: toolkitRaw.ActionCreatorWithPayload<string, any>, setTargetCompliant: toolkitRaw.ActionCreatorWithPayload<string, any>, setUseFIAT: toolkitRaw.ActionCreatorWithPayload<boolean, any>, setBankDetails: toolkitRaw.ActionCreatorWithPayload<BankDetails, any>, setTargetChainFetching: toolkitRaw.ActionCreatorWithPayload<boolean, any>, setSignature: toolkitRaw.ActionCreatorWithPayload<string, any>, setUuid: toolkitRaw.ActionCreatorWithPayload<string, any>, setKYCStatus: toolkitRaw.ActionCreatorWithPayload<string, any>, setExpireTime: toolkitRaw.ActionCreatorWithPayload<string, any>, setPendingTxData: toolkitRaw.ActionCreatorWithPayload<PendingTxData[], any>, setPendingTxs: toolkitRaw.ActionCreatorWithPayload<number, any>, setDepasifyAccounts: toolkitRaw.ActionCreatorWithPayload<[], any>, setSelectedAccount: toolkitRaw.ActionCreatorWithPayload<any, any>, setSelectedBankAccount: toolkitRaw.ActionCreatorWithPayload<any, any>;
 declare const _default: toolkitRaw.Reducer<OptionState, toolkitRaw.UnknownAction, OptionState>;
 export default _default;

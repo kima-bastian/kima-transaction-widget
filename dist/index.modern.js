@@ -389,9 +389,9 @@ const Optimism = ({
     fill: "#000000",
     stroke: "none"
   }, React.createElement("path", {
-    d: "M109 372 c-43 -22 -59 -38 -81 -81 -36 -68 -36 -114 0 -182 22 -43\r\n    38 -59 81 -81 68 -36 114 -36 182 0 43 22 59 38 81 81 36 68 36 114 0 182 -22\r\n    43 -38 59 -81 81 -31 16 -69 28 -91 28 -22 0 -60 -12 -91 -28z m79 -124 c16\r\n    -16 15 -60 -1 -82 -9 -12 -23 -17 -42 -14 -26 3 -30 8 -33 36 -5 54 44 92 76\r\n    60z m96 -1 c26 -19 13 -54 -24 -62 -17 -4 -30 -13 -30 -21 0 -8 -6 -14 -14\r\n    -14 -10 0 -12 9 -5 43 4 23 8 48 9 55 0 16 41 16 64 -1z"
+    d: "M109 372 c-43 -22 -59 -38 -81 -81 -36 -68 -36 -114 0 -182 22 -43\n    38 -59 81 -81 68 -36 114 -36 182 0 43 22 59 38 81 81 36 68 36 114 0 182 -22\n    43 -38 59 -81 81 -31 16 -69 28 -91 28 -22 0 -60 -12 -91 -28z m79 -124 c16\n    -16 15 -60 -1 -82 -9 -12 -23 -17 -42 -14 -26 3 -30 8 -33 36 -5 54 44 92 76\n    60z m96 -1 c26 -19 13 -54 -24 -62 -17 -4 -30 -13 -30 -21 0 -8 -6 -14 -14\n    -14 -10 0 -12 9 -5 43 4 23 8 48 9 55 0 16 41 16 64 -1z"
   }), React.createElement("path", {
-    d: "M140 219 c-14 -24 -7 -49 14 -49 15 0 28 34 19 56 -7 20 -21 17 -33\r\n    -7z"
+    d: "M140 219 c-14 -24 -7 -49 14 -49 15 0 28 34 19 56 -7 20 -21 17 -33\n    -7z"
   }), React.createElement("path", {
     d: "M247 233 c-12 -11 -8 -23 8 -23 8 0 15 7 15 15 0 16 -12 20 -23 8z"
   })));
@@ -471,13 +471,13 @@ const Copy = ({
     xmlns: 'http://www.w3.org/2000/svg',
     fill: _fill
   }, rest), React.createElement("g", null, React.createElement("path", {
-    d: 'M35,270h45v45c0,8.284,6.716,15,15,15h200c8.284,0,15-6.716,15-15V75c0-8.284-6.716-15-15-15h-45V15\r\n     c0-8.284-6.716-15-15-15H35c-8.284,0-15,6.716-15,15v240C20,263.284,26.716,270,35,270z M280,300H110V90h170V300z M50,30h170v30H95\r\n     c-8.284,0-15,6.716-15,15v165H50V30z'
+    d: 'M35,270h45v45c0,8.284,6.716,15,15,15h200c8.284,0,15-6.716,15-15V75c0-8.284-6.716-15-15-15h-45V15\n     c0-8.284-6.716-15-15-15H35c-8.284,0-15,6.716-15,15v240C20,263.284,26.716,270,35,270z M280,300H110V90h170V300z M50,30h170v30H95\n     c-8.284,0-15,6.716-15,15v165H50V30z'
   }), React.createElement("path", {
     d: 'M155,120c-8.284,0-15,6.716-15,15s6.716,15,15,15h80c8.284,0,15-6.716,15-15s-6.716-15-15-15H155z'
   }), React.createElement("path", {
     d: 'M235,180h-80c-8.284,0-15,6.716-15,15s6.716,15,15,15h80c8.284,0,15-6.716,15-15S243.284,180,235,180z'
   }), React.createElement("path", {
-    d: 'M235,240h-80c-8.284,0-15,6.716-15,15c0,8.284,6.716,15,15,15h80c8.284,0,15-6.716,15-15C250,246.716,243.284,240,235,240z\r\n     '
+    d: 'M235,240h-80c-8.284,0-15,6.716-15,15c0,8.284,6.716,15,15,15h80c8.284,0,15-6.716,15-15C250,246.716,243.284,240,235,240z\n     '
   })));
 };
 
@@ -713,6 +713,27 @@ const BTC = ({
   }));
 };
 
+const Peaq = ({
+  width: _width = 37,
+  height: _height = 37,
+  ...rest
+}) => {
+  return React.createElement("svg", Object.assign({
+    version: "1.0",
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "400.000000pt",
+    height: "400.000000pt",
+    viewBox: "0 0 400.000000 400.000000",
+    preserveAspectRatio: "xMidYMid meet"
+  }, rest), React.createElement("g", {
+    transform: "translate(0.000000,400.000000) scale(0.100000,-0.100000)",
+    fill: "#000000",
+    stroke: "none"
+  }, React.createElement("path", {
+    d: "M1214 2659 c-179 -21 -349 -125 -454 -279 -91 -135 -124 -250 -118\n-415 6 -147 44 -255 131 -370 147 -195 380 -291 610 -250 49 8 103 23 120 32\n18 10 35 16 40 15 13 -4 88 38 147 81 104 77 249 234 232 252 -4 5 -2 5 4 2\n10 -6 78 88 204 283 51 80 130 190 163 229 50 59 140 132 200 162 117 60 293\n62 406 4 27 -13 52 -21 56 -17 5 4 5 2 1 -5 -4 -7 3 -17 16 -24 13 -7 32 -23\n43 -37 11 -13 30 -36 43 -51 45 -53 92 -193 92 -276 0 -51 -24 -146 -52 -205\n-28 -59 -131 -161 -193 -193 -96 -48 -234 -59 -347 -27 -58 17 -52 45 42 180\n168 243 211 312 208 328 -6 33 -248 26 -248 -7 0 -4 -67 -105 -150 -225 -86\n-126 -152 -233 -156 -252 -7 -40 11 -98 39 -125 62 -58 200 -112 323 -129 75\n-9 106 -9 187 4 54 9 105 20 115 25 9 5 40 20 67 32 59 27 141 87 137 101 -1\n5 1 7 6 4 14 -9 132 128 132 153 0 6 5 11 10 11 6 0 10 5 10 11 0 5 11 34 25\n62 47 101 68 267 45 362 -6 22 -13 56 -16 74 -9 52 -77 183 -126 244 -61 76\n-185 173 -230 181 -7 1 -28 10 -46 20 -19 10 -36 15 -40 12 -3 -3 -10 -2 -16\n3 -6 5 -45 14 -87 20 -154 21 -357 -27 -478 -114 -50 -36 -201 -191 -196 -203\n2 -7 1 -11 -4 -7 -5 3 -20 -9 -32 -27 -13 -18 -27 -37 -32 -43 -16 -21 -127\n-187 -127 -192 0 -2 -39 -64 -87 -136 -78 -117 -179 -234 -253 -292 -44 -35\n-143 -74 -220 -88 -277 -49 -527 181 -507 467 8 118 42 198 123 287 63 70 168\n124 261 134 73 8 208 -11 230 -33 19 -19 10 -53 -28 -106 -16 -22 -41 -57 -54\n-76 -13 -19 -64 -95 -114 -168 -113 -167 -113 -172 19 -172 49 0 100 4 113 9\n27 11 71 77 61 93 -4 6 -2 8 3 5 6 -4 53 55 107 136 53 78 111 162 129 187 28\n40 32 52 32 113 0 64 -2 69 -34 99 -18 17 -72 48 -120 68 -128 56 -242 74\n-367 59z"
+  })));
+};
+
 var ChainName;
 (function (ChainName) {
   ChainName["ETHEREUM"] = "ETH";
@@ -726,6 +747,7 @@ var ChainName;
   ChainName["TRON"] = "TRX";
   ChainName["FIAT"] = "FIAT";
   ChainName["BTC"] = "BTC";
+  ChainName["PEAQ"] = "PEAQ";
 })(ChainName || (ChainName = {}));
 var SupportedChainIdTestnet;
 (function (SupportedChainIdTestnet) {
@@ -736,6 +758,7 @@ var SupportedChainIdTestnet;
   SupportedChainIdTestnet[SupportedChainIdTestnet["ARBITRUM"] = 421614] = "ARBITRUM";
   SupportedChainIdTestnet[SupportedChainIdTestnet["OPTIMISM"] = 11155420] = "OPTIMISM";
   SupportedChainIdTestnet[SupportedChainIdTestnet["POLYGON_ZKEM"] = 2442] = "POLYGON_ZKEM";
+  SupportedChainIdTestnet[SupportedChainIdTestnet["PEAQ"] = 9990] = "PEAQ";
 })(SupportedChainIdTestnet || (SupportedChainIdTestnet = {}));
 const CHAIN_NAMES_TO_IDS_TESTNET = {
   [ChainName.ETHEREUM]: SupportedChainIdTestnet.ETHEREUM,
@@ -744,7 +767,8 @@ const CHAIN_NAMES_TO_IDS_TESTNET = {
   [ChainName.BSC]: SupportedChainIdTestnet.BSC,
   [ChainName.OPTIMISM]: SupportedChainIdTestnet.OPTIMISM,
   [ChainName.ARBITRUM]: SupportedChainIdTestnet.ARBITRUM,
-  [ChainName.POLYGON_ZKEVM]: SupportedChainIdTestnet.POLYGON_ZKEM
+  [ChainName.POLYGON_ZKEVM]: SupportedChainIdTestnet.POLYGON_ZKEM,
+  [ChainName.PEAQ]: SupportedChainIdTestnet.PEAQ
 };
 var SupportedChainIdMainnet;
 (function (SupportedChainIdMainnet) {
@@ -755,6 +779,7 @@ var SupportedChainIdMainnet;
   SupportedChainIdMainnet[SupportedChainIdMainnet["ARBITRUM"] = 42161] = "ARBITRUM";
   SupportedChainIdMainnet[SupportedChainIdMainnet["OPTIMISM"] = 10] = "OPTIMISM";
   SupportedChainIdMainnet[SupportedChainIdMainnet["POLYGON_ZKEM"] = 1101] = "POLYGON_ZKEM";
+  SupportedChainIdMainnet[SupportedChainIdMainnet["PEAQ"] = 2241] = "PEAQ";
 })(SupportedChainIdMainnet || (SupportedChainIdMainnet = {}));
 const CHAIN_NAMES_TO_IDS_MAINNET = {
   [ChainName.ETHEREUM]: SupportedChainIdMainnet.ETHEREUM,
@@ -763,7 +788,8 @@ const CHAIN_NAMES_TO_IDS_MAINNET = {
   [ChainName.BSC]: SupportedChainIdMainnet.BSC,
   [ChainName.OPTIMISM]: SupportedChainIdMainnet.OPTIMISM,
   [ChainName.ARBITRUM]: SupportedChainIdMainnet.ARBITRUM,
-  [ChainName.POLYGON_ZKEVM]: SupportedChainIdMainnet.POLYGON_ZKEM
+  [ChainName.POLYGON_ZKEVM]: SupportedChainIdMainnet.POLYGON_ZKEM,
+  [ChainName.PEAQ]: SupportedChainIdMainnet.PEAQ
 };
 const CHAIN_NAMES_TO_STRING = {
   [ChainName.ETHEREUM]: 'Ethereum',
@@ -776,7 +802,8 @@ const CHAIN_NAMES_TO_STRING = {
   [ChainName.POLYGON_ZKEVM]: 'Polygon zkEVM',
   [ChainName.TRON]: 'Tron',
   [ChainName.FIAT]: 'Pay with FIAT',
-  [ChainName.BTC]: 'Bitcoin'
+  [ChainName.BTC]: 'Bitcoin',
+  [ChainName.PEAQ]: 'Peaq'
 };
 const CHAIN_STRING_TO_NAME = {
   ['Ethereum']: ChainName.ETHEREUM,
@@ -789,7 +816,8 @@ const CHAIN_STRING_TO_NAME = {
   ['Polygon zkEVM']: ChainName.POLYGON_ZKEVM,
   ['Tron']: ChainName.TRON,
   ['Pay with FIAT']: ChainName.FIAT,
-  ['Bitcoin']: ChainName.BTC
+  ['Bitcoin']: ChainName.BTC,
+  ['Peaq']: ChainName.PEAQ
 };
 const CHAIN_NAMES_TO_EXPLORER_TESTNET = {
   [ChainName.ETHEREUM]: 'sepolia.etherscan.io',
@@ -801,7 +829,8 @@ const CHAIN_NAMES_TO_EXPLORER_TESTNET = {
   [ChainName.ARBITRUM]: 'sepolia.arbiscan.io',
   [ChainName.POLYGON_ZKEVM]: 'cardona-zkevm.polygonscan.com',
   [ChainName.TRON]: 'nile.tronscan.org/#',
-  [ChainName.BTC]: 'mempool.space/testnet'
+  [ChainName.BTC]: 'mempool.space/testnet',
+  [ChainName.PEAQ]: 'peaq-testnet.subscan.io/'
 };
 const CHAIN_NAMES_TO_EXPLORER_MAINNET = {
   [ChainName.ETHEREUM]: 'etherscan.io',
@@ -813,7 +842,8 @@ const CHAIN_NAMES_TO_EXPLORER_MAINNET = {
   [ChainName.ARBITRUM]: 'arbiscan.io',
   [ChainName.POLYGON_ZKEVM]: 'zkevm.polygonscan.com',
   [ChainName.TRON]: 'tronscan.org/#',
-  [ChainName.BTC]: 'mempool.space'
+  [ChainName.BTC]: 'mempool.space',
+  [ChainName.PEAQ]: 'https://krest.subscan.io/'
 };
 const CHAIN_IDS_TO_NAMES_TESTNET = {
   [SupportedChainIdTestnet.ETHEREUM]: ChainName.ETHEREUM,
@@ -822,7 +852,8 @@ const CHAIN_IDS_TO_NAMES_TESTNET = {
   [SupportedChainIdTestnet.BSC]: ChainName.BSC,
   [SupportedChainIdTestnet.OPTIMISM]: ChainName.OPTIMISM,
   [SupportedChainIdTestnet.ARBITRUM]: ChainName.ARBITRUM,
-  [SupportedChainIdTestnet.POLYGON_ZKEM]: ChainName.POLYGON_ZKEVM
+  [SupportedChainIdTestnet.POLYGON_ZKEM]: ChainName.POLYGON_ZKEVM,
+  [SupportedChainIdTestnet.PEAQ]: ChainName.PEAQ
 };
 const CHAIN_IDS_TO_NAMES_MAINNET = {
   [SupportedChainIdMainnet.ETHEREUM]: ChainName.ETHEREUM,
@@ -831,7 +862,8 @@ const CHAIN_IDS_TO_NAMES_MAINNET = {
   [SupportedChainIdMainnet.BSC]: ChainName.BSC,
   [SupportedChainIdMainnet.OPTIMISM]: ChainName.OPTIMISM,
   [SupportedChainIdMainnet.ARBITRUM]: ChainName.ARBITRUM,
-  [SupportedChainIdMainnet.POLYGON_ZKEM]: ChainName.POLYGON_ZKEVM
+  [SupportedChainIdMainnet.POLYGON_ZKEM]: ChainName.POLYGON_ZKEVM,
+  [SupportedChainIdMainnet.PEAQ]: ChainName.PEAQ
 };
 const networkOptions = [{
   id: ChainName.ARBITRUM,
@@ -877,6 +909,10 @@ const networkOptions = [{
   id: ChainName.TRON,
   label: 'Tron',
   icon: Celo
+}, {
+  id: ChainName.PEAQ,
+  label: 'Peaq',
+  icon: Peaq
 }];
 const getNetworkOption = id => {
   const index = networkOptions.findIndex(item => item.id === id);
@@ -885,7 +921,7 @@ const getNetworkOption = id => {
 };
 const CLUSTER = 'devnet';
 const SOLANA_HOST = clusterApiUrl(CLUSTER);
-const isEVMChain = chainId => chainId === ChainName.ETHEREUM || chainId === ChainName.POLYGON || chainId === ChainName.AVALANCHE || chainId === ChainName.BSC || chainId === ChainName.OPTIMISM || chainId === ChainName.ARBITRUM || chainId === ChainName.POLYGON_ZKEVM;
+const isEVMChain = chainId => chainId === ChainName.ETHEREUM || chainId === ChainName.POLYGON || chainId === ChainName.AVALANCHE || chainId === ChainName.BSC || chainId === ChainName.OPTIMISM || chainId === ChainName.ARBITRUM || chainId === ChainName.POLYGON_ZKEVM || chainId === ChainName.PEAQ;
 const COIN_LIST = {
   USDK: {
     symbol: 'USDK',
@@ -895,10 +931,6 @@ const COIN_LIST = {
     symbol: 'USDT',
     icon: USDT
   },
-  USDC: {
-    symbol: 'USDC',
-    icon: USDC
-  },
   KEUR: {
     symbol: 'KEUR',
     icon: KEUR
@@ -906,6 +938,10 @@ const COIN_LIST = {
   WBTC: {
     symbol: 'WBTC',
     icon: BTC
+  },
+  USDC: {
+    symbol: "USDC",
+    icon: USDC
   }
 };
 const ExpireTimeOptions = ['1 hour', '2 hours', '3 hours'];
@@ -939,13 +975,12 @@ var ModeOptions;
   ModeOptions["payment"] = "payment";
   ModeOptions["bridge"] = "bridge";
   ModeOptions["status"] = "status";
+  ModeOptions["onramp"] = "onramp";
 })(ModeOptions || (ModeOptions = {}));
 var CurrencyOptions;
 (function (CurrencyOptions) {
   CurrencyOptions["USDK"] = "USDK";
-  CurrencyOptions["USDC"] = "USDC";
   CurrencyOptions["USDT"] = "USDT";
-  CurrencyOptions["WBTC"] = "WBTC";
   CurrencyOptions["G$"] = "GDOLLAR";
 })(CurrencyOptions || (CurrencyOptions = {}));
 var ColorModeOptions;
@@ -969,8 +1004,7 @@ const initialState = {
   tokenOptions: {},
   pendingTxs: 0,
   pendingTxData: [],
-  kimaExplorerUrl: 'https://explorer.kima.finance',
-  graphqlProviderQuery: 'https://graphql.kima.finance',
+  kimaExplorerUrl: 'explorer.kima.finance',
   mode: ModeOptions.bridge,
   sourceChain: '',
   targetChain: '',
@@ -1001,8 +1035,8 @@ const initialState = {
   backendUrl: '',
   nodeProviderQuery: '',
   txId: -1,
-  sourceCurrency: 'USDK',
-  targetCurrency: 'USDK',
+  selectedToken: 'USDK',
+  availableTokenList: ['USDK'],
   compliantOption: true,
   sourceCompliant: 'low',
   targetCompliant: 'low',
@@ -1015,7 +1049,10 @@ const initialState = {
   signature: '',
   uuid: '',
   kycStatus: '',
-  expireTime: '1 hour'
+  expireTime: '1 hour',
+  accounts: [],
+  selectedAccount: null,
+  selectedBankAccount: null
 };
 const optionSlice = createSlice({
   name: 'option',
@@ -1147,17 +1184,14 @@ const optionSlice = createSlice({
     setNodeProviderQuery: (state, action) => {
       state.nodeProviderQuery = action.payload;
     },
-    setGraphqlProviderQuery: (state, action) => {
-      state.graphqlProviderQuery = action.payload;
-    },
     setTxId: (state, action) => {
       state.txId = action.payload;
     },
-    setSourceCurrency: (state, action) => {
-      state.sourceCurrency = action.payload;
+    setSelectedToken: (state, action) => {
+      state.selectedToken = action.payload;
     },
-    setTargetCurrency: (state, action) => {
-      state.targetCurrency = action.payload;
+    setAvailableTokenList: (state, action) => {
+      state.availableTokenList = action.payload;
     },
     setCompliantOption: (state, action) => {
       state.compliantOption = action.payload;
@@ -1188,6 +1222,15 @@ const optionSlice = createSlice({
     },
     setExpireTime: (state, action) => {
       state.expireTime = action.payload;
+    },
+    setDepasifyAccounts: (state, action) => {
+      state.accounts = action.payload;
+    },
+    setSelectedAccount: (state, action) => {
+      state.selectedAccount = action.payload;
+    },
+    setSelectedBankAccount: (state, action) => {
+      state.selectedBankAccount = action.payload;
     }
   }
 });
@@ -1227,10 +1270,9 @@ const {
   setFeeDeduct,
   setBackendUrl,
   setNodeProviderQuery,
-  setGraphqlProviderQuery,
   setTxId,
-  setSourceCurrency,
-  setTargetCurrency,
+  setSelectedToken,
+  setAvailableTokenList,
   setCompliantOption,
   setSourceCompliant,
   setTargetCompliant,
@@ -1242,7 +1284,10 @@ const {
   setKYCStatus,
   setExpireTime,
   setPendingTxData,
-  setPendingTxs
+  setPendingTxs,
+  setDepasifyAccounts,
+  setSelectedAccount,
+  setSelectedBankAccount
 } = optionSlice.actions;
 var optionReducer = optionSlice.reducer;
 
@@ -1287,10 +1332,8 @@ const selectMode = state => state.option.mode;
 const selectFeeDeduct = state => state.option.feeDeduct;
 const selectBackendUrl = state => state.option.backendUrl;
 const selectNodeProviderQuery = state => state.option.nodeProviderQuery;
-const selectGraphqlProviderQuery = state => state.option.graphqlProviderQuery;
 const selectTxId = state => state.option.txId;
-const selectSourceCurrency = state => state.option.sourceCurrency;
-const selectTargetCurrency = state => state.option.targetCurrency;
+const selectSelectedToken = state => state.option.selectedToken;
 const selectCompliantOption = state => state.option.compliantOption;
 const selectSourceCompliant = state => state.option.sourceCompliant;
 const selectTargetCompliant = state => state.option.targetCompliant;
@@ -1303,6 +1346,9 @@ const selectKycStatus = state => state.option.kycStatus;
 const selectExpireTime = state => state.option.expireTime;
 const selectPendingTxs = state => state.option.pendingTxs;
 const selectPendingTxData = state => state.option.pendingTxData;
+const selectSelectedAccount = state => state.option.selectedAccount;
+const selectSelectedBankAccount = state => state.option.selectedBankAccount;
+const selectAccounts = state => state.option.accounts;
 
 const Loading180Ring = ({
   width: _width = 24,
@@ -1514,6 +1560,124 @@ function useNetworkOptions() {
   }), [options]);
 }
 
+const Network = ({
+  isOriginChain: _isOriginChain = true
+}) => {
+  const sourceChangeRef = useRef(false);
+  const theme = useSelector(selectTheme);
+  const mode = useSelector(selectMode);
+  const dAppOption = useSelector(selectDappOption);
+  const originNetwork = useSelector(selectSourceChain);
+  const targetNetwork = useSelector(selectTargetChain);
+  const nodeProviderQuery = useSelector(selectNodeProviderQuery);
+  const dispatch = useDispatch();
+  const sliderRef = useRef();
+  const [availableNetworks, setAvailableNetworks] = useState([]);
+  const {
+    options: networkOptions
+  } = useNetworkOptions();
+  const selectedNetwork = useMemo(() => {
+    const index = networkOptions.findIndex(option => option.id === (_isOriginChain ? originNetwork : targetNetwork));
+    if (index >= 0) return networkOptions[index];
+    return networkOptions[3];
+  }, [originNetwork, targetNetwork, networkOptions]);
+  const networks = useMemo(() => {
+    if (_isOriginChain && mode === ModeOptions.bridge) {
+      return networkOptions;
+    }
+    return networkOptions.filter(network => availableNetworks.findIndex(id => id === network.id) >= 0);
+  }, [networkOptions, _isOriginChain, availableNetworks, dAppOption]);
+  useEffect(() => {
+    if (!nodeProviderQuery || mode !== ModeOptions.bridge && mode !== ModeOptions.onramp) return;
+    (async function () {
+      try {
+        const networks = await fetchWrapper.get(`${nodeProviderQuery}/kima-finance/kima-blockchain/chains/get_available_chains/${originNetwork}`);
+        setAvailableNetworks(networks.Chains);
+        if (_isOriginChain && !targetNetwork) {
+          dispatch(setTargetChain(networks.Chains[0]));
+        }
+        if (sourceChangeRef.current) {
+          sourceChangeRef.current = false;
+          dispatch(setTargetChain(networks.Chains[0]));
+        }
+      } catch (e) {
+        console.log('rpc disconnected', e);
+        toast.error('rpc disconnected');
+      }
+    })();
+  }, [nodeProviderQuery, originNetwork, targetNetwork, mode, _isOriginChain]);
+  useEffect(() => {
+    var _sliderRef$current, _sliderRef$current5, _sliderRef$current6, _sliderRef$current7;
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+    (_sliderRef$current = sliderRef.current) === null || _sliderRef$current === void 0 ? void 0 : _sliderRef$current.addEventListener('mousedown', e => {
+      var _sliderRef$current2, _sliderRef$current3, _sliderRef$current4;
+      isDown = true;
+      (_sliderRef$current2 = sliderRef.current) === null || _sliderRef$current2 === void 0 ? void 0 : _sliderRef$current2.classList.add('active');
+      startX = e.pageX - ((_sliderRef$current3 = sliderRef.current) === null || _sliderRef$current3 === void 0 ? void 0 : _sliderRef$current3.offsetLeft);
+      scrollLeft = (_sliderRef$current4 = sliderRef.current) === null || _sliderRef$current4 === void 0 ? void 0 : _sliderRef$current4.scrollLeft;
+    });
+    (_sliderRef$current5 = sliderRef.current) === null || _sliderRef$current5 === void 0 ? void 0 : _sliderRef$current5.addEventListener('mouseleave', () => {
+      isDown = false;
+      sliderRef.current.classList.remove('active');
+    });
+    (_sliderRef$current6 = sliderRef.current) === null || _sliderRef$current6 === void 0 ? void 0 : _sliderRef$current6.addEventListener('mouseup', () => {
+      isDown = false;
+      sliderRef.current.classList.remove('active');
+    });
+    (_sliderRef$current7 = sliderRef.current) === null || _sliderRef$current7 === void 0 ? void 0 : _sliderRef$current7.addEventListener('mousemove', e => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - sliderRef.current.offsetLeft;
+      const walk = (x - startX) * 1;
+      sliderRef.current.scrollLeft = scrollLeft - walk;
+    });
+  });
+  const slideLeft = () => {
+    let temp = 0;
+    const timerId = setInterval(() => {
+      sliderRef.current.scrollLeft -= 10;
+      if (temp++ === 20) clearInterval(timerId);
+    }, 10);
+  };
+  const slideRight = () => {
+    let temp = 0;
+    const timerId = setInterval(() => {
+      sliderRef.current.scrollLeft += 10;
+      if (temp++ === 20) clearInterval(timerId);
+    }, 10);
+  };
+  return React.createElement("div", {
+    className: `network-select`
+  }, React.createElement("p", null, _isOriginChain ? 'Which network are you funding from?' : 'Which network are you funding to?'), React.createElement("div", {
+    className: 'scroll-button'
+  }, React.createElement(Arrow, {
+    fill: theme.colorMode === 'light' ? 'black' : 'white',
+    onClick: slideLeft
+  }), React.createElement(Arrow, {
+    fill: theme.colorMode === 'light' ? 'black' : 'white',
+    onClick: slideRight
+  })), React.createElement("div", {
+    className: 'slide-area hide-scrollbar',
+    ref: sliderRef
+  }, React.createElement("div", {
+    className: 'network-container'
+  }, networks.map(network => React.createElement("div", {
+    className: `card-item ${theme.colorMode} ${network.id === selectedNetwork.id ? 'active' : ''}`,
+    key: network.id,
+    onClick: () => {
+      if (_isOriginChain) {
+        dispatch(setSourceChain(network.id));
+        sourceChangeRef.current = true;
+      } else {
+        dispatch(setTargetChain(network.id));
+        dispatch(setServiceFee(-1));
+      }
+    }
+  }, React.createElement(network.icon, null), React.createElement("span", null, network.label))))));
+};
+
 const SolanaWalletSelect = () => {
   const theme = useSelector(selectTheme);
   const selectedProvider = useSelector(selectSolanaProvider);
@@ -1711,6 +1875,7 @@ const createWalletStatus = (isReady, statusMessage = '', connectBitcoinWallet, w
 function useIsWalletReady() {
   const dispatch = useDispatch();
   const autoSwitch = useSelector(selectWalletAutoConnect);
+  const mode = useSelector(selectMode);
   const {
     publicKey: solanaAddress
   } = useWallet();
@@ -1819,7 +1984,7 @@ function useIsWalletReady() {
             toast.success(`Wallet connected to ${CHAIN_NAMES_TO_STRING[CHAIN_IDS_TO_NAMES[evmChainId || SupportedChainId.ETHEREUM]]}`);
           }
         }
-        if (evmChainId && autoSwitch) return createWalletStatus(false, `Wallet not connected to ${CHAIN_NAMES_TO_STRING[CHAIN_IDS_TO_NAMES[correctEvmNetwork]]}`, connectBitcoinWallet, evmAddress);
+        if (evmChainId && autoSwitch && mode !== ModeOptions.onramp) return createWalletStatus(false, `Wallet not connected to ${CHAIN_NAMES_TO_STRING[CHAIN_IDS_TO_NAMES[correctEvmNetwork]]}`, connectBitcoinWallet, evmAddress);
       }
     }
     return createWalletStatus(false, '', connectBitcoinWallet, undefined);
@@ -2215,18 +2380,18 @@ function useBalance() {
     connection
   } = useConnection();
   const kimaBackendUrl = useSelector(selectBackendUrl);
-  const sourceCurrency = useSelector(selectSourceCurrency);
+  const selectedCoin = useSelector(selectSelectedToken);
   const tokenOptions = useSelector(selectTokenOptions);
   const tokenAddress = useMemo(() => {
     if (isEmptyObject(tokenOptions) || sourceChain === ChainName.FIAT) return '';
     if (tokenOptions && typeof tokenOptions === 'object') {
-      const coinOptions = tokenOptions[sourceCurrency];
+      const coinOptions = tokenOptions[selectedCoin];
       if (coinOptions && typeof coinOptions === 'object') {
-        return tokenOptions[sourceCurrency][sourceChain];
+        return tokenOptions[selectedCoin][sourceChain];
       }
     }
     return '';
-  }, [sourceCurrency, sourceChain, tokenOptions]);
+  }, [selectedCoin, sourceChain, tokenOptions]);
   useEffect(() => {
     setBalance(0);
   }, [sourceChain]);
@@ -2283,7 +2448,7 @@ const WalletButton = ({
 }) => {
   const dispatch = useDispatch();
   const theme = useSelector(selectTheme);
-  const selectedCoin = useSelector(selectSourceCurrency);
+  const selectedCoin = useSelector(selectSelectedToken);
   const sourceCompliant = useSelector(selectSourceCompliant);
   const compliantOption = useSelector(selectCompliantOption);
   const selectedNetwork = useSelector(selectSourceChain);
@@ -2333,69 +2498,16 @@ const WalletButton = ({
   }, balance.toFixed(selectedCoin === 'WBTC' ? 8 : 2), ' ', selectedNetwork === ChainName.BTC ? 'BTC' : selectedCoin, " available") : null);
 };
 
-function useCurrencyOptions() {
-  const dispatch = useDispatch();
-  const [tokenList, setTokenList] = useState(['USDK']);
-  const mode = useSelector(selectMode);
-  const transactionOption = useSelector(selectTransactionOption);
-  const nodeProviderQuery = useSelector(selectNodeProviderQuery);
-  const originNetwork = useSelector(selectSourceChain);
-  const targetNetwork = useSelector(selectTargetChain);
-  const dAppOption = useSelector(selectDappOption);
-  useEffect(() => {
-    if (!nodeProviderQuery || !originNetwork || !targetNetwork || !transactionOption && mode === ModeOptions.payment) return;
-    (async function () {
-      try {
-        if (originNetwork === ChainName.FIAT || targetNetwork === ChainName.FIAT) {
-          dispatch(setSourceCurrency('KEUR'));
-          dispatch(setTargetCurrency('KEUR'));
-          return;
-        }
-        const coins = await fetchWrapper.get(`${nodeProviderQuery}/kima-finance/kima-blockchain/chains/get_currencies/${originNetwork}/${targetNetwork}`);
-        let _tokenList = coins.Currencies.map(coin => coin.toUpperCase()) || ['USDK'];
-        if (originNetwork === ChainName.BTC || targetNetwork === ChainName.BTC) {
-          _tokenList = ['WBTC'];
-        }
-        if (transactionOption !== null && transactionOption !== void 0 && transactionOption.currency && _tokenList.findIndex(item => item === transactionOption.currency) >= 0) {
-          dispatch(setSourceCurrency(transactionOption.currency));
-          dispatch(setTargetCurrency(transactionOption.currency));
-        } else {
-          dispatch(setSourceCurrency(_tokenList[0]));
-          dispatch(setTargetCurrency(_tokenList[0]));
-        }
-        if (dAppOption !== DAppOptions.None) {
-          setTokenList([(transactionOption === null || transactionOption === void 0 ? void 0 : transactionOption.currency) || 'USDK']);
-        } else {
-          setTokenList(_tokenList);
-        }
-      } catch (e) {
-        console.log('rpc disconnected', e);
-        toast.error('rpc disconnected');
-      }
-    })();
-  }, [nodeProviderQuery, originNetwork, targetNetwork, transactionOption, mode, dAppOption]);
-  return useMemo(() => ({
-    tokenList
-  }), [tokenList]);
-}
-
-const CoinDropdown = ({
-  isSourceChain: _isSourceChain = true
-}) => {
+const CoinDropdown = () => {
+  var _COIN_LIST;
   const ref = useRef();
-  const dispatch = useDispatch();
   const [collapsed, setCollapsed] = useState(true);
-  const sourceCurrency = useSelector(selectSourceCurrency);
-  const targetCurrency = useSelector(selectTargetCurrency);
-  const {
-    tokenList
-  } = useCurrencyOptions();
+  const selectedCoin = useSelector(selectSelectedToken);
+  const tokenList = ['USDC'];
   const theme = useSelector(selectTheme);
-  const Icon = useMemo(() => {
-    var _COIN_LIST;
-    const selectedCoin = _isSourceChain ? sourceCurrency : targetCurrency;
-    return ((_COIN_LIST = COIN_LIST[selectedCoin || 'USDK']) === null || _COIN_LIST === void 0 ? void 0 : _COIN_LIST.icon) || COIN_LIST['USDK'].icon;
-  }, [sourceCurrency, targetCurrency, _isSourceChain]);
+  const Icon = ((_COIN_LIST = COIN_LIST[selectedCoin || 'USDK']) === null || _COIN_LIST === void 0 ? void 0 : _COIN_LIST.icon) || COIN_LIST['USDK'].icon;
+  console.log("tokenlist: ", tokenList);
+  console.log("selectedCoin: ", selectedCoin);
   useEffect(() => {
     const bodyMouseDowntHandler = e => {
       if (ref !== null && ref !== void 0 && ref.current && !ref.current.contains(e.target)) {
@@ -2413,29 +2525,20 @@ const CoinDropdown = ({
     ref: ref
   }, React.createElement("div", {
     className: 'coin-wrapper'
-  }, React.createElement(Icon, null), _isSourceChain ? sourceCurrency : targetCurrency), React.createElement("div", {
+  }, React.createElement(Icon, null), selectedCoin), React.createElement("div", {
     className: `coin-menu ${theme.colorMode} ${collapsed ? 'collapsed' : ''}`
   }, tokenList.map(token => {
-    var _COIN_LIST$token, _COIN_LIST$token4;
+    var _COIN_LIST$token, _COIN_LIST$token2;
     const CoinIcon = COIN_LIST[token].icon || COIN_LIST['USDK'].icon;
     return React.createElement("div", {
       className: 'coin-item',
-      key: (_COIN_LIST$token = COIN_LIST[token]) === null || _COIN_LIST$token === void 0 ? void 0 : _COIN_LIST$token.symbol,
-      onClick: () => {
-        if (_isSourceChain) {
-          var _COIN_LIST$token2;
-          dispatch(setSourceCurrency((_COIN_LIST$token2 = COIN_LIST[token]) === null || _COIN_LIST$token2 === void 0 ? void 0 : _COIN_LIST$token2.symbol));
-        } else {
-          var _COIN_LIST$token3;
-          dispatch(setTargetCurrency((_COIN_LIST$token3 = COIN_LIST[token]) === null || _COIN_LIST$token3 === void 0 ? void 0 : _COIN_LIST$token3.symbol));
-        }
-      }
-    }, React.createElement(CoinIcon, null), React.createElement("p", null, (_COIN_LIST$token4 = COIN_LIST[token]) === null || _COIN_LIST$token4 === void 0 ? void 0 : _COIN_LIST$token4.symbol));
+      key: (_COIN_LIST$token = COIN_LIST[token]) === null || _COIN_LIST$token === void 0 ? void 0 : _COIN_LIST$token.symbol
+    }, React.createElement(CoinIcon, null), React.createElement("p", null, (_COIN_LIST$token2 = COIN_LIST[token]) === null || _COIN_LIST$token2 === void 0 ? void 0 : _COIN_LIST$token2.symbol));
   })));
 };
 
 const NetworkDropdown = React.memo(({
-  isSourceChain: _isSourceChain = true
+  isOriginChain: _isOriginChain = true
 }) => {
   const [collapsed, setCollapsed] = useState(true);
   const [availableNetworks, setAvailableNetworks] = useState([]);
@@ -2452,18 +2555,46 @@ const NetworkDropdown = React.memo(({
     options: networkOptions
   } = useNetworkOptions();
   const selectedNetwork = useMemo(() => {
-    const index = networkOptions.findIndex(option => option.id === (_isSourceChain ? originNetwork : targetNetwork));
+    const index = networkOptions.findIndex(option => option.id === (_isOriginChain ? originNetwork : targetNetwork));
+    console.log('network: ', networkOptions[index]);
     if (index >= 0) return networkOptions[index];
-    return networkOptions[3];
-  }, [originNetwork, targetNetwork, networkOptions]);
+    console.log('network 3: ', networkOptions[3]);
+    if (availableNetworks.length !== 0) {
+      return networkOptions.find(networkOption => networkOption.id === availableNetworks[0]);
+    }
+    return null;
+  }, [originNetwork, targetNetwork, networkOptions, availableNetworks]);
   const networks = useMemo(() => {
-    if (_isSourceChain && mode === ModeOptions.bridge) {
+    if (_isOriginChain && mode === ModeOptions.bridge) {
       return networkOptions;
     }
     return networkOptions.filter(network => availableNetworks.findIndex(id => id === network.id) >= 0);
-  }, [networkOptions, _isSourceChain, availableNetworks, dAppOption, originNetwork]);
+  }, [networkOptions, _isOriginChain, availableNetworks, dAppOption, originNetwork]);
   const theme = useSelector(selectTheme);
   const dispatch = useDispatch();
+  useEffect(() => {
+    if (!nodeProviderQuery || mode != ModeOptions.onramp) return;
+    (async function () {
+      try {
+        let chains = [];
+        const networks = await fetchWrapper.get(`${nodeProviderQuery}/kima-finance/kima-blockchain/chains/get_available_chains/${originNetwork}`);
+        chains = networks.Chains;
+        if (useFIAT) chains.push(ChainName.FIAT);
+        setAvailableNetworks(chains);
+        if (_isOriginChain && !targetNetwork) {
+          dispatch(setTargetChain(chains[0]));
+        }
+        if (sourceChangeRef.current) {
+          sourceChangeRef.current = false;
+          dispatch(setTargetChain(chains.findIndex(chain => chain === targetNetwork) < 0 || targetNetwork === originNetwork ? chains[0] : targetNetwork));
+          dispatch(setTargetChainFetching(false));
+        }
+      } catch (e) {
+        console.log('rpc disconnected', e);
+        toast.error('rpc disconnected');
+      }
+    })();
+  }, [nodeProviderQuery, targetNetwork, mode, _isOriginChain, useFIAT]);
   useEffect(() => {
     if (!nodeProviderQuery || mode !== ModeOptions.bridge) return;
     (async function () {
@@ -2477,7 +2608,7 @@ const NetworkDropdown = React.memo(({
           if (useFIAT) chains.push(ChainName.FIAT);
         }
         setAvailableNetworks(chains);
-        if (_isSourceChain && !targetNetwork) {
+        if (_isOriginChain && !targetNetwork) {
           dispatch(setTargetChain(chains[0]));
         }
         if (sourceChangeRef.current) {
@@ -2490,7 +2621,7 @@ const NetworkDropdown = React.memo(({
         toast.error('rpc disconnected');
       }
     })();
-  }, [nodeProviderQuery, originNetwork, targetNetwork, mode, _isSourceChain, useFIAT]);
+  }, [nodeProviderQuery, originNetwork, targetNetwork, mode, _isOriginChain, useFIAT]);
   useEffect(() => {
     if (!nodeProviderQuery || mode !== ModeOptions.payment) return;
     (async function () {
@@ -2525,19 +2656,26 @@ const NetworkDropdown = React.memo(({
   return React.createElement("div", {
     className: `network-dropdown ${theme.colorMode} ${collapsed ? 'collapsed' : ''}`,
     onClick: () => {
-      if (!autoSwitchChain && _isSourceChain) return;
+      if (!autoSwitchChain && _isOriginChain && mode !== ModeOptions.onramp) return;
       setCollapsed(prev => !prev);
     },
     ref: ref
-  }, React.createElement("div", {
+  }, availableNetworks.length != 0 && selectedNetwork ? React.createElement("div", {
     className: 'network-wrapper'
-  }, React.createElement(selectedNetwork.icon, null), React.createElement("span", null, selectedNetwork.label)), React.createElement("div", {
+  }, React.createElement(selectedNetwork.icon, null), React.createElement("span", null, selectedNetwork.label)) : React.createElement("div", {
+    className: 'network-wrapper'
+  }, React.createElement(Loading180Ring, {
+    width: 24,
+    height: 24,
+    fill: 'white'
+  })), React.createElement("div", {
     className: `network-menu custom-scrollbar ${theme.colorMode} ${collapsed ? 'collapsed' : ''}`
   }, networks.map(network => React.createElement("div", {
     className: 'network-menu-item',
     key: network.label,
     onClick: async () => {
-      if (_isSourceChain) {
+      if (_isOriginChain) {
+        console.log('origin chain');
         dispatch(setTargetChainFetching(true));
         dispatch(setSourceChain(network.id));
         sourceChangeRef.current = true;
@@ -2569,8 +2707,7 @@ const ConfirmDetails = ({
   } = useIsWalletReady();
   const originNetworkOption = useMemo(() => networkOptions.filter(network => network.id === originNetwork)[0], [networkOptions, originNetwork]);
   const targetNetworkOption = useMemo(() => networkOptions.filter(network => network.id === (mode === ModeOptions.payment ? transactionOption === null || transactionOption === void 0 ? void 0 : transactionOption.targetChain : targetNetwork))[0], [networkOptions, originNetwork]);
-  const sourceCurrency = useSelector(selectSourceCurrency);
-  const targetCurrency = useSelector(selectTargetCurrency);
+  const selectedCoin = useSelector(selectSelectedToken);
   const sourceWalletAddress = useMemo(() => {
     return getShortenedAddress(walletAddress || '');
   }, [walletAddress]);
@@ -2615,7 +2752,7 @@ const ConfirmDetails = ({
     className: 'detail-item'
   }, React.createElement("span", {
     className: 'label'
-  }, "Amount:"), React.createElement("p", null, amountToShow, " ", sourceCurrency, " \u2192 ", targetCurrency)), targetNetwork === ChainName.FIAT ? React.createElement("div", null, React.createElement("div", {
+  }, "Amount:"), React.createElement("p", null, amountToShow, " ", selectedCoin)), targetNetwork === ChainName.FIAT ? React.createElement("div", null, React.createElement("div", {
     className: 'detail-item'
   }, React.createElement("span", {
     className: 'label'
@@ -2625,13 +2762,13 @@ const ConfirmDetails = ({
     className: 'detail-item'
   }, React.createElement("span", {
     className: 'label'
-  }, "Recipient:"), React.createElement("p", null, bankDetails.recipient))) : React.createElement("div", {
+  }, "Recipient:"), React.createElement("p", null, bankDetails.recipient))) : mode !== ModeOptions.onramp ? React.createElement("div", {
     className: 'detail-item'
   }, React.createElement("span", {
     className: 'label'
   }, "Target wallet:"), React.createElement("p", null, dAppOption === DAppOptions.LPDrain ? sourceWalletAddress : targetWalletAddress), React.createElement("span", {
     className: 'kima-card-network-label'
-  }, React.createElement(targetNetworkOption.icon, null), targetNetworkOption.label)));
+  }, React.createElement(targetNetworkOption.icon, null), targetNetworkOption.label)) : '');
 };
 
 const AddressInput = () => {
@@ -2802,87 +2939,47 @@ const TransactionWidget = ({
   const dAppOption = useSelector(selectDappOption);
   const closeHandler = useSelector(selectCloseHandler);
   const successHandler = useSelector(selectSuccessHandler);
-  const graphqlProviderQuery = useSelector(selectGraphqlProviderQuery);
+  const nodeProviderQuery = useSelector(selectNodeProviderQuery);
   useEffect(() => {
-    if (!graphqlProviderQuery || txId < 0) return;
-    const updateTxData = async () => {
+    if (!nodeProviderQuery || txId < 0) return;
+    const timerId = setInterval(async () => {
       try {
-        var _result$data, _result$data$liquidit, _result$data2, _result$data2$transac;
         let data;
+        let result;
         const isLP = dAppOption === DAppOptions.LPAdd || dAppOption === DAppOptions.LPDrain;
-        const result = await fetchWrapper.post(graphqlProviderQuery, JSON.stringify({
-          query: isLP ? `query TransactionDetailsKima($txId: String) {
-                  liquidity_transaction_data(where: { tx_id: { _eq: ${txId.toString()} } }, limit: 1) {
-                    failreason
-                    pullfailcount
-                    pullhash
-                    releasefailcount
-                    releasehash
-                    txstatus
-                    amount
-                    creator
-                    chain
-                    providerchainaddress
-                    symbol
-                    tx_id
-                    kimahash
-                  }
-                }` : `query TransactionDetailsKima($txId: String) {
-                  transaction_data(where: { tx_id: { _eq: ${txId.toString()} } }, limit: 1) {
-                    failreason
-                    pullfailcount
-                    pullhash
-                    releasefailcount
-                    releasehash
-                    txstatus
-                    amount
-                    creator
-                    originaddress
-                    originchain
-                    originsymbol
-                    targetsymbol
-                    targetaddress
-                    targetchain
-                    tx_id
-                    kimahash
-                  }
-                }`
-        }));
-        if (isLP && !(result !== null && result !== void 0 && (_result$data = result.data) !== null && _result$data !== void 0 && (_result$data$liquidit = _result$data.liquidity_transaction_data) !== null && _result$data$liquidit !== void 0 && _result$data$liquidit.length) || !isLP && !(result !== null && result !== void 0 && (_result$data2 = result.data) !== null && _result$data2 !== void 0 && (_result$data2$transac = _result$data2.transaction_data) !== null && _result$data2$transac !== void 0 && _result$data2$transac.length)) {
-          return;
-        }
         if (isLP) {
-          data = result === null || result === void 0 ? void 0 : result.data.liquidity_transaction_data[0];
+          var _result;
+          result = await fetchWrapper.get(`${nodeProviderQuery}/kima-finance/kima-blockchain/transaction/liquidity_transaction_data/${txId}`);
+          data = (_result = result) === null || _result === void 0 ? void 0 : _result.LiquidityTransactionData;
         } else {
-          data = result === null || result === void 0 ? void 0 : result.data.transaction_data[0];
+          var _result2;
+          result = await fetchWrapper.get(`${nodeProviderQuery}/kima-finance/kima-blockchain/transaction/transaction_data/${txId}`);
+          data = (_result2 = result) === null || _result2 === void 0 ? void 0 : _result2.transactionData;
         }
-        console.log(data);
         if (!data) return;
         if (isLP) {
           setData({
-            status: data.txstatus,
+            status: data.status,
             sourceChain: data.chain,
             targetChain: data.chain,
-            tssPullHash: dAppOption === DAppOptions.LPAdd ? data.releasehash : '',
-            tssReleaseHash: dAppOption === DAppOptions.LPDrain ? data.releasehash : '',
-            failReason: data.failreason,
+            tssPullHash: dAppOption === DAppOptions.LPAdd ? data.tssReleaseHash : '',
+            tssReleaseHash: dAppOption === DAppOptions.LPDrain ? data.tssReleaseHash : '',
+            failReason: data.failReason,
             amount: +data.amount,
-            sourceSymbol: data.symbol,
-            targetSymbol: data.symbol,
-            kimaTxHash: data.kimahash
+            symbol: data.symbol,
+            kimaTxHash: data.kimaTxHash
           });
         } else {
           setData({
-            status: data.txstatus,
-            sourceChain: data.originchain,
-            targetChain: data.targetchain,
-            tssPullHash: data.pullhash,
-            tssReleaseHash: data.releasehash,
-            failReason: data.failreason,
+            status: data.status,
+            sourceChain: data.originChain,
+            targetChain: data.targetChain,
+            tssPullHash: data.tssPullHash,
+            tssReleaseHash: data.tssReleaseHash,
+            failReason: data.failReason,
             amount: +data.amount,
-            sourceSymbol: data.originsymbol,
-            targetSymbol: data.targetsymbol,
-            kimaTxHash: data.kimahash
+            symbol: data.symbol,
+            kimaTxHash: data.kimaTxHash
           });
         }
         if (data.status === TransactionStatus.COMPLETED) {
@@ -2897,15 +2994,11 @@ const TransactionWidget = ({
         toast$1.error('rpc disconnected');
         console.log('rpc disconnected', e);
       }
-    };
-    const timerId = setInterval(() => {
-      updateTxData();
     }, 10000);
-    updateTxData();
     return () => {
       clearInterval(timerId);
     };
-  }, [graphqlProviderQuery, txId, dAppOption]);
+  }, [nodeProviderQuery, txId, dAppOption]);
   useEffect(() => {
     if (!data) {
       setStep(0);
@@ -2975,7 +3068,7 @@ const TransactionWidget = ({
     className: 'topbar'
   }, React.createElement("div", {
     className: 'title'
-  }, React.createElement("h3", null, "Transferring ", formatterFloat.format((data === null || data === void 0 ? void 0 : data.amount) || 0), ' ', `${(data === null || data === void 0 ? void 0 : data.sourceSymbol) || 'USDK'} → ${(data === null || data === void 0 ? void 0 : data.targetSymbol) || 'USDK'}`, "\u00A0\u00A0", `(${percent}%)`)), !minimized ? React.createElement("div", {
+  }, React.createElement("h3", null, "Transferring ", formatterFloat.format((data === null || data === void 0 ? void 0 : data.amount) || 0), ' ', (data === null || data === void 0 ? void 0 : data.symbol) || 'USDK', "\u00A0\u00A0", `(${percent}%)`)), !minimized ? React.createElement("div", {
     className: 'control-buttons'
   }, React.createElement("button", {
     className: 'icon-button',
@@ -3090,12 +3183,12 @@ const SingleForm = ({
   const compliantOption = useSelector(selectCompliantOption);
   const targetCompliant = useSelector(selectTargetCompliant);
   const transactionOption = useSelector(selectTransactionOption);
+  const selectedCoin = useSelector(selectSelectedToken);
   const sourceNetwork = useSelector(selectSourceChain);
   const targetNetwork = useSelector(selectTargetChain);
   const [amountValue, setAmountValue] = useState('');
   const amount = useSelector(selectAmount);
-  const targetCurrency = useSelector(selectTargetCurrency);
-  const TargetIcon = ((_COIN_LIST = COIN_LIST[targetCurrency || 'USDK']) === null || _COIN_LIST === void 0 ? void 0 : _COIN_LIST.icon) || COIN_LIST['USDK'].icon;
+  const Icon = ((_COIN_LIST = COIN_LIST[selectedCoin || 'USDK']) === null || _COIN_LIST === void 0 ? void 0 : _COIN_LIST.icon) || COIN_LIST['USDK'].icon;
   const errorMessage = useMemo(() => compliantOption && targetCompliant !== 'low' ? `Target address has ${targetCompliant} risk` : '', [compliantOption, targetCompliant]);
   useEffect(() => {
     if (!errorMessage) return;
@@ -3114,7 +3207,7 @@ const SingleForm = ({
     className: 'form-item'
   }, React.createElement("span", {
     className: 'label'
-  }, "Source Network:"), React.createElement(NetworkDropdown, null), React.createElement(CoinDropdown, null)), React.createElement("div", {
+  }, "Source Network"), React.createElement(NetworkDropdown, null)), React.createElement("div", {
     className: `dynamic-area ${sourceNetwork === ChainName.FIAT ? 'reverse' : ''}`
   }, React.createElement("div", {
     className: 'form-item wallet-button-item'
@@ -3125,14 +3218,12 @@ const SingleForm = ({
   }, React.createElement("span", {
     className: 'label'
   }, "Target Network:"), React.createElement(NetworkDropdown, {
-    isSourceChain: false
-  }), React.createElement(CoinDropdown, {
-    isSourceChain: false
+    isOriginChain: false
   }))), mode === ModeOptions.bridge && sourceNetwork !== ChainName.FIAT ? targetNetwork === ChainName.FIAT ? React.createElement(BankInput, null) : React.createElement("div", {
     className: `form-item ${theme.colorMode}`
   }, React.createElement("span", {
     className: 'label'
-  }, "Target Address:"), React.createElement(AddressInput, null)) : null, mode === ModeOptions.bridge ? React.createElement("div", {
+  }, "Target Address:"), React.createElement(AddressInput, null)) : null, "//TODO: Add dropdown for bank account selection", mode === ModeOptions.bridge || mode === ModeOptions.onramp ? React.createElement("div", {
     className: `form-item ${theme.colorMode}`
   }, React.createElement("span", {
     className: 'label'
@@ -3147,7 +3238,7 @@ const SingleForm = ({
       setAmountValue(e.target.value);
       dispatch(setAmount(_amount.toFixed(decimal)));
     }
-  }))) : React.createElement("div", {
+  }), React.createElement(CoinDropdown, null))) : React.createElement("div", {
     className: `form-item ${theme.colorMode}`
   }, React.createElement("span", {
     className: 'label'
@@ -3155,7 +3246,7 @@ const SingleForm = ({
     className: `amount-label ${theme.colorMode}`
   }, React.createElement("span", null, (transactionOption === null || transactionOption === void 0 ? void 0 : transactionOption.amount) || ''), React.createElement("div", {
     className: 'coin-wrapper'
-  }, React.createElement(TargetIcon, null), targetCurrency))), mode === ModeOptions.bridge && serviceFee > 0 ? React.createElement(CustomCheckbox, {
+  }, React.createElement(Icon, null), selectedCoin))), mode === ModeOptions.bridge && serviceFee > 0 ? React.createElement(CustomCheckbox, {
     text: sourceNetwork === ChainName.BTC ? `Deduct ${formatterFloat.format(serviceFee)} BTC fee` : `Deduct $${formatterFloat.format(serviceFee)} fee`,
     checked: feeDeduct,
     setCheck: value => dispatch(setFeeDeduct(value))
@@ -3164,6 +3255,36 @@ const SingleForm = ({
   }, React.createElement("span", {
     className: 'label'
   }, "Expire Time:"), React.createElement(ExpireTimeDropdown, null)) : null);
+};
+
+const CoinSelect = () => {
+  const dispatch = useDispatch();
+  const theme = useSelector(selectTheme);
+  const mode = useSelector(selectMode);
+  const selectedCoin = useSelector(selectSelectedToken);
+  const sourceNetwork = useSelector(selectSourceChain);
+  const targetNetwork = useSelector(selectTargetChain);
+  const [amountValue, setAmountValue] = useState('');
+  const Icon = COIN_LIST[selectedCoin || 'USDK'].icon;
+  return React.createElement("div", {
+    className: `coin-select`
+  }, React.createElement("p", null, "Select Amount of Token for Funding"), React.createElement("div", {
+    className: `amount-input ${theme.colorMode}`
+  }, React.createElement("span", null, "Amount:"), React.createElement("div", {
+    className: 'input-wrapper'
+  }, React.createElement("input", {
+    type: 'number',
+    value: amountValue || '',
+    readOnly: mode === ModeOptions.payment,
+    onChange: e => {
+      const _amount = +e.target.value;
+      const decimal = sourceNetwork === ChainName.BTC || targetNetwork === ChainName.BTC ? 8 : 2;
+      setAmountValue(e.target.value);
+      dispatch(setAmount(_amount.toFixed(decimal)));
+    }
+  }), React.createElement("div", {
+    className: 'coin-label'
+  }, React.createElement(Icon, null), React.createElement("span", null, selectedCoin)))));
 };
 
 function useServiceFee(isConfirming = false, feeURL) {
@@ -6833,7 +6954,7 @@ function useAllowance({
     address: tronAddress,
     signTransaction: signTronTransaction
   } = useWallet$1();
-  const selectedCoin = useSelector(selectSourceCurrency);
+  const selectedCoin = useSelector(selectSelectedToken);
   const tokenOptions = useSelector(selectTokenOptions);
   const tokenAddress = useMemo(() => {
     if (isEmptyObject(tokenOptions) || sourceChain === ChainName.FIAT) return '';
@@ -7000,6 +7121,15 @@ function useAllowance({
     allowance
   }), [isApproved, poolAddress, approve, allowance]);
 }
+
+const AddressInputWizard = () => {
+  const theme = useSelector(selectTheme);
+  return React.createElement("div", {
+    className: `coin-select`
+  }, React.createElement("p", null, "Select Target Address for Funding"), React.createElement("div", {
+    className: `address-input ${theme.colorMode}`
+  }, React.createElement("span", null, "Target Address:"), React.createElement(AddressInput, null)));
+};
 
 const SolanaWalletConnectModal = () => {
   const dispatch = useDispatch();
@@ -11169,6 +11299,244 @@ async function broadcastTransaction(rawHex, networkSubpath = '') {
   }
 }
 
+const ConfirmOnrampDetails = () => {
+  const theme = useSelector(selectTheme);
+  const amount = useSelector(selectAmount);
+  const targetNetwork = useSelector(selectTargetChain);
+  const {
+    isReady,
+    walletAddress
+  } = useIsWalletReady();
+  const targetAddress = useSelector(selectTargetAddress);
+  const targetNetworkOption = useMemo(() => networkOptions.filter(network => network.id === targetNetwork)[0], [networkOptions, targetNetwork]);
+  const selectedCoin = useSelector(selectSelectedToken);
+  const selectedAccount = useSelector(selectSelectedAccount);
+  const selectedBankAccount = useSelector(selectSelectedBankAccount);
+  const sourceWalletAddress = useMemo(() => {
+    return getShortenedAddress(walletAddress || '');
+  }, [walletAddress]);
+  return React.createElement("div", {
+    className: `confirm-details ${theme.colorMode}`
+  }, React.createElement("div", {
+    className: 'detail-item'
+  }, React.createElement("span", {
+    className: 'label'
+  }, "Target wallet:"), React.createElement("p", null, isReady ? sourceWalletAddress : getShortenedAddress(targetAddress)), React.createElement("span", {
+    className: 'kima-card-network-label'
+  }, React.createElement(targetNetworkOption.icon, null), targetNetworkOption.label)), React.createElement("div", {
+    className: 'detail-item'
+  }, React.createElement("span", {
+    className: 'label'
+  }, "Amount:"), React.createElement("p", null, parseFloat(amount) - 1, " ", selectedCoin, " (1 ", selectedCoin, " fee)")), React.createElement("div", {
+    className: 'detail-item'
+  }, React.createElement("span", {
+    className: 'label'
+  }, "Account:"), React.createElement("p", null, selectedAccount.name)), React.createElement("div", {
+    className: 'detail-item'
+  }, React.createElement("span", {
+    className: 'label'
+  }, "Bank account:"), React.createElement("p", null, selectedBankAccount.name)), React.createElement("div", {
+    className: 'detail-item'
+  }, React.createElement("span", {
+    className: 'label'
+  }, "New balance:"), React.createElement("p", null, selectedBankAccount.balance - parseFloat(amount), " EUR")));
+};
+
+const AccountDropdown = () => {
+  const ref = useRef();
+  const dispatch = useDispatch();
+  const [collapsed, setCollapsed] = useState(true);
+  const accounts = useSelector(selectAccounts);
+  const selectedAccount = useSelector(selectSelectedAccount);
+  const theme = useSelector(selectTheme);
+  useEffect(() => {
+    const bodyMouseDowntHandler = e => {
+      if (ref !== null && ref !== void 0 && ref.current && !ref.current.contains(e.target)) {
+        setCollapsed(true);
+      }
+    };
+    document.addEventListener('mousedown', bodyMouseDowntHandler);
+    return () => {
+      document.removeEventListener('mousedown', bodyMouseDowntHandler);
+    };
+  }, [setCollapsed]);
+  const handleSelectAccount = ({
+    target
+  }) => {
+    console.log(target.id);
+    const account = accounts.find(account => account.accountId === target.id);
+    dispatch(setSelectedAccount(account));
+    dispatch(setSelectedBankAccount(account === null || account === void 0 ? void 0 : account.bankAccounts[0]));
+  };
+  return React.createElement("div", {
+    className: `coin-dropdown ${theme.colorMode} ${collapsed ? 'collapsed' : ''}`,
+    onClick: () => setCollapsed(prev => !prev),
+    ref: ref
+  }, React.createElement("div", {
+    className: 'coin-wrapper'
+  }, selectedAccount ? selectedAccount.name : React.createElement(Loading180Ring, {
+    width: 24,
+    height: 24,
+    fill: 'white'
+  })), React.createElement("div", {
+    className: `coin-menu ${theme.colorMode} ${collapsed ? 'collapsed' : ''}`
+  }, accounts.map(account => {
+    if ((account === null || account === void 0 ? void 0 : account.accountId) !== (selectedAccount === null || selectedAccount === void 0 ? void 0 : selectedAccount.accountId)) return React.createElement("div", {
+      className: 'coin-item',
+      key: account === null || account === void 0 ? void 0 : account.accountId
+    }, React.createElement("p", {
+      id: account === null || account === void 0 ? void 0 : account.accountId,
+      onClick: handleSelectAccount
+    }, account === null || account === void 0 ? void 0 : account.name));
+  })));
+};
+
+const BankAccountDropdown = () => {
+  const ref = useRef();
+  const dispatch = useDispatch();
+  const [collapsed, setCollapsed] = useState(true);
+  const selectedAccount = useSelector(selectSelectedAccount);
+  const selectedBankAccount = useSelector(selectSelectedBankAccount);
+  const theme = useSelector(selectTheme);
+  useEffect(() => {
+    const bodyMouseDowntHandler = e => {
+      if (ref !== null && ref !== void 0 && ref.current && !ref.current.contains(e.target)) {
+        setCollapsed(true);
+      }
+    };
+    document.addEventListener('mousedown', bodyMouseDowntHandler);
+    return () => {
+      document.removeEventListener('mousedown', bodyMouseDowntHandler);
+    };
+  }, [setCollapsed]);
+  const handleSelectBankAccount = ({
+    target
+  }) => {
+    console.log(target.id);
+    const bankAccount = selectedAccount.bankAccounts.find(availableBankAccount => availableBankAccount.id === target.id);
+    dispatch(setSelectedBankAccount(bankAccount));
+  };
+  return React.createElement("div", {
+    className: `coin-dropdown ${theme.colorMode} ${collapsed ? 'collapsed' : ''}`,
+    onClick: () => setCollapsed(prev => !prev),
+    ref: ref
+  }, React.createElement("div", {
+    className: 'coin-wrapper'
+  }, selectedBankAccount ? selectedBankAccount.name : React.createElement(Loading180Ring, {
+    width: 24,
+    height: 24,
+    fill: 'white'
+  })), React.createElement("div", {
+    className: `coin-menu ${theme.colorMode} ${collapsed ? 'collapsed' : ''}`
+  }, selectedAccount === null || selectedAccount === void 0 ? void 0 : selectedAccount.bankAccounts.map(bankAccount => {
+    if ((bankAccount === null || bankAccount === void 0 ? void 0 : bankAccount.accountId) !== (selectedAccount === null || selectedAccount === void 0 ? void 0 : selectedAccount.accountId)) return React.createElement("div", {
+      className: 'coin-item',
+      key: bankAccount === null || bankAccount === void 0 ? void 0 : bankAccount.accountId
+    }, React.createElement("p", {
+      id: bankAccount === null || bankAccount === void 0 ? void 0 : bankAccount.accountId,
+      onClick: handleSelectBankAccount
+    }, bankAccount === null || bankAccount === void 0 ? void 0 : bankAccount.name));
+  })));
+};
+
+const OnrampForm = ({
+  paymentTitleOption
+}) => {
+  var _COIN_LIST;
+  const dispatch = useDispatch();
+  const mode = useSelector(selectMode);
+  const theme = useSelector(selectTheme);
+  const feeDeduct = useSelector(selectFeeDeduct);
+  const serviceFee = useSelector(selectServiceFee);
+  const compliantOption = useSelector(selectCompliantOption);
+  const targetCompliant = useSelector(selectTargetCompliant);
+  const transactionOption = useSelector(selectTransactionOption);
+  const selectedCoin = useSelector(selectSelectedToken);
+  const sourceNetwork = useSelector(selectSourceChain);
+  const targetNetwork = useSelector(selectTargetChain);
+  const selectedBankAccount = useSelector(selectSelectedBankAccount);
+  const [amountValue, setAmountValue] = useState('');
+  const amount = useSelector(selectAmount);
+  const {
+    isReady
+  } = useIsWalletReady();
+  const Icon = ((_COIN_LIST = COIN_LIST[selectedCoin || 'USDK']) === null || _COIN_LIST === void 0 ? void 0 : _COIN_LIST.icon) || COIN_LIST['USDK'].icon;
+  const errorMessage = useMemo(() => compliantOption && targetCompliant !== 'low' ? `Target address has ${targetCompliant} risk` : '', [compliantOption, targetCompliant]);
+  useEffect(() => {
+    if (!errorMessage) return;
+    toast$1.error(errorMessage);
+  }, [errorMessage]);
+  useEffect(() => {
+    if (amountValue) return;
+    setAmountValue(amount);
+  }, [amount]);
+  return React.createElement("div", {
+    className: 'single-form'
+  }, React.createElement("p", {
+    className: 'payment-title',
+    style: paymentTitleOption === null || paymentTitleOption === void 0 ? void 0 : paymentTitleOption.style
+  }, paymentTitleOption === null || paymentTitleOption === void 0 ? void 0 : paymentTitleOption.title), React.createElement("div", {
+    className: 'form-item'
+  }, React.createElement("span", {
+    className: 'label'
+  }, "Target Network"), React.createElement(NetworkDropdown, null)), React.createElement("div", {
+    className: 'form-item wallet-button-item'
+  }, React.createElement("span", {
+    className: 'label'
+  }, "Connect wallet:"), React.createElement(WalletButton, null)), !isReady && React.createElement("div", null, React.createElement("h4", {
+    className: 'text-center'
+  }, "or"), React.createElement("div", {
+    className: `form-item ${theme.colorMode}`
+  }, React.createElement("span", {
+    className: 'label'
+  }, "Input Address:"), React.createElement(AddressInput, null))), React.createElement("h3", {
+    className: 'text-center'
+  }, "Select bank account"), React.createElement("div", {
+    className: `form-item ${theme.colorMode}`
+  }, React.createElement("span", {
+    className: 'label'
+  }, "Account:"), React.createElement(AccountDropdown, null)), React.createElement("div", {
+    className: `form-item ${theme.colorMode}`
+  }, React.createElement("span", {
+    className: 'label'
+  }, "Bank account:"), React.createElement(BankAccountDropdown, null)), React.createElement("div", {
+    className: `form-item ${theme.colorMode}`
+  }, React.createElement("span", {
+    className: 'label'
+  }, "Balance:"), (selectedBankAccount === null || selectedBankAccount === void 0 ? void 0 : selectedBankAccount.balance) !== undefined ? `${selectedBankAccount.balance} EUR` : '...'), mode === ModeOptions.bridge || mode === ModeOptions.onramp ? React.createElement("div", {
+    className: `form-item ${theme.colorMode}`
+  }, React.createElement("span", {
+    className: 'label'
+  }, "Amount:"), React.createElement("div", {
+    className: 'amount-label-container'
+  }, React.createElement("input", {
+    type: 'number',
+    value: amountValue || '',
+    onChange: e => {
+      let _amount = +e.target.value;
+      const decimal = sourceNetwork === ChainName.BTC || targetNetwork === ChainName.BTC ? 8 : 2;
+      setAmountValue(e.target.value);
+      dispatch(setAmount(_amount.toFixed(decimal)));
+    }
+  }), React.createElement(CoinDropdown, null))) : React.createElement("div", {
+    className: `form-item ${theme.colorMode}`
+  }, React.createElement("span", {
+    className: 'label'
+  }, "Amount:"), React.createElement("div", {
+    className: `amount-label ${theme.colorMode}`
+  }, React.createElement("span", null, (transactionOption === null || transactionOption === void 0 ? void 0 : transactionOption.amount) || ''), React.createElement("div", {
+    className: 'coin-wrapper'
+  }, React.createElement(Icon, null), selectedCoin))), mode === ModeOptions.bridge && serviceFee > 0 ? React.createElement(CustomCheckbox, {
+    text: sourceNetwork === ChainName.BTC ? `Deduct ${formatterFloat.format(serviceFee)} BTC fee` : `Deduct $${formatterFloat.format(serviceFee)} fee`,
+    checked: feeDeduct,
+    setCheck: value => dispatch(setFeeDeduct(value))
+  }) : null, sourceNetwork === ChainName.BTC || targetNetwork === ChainName.BTC ? React.createElement("div", {
+    className: `form-item ${theme.colorMode}`
+  }, React.createElement("span", {
+    className: 'label'
+  }, "Expire Time:"), React.createElement(ExpireTimeDropdown, null)) : null);
+};
+
 const TransferWidget = ({
   theme,
   feeURL,
@@ -11178,6 +11546,7 @@ const TransferWidget = ({
 }) => {
   const dispatch = useDispatch();
   const mainRef = useRef(null);
+  const [isWizard, setWizard] = useState(false);
   const [formStep, setFormStep] = useState(0);
   const [wizardStep, setWizardStep] = useState(0);
   const mode = useSelector(selectMode);
@@ -11193,8 +11562,7 @@ const TransferWidget = ({
   const errorHandler = useSelector(selectErrorHandler);
   const keplrHandler = useSelector(selectKeplrHandler);
   const closeHandler = useSelector(selectCloseHandler);
-  const sourceCurrency = useSelector(selectSourceCurrency);
-  const targetCurrency = useSelector(selectTargetCurrency);
+  const selectedToken = useSelector(selectSelectedToken);
   const backendUrl = useSelector(selectBackendUrl);
   const nodeProviderQuery = useSelector(selectNodeProviderQuery);
   const bankDetails = useSelector(selectBankDetails);
@@ -11203,6 +11571,8 @@ const TransferWidget = ({
   const bitcoinAddress = useSelector(selectBitcoinAddress);
   const bitcoinPubkey = useSelector(selectBitcoinPubkey);
   const transactionOption = useSelector(selectTransactionOption);
+  const selectedAccount = useSelector(selectSelectedAccount);
+  let selectedBankAccount = useSelector(selectSelectedBankAccount);
   const [isCancellingApprove, setCancellingApprove] = useState(false);
   const [isApproving, setApproving] = useState(false);
   const [isSubmitting, setSubmitting] = useState(false);
@@ -11292,7 +11662,11 @@ const TransferWidget = ({
     })();
   }, [nodeProviderQuery]);
   useEffect(() => {
-    if (!isReady) {
+    console.log('selected token use effect: ', selectedToken);
+    dispatch(setSelectedToken(selectedToken));
+  }, [selectedToken]);
+  useEffect(() => {
+    if (!isReady && mode !== ModeOptions.onramp) {
       if (formStep > 0) setFormStep(0);
       if (wizardStep > 0) setWizardStep(1);
     }
@@ -11303,11 +11677,11 @@ const TransferWidget = ({
     for (let i = 0; i < poolBalance.length; i++) {
       if (poolBalance[i].chainName === targetChain) {
         for (let j = 0; j < poolBalance[i].balance.length; j++) {
-          if (poolBalance[i].balance[j].tokenSymbol !== targetCurrency) continue;
+          if (poolBalance[i].balance[j].tokenSymbol !== selectedToken) continue;
           if (+poolBalance[i].balance[j].amount >= +amount + fee) {
             return true;
           }
-          const symbol = targetCurrency;
+          const symbol = selectedToken;
           const errorString = `Tried to transfer ${amount} ${symbol}, but ${CHAIN_NAMES_TO_STRING[targetChain]} pool has only ${+poolBalance[i].balance[j].amount} ${symbol}`;
           console.log(errorString);
           toast$1.error(errorString);
@@ -11424,6 +11798,45 @@ const TransferWidget = ({
     });
   };
   const handleSubmit = async () => {
+    if (mode === ModeOptions.onramp) {
+      setSubmitting(true);
+      const params = {
+        originAddress: walletAddress,
+        originChain: 'FIAT',
+        targetAddress: targetAddress || walletAddress,
+        targetChain: targetChain,
+        symbol: selectedToken,
+        amount,
+        fee: 1,
+        htlcCreationHash: '',
+        htlcCreationVout: 0,
+        htlcExpirationTimestamp: '0',
+        htlcVersion: '',
+        senderPubKey: ''
+      };
+      const onrampParams = JSON.stringify({
+        ...params,
+        onramp: true,
+        sourceAccountId: selectedAccount === null || selectedAccount === void 0 ? void 0 : selectedAccount.accountId,
+        sourceBankAccountId: selectedBankAccount === null || selectedBankAccount === void 0 ? void 0 : selectedBankAccount.id
+      });
+      console.log('onramp params: ', onrampParams);
+      await fetchWrapper.post(`${backendUrl}/auth`, JSON.stringify(params));
+      const result = await fetchWrapper.post(`${backendUrl}/submit/onramp`, onrampParams);
+      if ((result === null || result === void 0 ? void 0 : result.code) !== 0) {
+        toast$1.error("Something went wrong");
+      }
+      const txId = result.kimaTxHash;
+      let selectedBankAccountCopy = {
+        ...selectedBankAccount
+      };
+      selectedBankAccountCopy.balance -= parseFloat(amount);
+      dispatch(setSelectedBankAccount(selectedBankAccountCopy));
+      setSubmitting(false);
+      dispatch(setTxId(txId));
+      dispatch(setSubmitted(true));
+      return;
+    }
     if (fee < 0) {
       toast$1.error('Fee is not calculated!');
       errorHandler('Fee is not calculated!');
@@ -11511,8 +11924,7 @@ const TransferWidget = ({
           originChain: sourceChain,
           targetAddress: mode === ModeOptions.payment ? transactionOption === null || transactionOption === void 0 ? void 0 : transactionOption.targetAddress : targetAddress,
           targetChain: targetChain,
-          originSymbol: sourceCurrency,
-          targetSymbol: targetCurrency,
+          symbol: selectedToken,
           amount: feeDeduct ? (+amount - fee).toFixed(8) : amount,
           fee: feeParam,
           htlcCreationHash: btcHash,
@@ -11527,8 +11939,7 @@ const TransferWidget = ({
           originChain: sourceChain,
           targetAddress: mode === ModeOptions.payment ? transactionOption === null || transactionOption === void 0 ? void 0 : transactionOption.targetAddress : targetAddress,
           targetChain: targetChain,
-          originSymbol: sourceCurrency,
-          targetSymbol: targetCurrency,
+          symbol: selectedToken,
           amount: feeDeduct ? (+amount - fee).toFixed(8) : amount,
           fee: feeParam,
           htlcCreationHash: '',
@@ -11538,7 +11949,7 @@ const TransferWidget = ({
           senderPubKey: ''
         });
       }
-      console.log(params);
+      console.log('tx params: ', params);
       await fetchWrapper.post(`${backendUrl}/auth`, params);
       const result = await fetchWrapper.post(`${backendUrl}/submit`, params);
       console.log(result);
@@ -11565,14 +11976,51 @@ const TransferWidget = ({
     } catch (e) {
       errorHandler(e);
       setSubmitting(false);
-      console.log((e === null || e === void 0 ? void 0 : e.status) !== 500 ? 'rpc disconnected' : '', e);
+      console.log((e === null || e === void 0 ? void 0 : e.status) !== 500 ? 'rpc disconnected here' : '', e);
       toast$1.error('rpc disconnected');
       toast$1.error('Failed to submit transaction');
     }
   };
   const onNext = () => {
     var _mainRef$current;
-    if ( !formStep) {
+    if (mode === ModeOptions.onramp) {
+      if (formStep === 0) {
+        if (!isReady && (targetAddress === null || targetAddress === void 0 ? void 0 : targetAddress.length) < 10) return toast$1.error('Invalid address');
+        if (parseFloat(amount) < 0 || (selectedBankAccount === null || selectedBankAccount === void 0 ? void 0 : selectedBankAccount.balance) < parseFloat(amount)) return toast$1.error('Invalid amount');
+        if (!targetChain) return toast$1.error('Invalid network selected');
+        setFormStep(1);
+        return;
+      }
+    }
+    if (isWizard && wizardStep < 5) {
+      if (wizardStep == 1 && !isReady) {
+        toast$1.error('Wallet is not connected!');
+        errorHandler('Wallet is not connected!');
+        return;
+      }
+      if (wizardStep === 3) {
+        if (targetAddress) {
+          setWizardStep(4);
+        }
+        return;
+      }
+      if (wizardStep === 4) {
+        if (fee >= 0 && +amount > 0) {
+          setWizardStep(5);
+        }
+        return;
+      }
+      if (fee > 0 && fee > +amount && feeDeduct) {
+        toast$1.error('Fee is greater than amount to transfer!');
+        errorHandler('Fee is greater than amount to transfer!');
+        return;
+      }
+      if (mode === ModeOptions.payment && wizardStep === 1 && fee >= 0 && (!compliantOption || sourceCompliant === 'low' && targetCompliant === 'low')) {
+        setConfirming(true);
+        setWizardStep(5);
+      } else setWizardStep(step => step + 1);
+    }
+    if (!isWizard && !formStep) {
       if (isReady) {
         if (targetChain === ChainName.FIAT) {
           if (!bankDetails.iban) {
@@ -11591,7 +12039,7 @@ const TransferWidget = ({
           errorHandler('Invalid amount!');
           return;
         }
-        if (fee < 0) {
+        if (fee < 0 && mode !== ModeOptions.onramp) {
           toast$1.error('Fee is not calculated!');
           errorHandler('Fee is not calculated!');
           return;
@@ -11612,23 +12060,30 @@ const TransferWidget = ({
         errorHandler('Wallet is not connected!');
       }
     }
-    if (  formStep > 0) {
+    if (isWizard && wizardStep === 5 || !isWizard && formStep > 0) {
       handleSubmit();
     }
     (_mainRef$current = mainRef.current) === null || _mainRef$current === void 0 ? void 0 : _mainRef$current.click();
   };
   const onBack = () => {
     if (isApproving || isSubmitting || isSigning) return;
-    if ( formStep > 0) {
+    if (isWizard && wizardStep > 0) {
+      if (mode === ModeOptions.payment && wizardStep === 5) setWizardStep(1);else setWizardStep(step => step - 1);
+      setConfirming(false);
+    }
+    if (!isWizard && formStep > 0) {
       setFormStep(0);
       setConfirming(false);
     }
-    if (  formStep === 0) {
+    if (isWizard && wizardStep === 0 || !isWizard && formStep === 0) {
       closeHandler();
     }
   };
   const getButtonLabel = () => {
-    if (  formStep === 1) {
+    if (isWizard && wizardStep === 5 || !isWizard && formStep === 1) {
+      if (mode === ModeOptions.onramp) {
+        return isSubmitting ? 'Submitting...' : 'Submit';
+      }
       if (sourceChain === ChainName.FIAT || targetChain === ChainName.FIAT) {
         if (isVerifying) return 'KYC Verifying...';
         if (kycStatus !== 'approved') {
@@ -11706,7 +12161,7 @@ const TransferWidget = ({
     className: 'topbar'
   }, React.createElement("div", {
     className: 'title'
-  }, React.createElement("h3", null,   formStep > 0 ? titleOption !== null && titleOption !== void 0 && titleOption.confirmTitle ? titleOption === null || titleOption === void 0 ? void 0 : titleOption.confirmTitle : 'Transfer Details' : titleOption !== null && titleOption !== void 0 && titleOption.initialTitle ? titleOption === null || titleOption === void 0 ? void 0 : titleOption.initialTitle : 'New Transfer')), React.createElement("div", {
+  }, React.createElement("h3", null, mode === ModeOptions.onramp ? 'Onramp transaction' : isWizard && wizardStep === 3 || !isWizard && formStep > 0 ? titleOption !== null && titleOption !== void 0 && titleOption.confirmTitle ? titleOption === null || titleOption === void 0 ? void 0 : titleOption.confirmTitle : 'Transfer Details' : titleOption !== null && titleOption !== void 0 && titleOption.initialTitle ? titleOption === null || titleOption === void 0 ? void 0 : titleOption.initialTitle : 'New Transfer')), React.createElement("div", {
     className: 'control-buttons'
   }, pendingTxs > 0 ? React.createElement(TxButton, {
     theme: theme
@@ -11727,11 +12182,25 @@ const TransferWidget = ({
   }))))), React.createElement("div", {
     className: 'kima-card-content',
     ref: mainRef
-  },  formStep === 0 ? React.createElement(SingleForm, {
+  }, isWizard ? mode !== ModeOptions.onramp ? wizardStep === 0 ? React.createElement(Network, null) : wizardStep === 1 ? React.createElement("div", {
+    className: 'connect-wallet-step'
+  }, React.createElement("p", null, "Connect your wallet"), React.createElement(WalletButton, {
+    errorBelow: true
+  })) : wizardStep === 2 ? React.createElement(Network, {
+    isOriginChain: false
+  }) : wizardStep === 3 ? React.createElement(AddressInputWizard, null) : wizardStep === 4 ? React.createElement(CoinSelect, null) : React.createElement(ConfirmDetails, {
+    isApproved: sourceChain === ChainName.FIAT ? isSigned : isApproved
+  }) : wizardStep === 0 ? React.createElement(Network, null) : wizardStep === 1 ? React.createElement("div", {
+    className: 'connect-wallet-step'
+  }, React.createElement("p", null, "Connect your wallet"), React.createElement(WalletButton, {
+    errorBelow: true
+  })) : wizardStep === 2 ? React.createElement(CoinSelect, null) : React.createElement(ConfirmDetails, {
+    isApproved: sourceChain === ChainName.FIAT ? isSigned : isApproved
+  }) : mode !== ModeOptions.onramp ? formStep === 0 ? React.createElement(SingleForm, {
     paymentTitleOption: paymentTitleOption
   }) : React.createElement(ConfirmDetails, {
     isApproved: sourceChain === ChainName.FIAT ? isSigned : isApproved
-  })), React.createElement("div", {
+  }) : formStep === 0 ? React.createElement(OnrampForm, null) : React.createElement(ConfirmOnrampDetails, null)), React.createElement("div", {
     className: 'kima-card-footer'
   }, React.createElement(ExternalLink, {
     to: 'https://kima.finance'
@@ -11739,14 +12208,27 @@ const TransferWidget = ({
     fill: theme.colorMode === 'light' ? 'black' : '#C5C5C5'
   })), React.createElement("div", {
     className: 'button-group'
-  }, React.createElement(SecondaryButton, {
+  }, mode !== ModeOptions.onramp && React.createElement(SecondaryButton, {
+    clickHandler: () => {
+      if (isApproving || isSubmitting || isSigning || isBTCSigning) return;
+      setWizard(prev => !prev);
+    },
+    disabled: isApproving || isSubmitting || isSigning || isBTCSigning,
+    theme: theme.colorMode,
+    style: {
+      style: {
+        width: '12em',
+        marginLeft: 'auto'
+      }
+    }
+  }, "Switch to ", isWizard ? 'Form' : 'Wizard'), React.createElement(SecondaryButton, {
     clickHandler: onBack,
     theme: theme.colorMode,
     disabled: isApproving || isSubmitting || isSigning || isBTCSigning
-  },   formStep > 0 ? 'Back' : 'Cancel'), allowance > 0 && (  formStep === 1) ? React.createElement(PrimaryButton, {
+  }, isWizard && wizardStep > 0 || !isWizard && formStep > 0 ? 'Back' : 'Cancel'), allowance > 0 && (isWizard && wizardStep === 5 || !isWizard && formStep === 1 && mode !== ModeOptions.onramp) ? React.createElement(PrimaryButton, {
     clickHandler: onCancelApprove,
     isLoading: isCancellingApprove,
-    disabled: isCancellingApprove || isApproving || isSubmitting || isSigning || isBTCSigning
+    disabled: isCancellingApprove
   }, isCancellingApprove ? 'Cancelling Approval' : 'Cancel Approve') : null, React.createElement(PrimaryButton, {
     clickHandler: onNext,
     isLoading: isApproving || isSubmitting || isSigning || isBTCSigning,
@@ -11785,6 +12267,7 @@ const KimaTransactionWidget = ({
   mode,
   txId,
   autoSwitchChain: _autoSwitchChain = true,
+  defaultToken: _defaultToken = 'USDT',
   networkOption: _networkOption = NetworkOptions.testnet,
   provider,
   dAppOption: _dAppOption = DAppOptions.None,
@@ -11797,9 +12280,8 @@ const KimaTransactionWidget = ({
   transactionOption,
   kimaBackendUrl,
   kimaNodeProviderQuery,
-  kimaExplorer: _kimaExplorer = 'https://explorer.kima.finance',
+  kimaExplorer: _kimaExplorer = 'explorer.kima.finance',
   feeURL: _feeURL = 'https://fee.kima.finance',
-  kimaGraphqlProviderQuery: _kimaGraphqlProviderQuery = 'https://graphql.kima.finance/v1/graphql',
   errorHandler: _errorHandler = () => void 0,
   closeHandler: _closeHandler = () => void 0,
   successHandler: _successHandler = () => void 0,
@@ -11824,11 +12306,11 @@ const KimaTransactionWidget = ({
     dispatch(setSwitchChainHandler(_switchChainHandler));
     dispatch(setBackendUrl(kimaBackendUrl));
     dispatch(setNodeProviderQuery(kimaNodeProviderQuery));
-    dispatch(setGraphqlProviderQuery(_kimaGraphqlProviderQuery));
     dispatch(setMode(mode));
     dispatch(setProvider(provider));
     dispatch(setDappOption(_dAppOption));
     dispatch(setWalletAutoConnect(_autoSwitchChain));
+    dispatch(setSelectedToken(_defaultToken));
     dispatch(setUseFIAT(_useFIAT));
     dispatch(setNetworkOption(_networkOption));
     if (_useFIAT) {
@@ -11843,15 +12325,29 @@ const KimaTransactionWidget = ({
         }
       })();
     }
+    if (mode === ModeOptions.onramp) {
+      (async function () {
+        try {
+          const accounts = await fetchWrapper.get(`${kimaBackendUrl}/depasify/accounts`);
+          console.log("accounts: ", accounts);
+          dispatch(setDepasifyAccounts(accounts.accountsWithBankInfo));
+          dispatch(setSelectedAccount(accounts.accountsWithBankInfo[0]));
+          dispatch(setSelectedBankAccount(accounts.accountsWithBankInfo[0].bankAccounts[0]));
+        } catch (error) {
+          console.error(error);
+          toast.error("can't get accounts from depasify");
+        }
+      })();
+    }
     if (mode === ModeOptions.payment) {
       dispatch(setTargetChain((transactionOption === null || transactionOption === void 0 ? void 0 : transactionOption.targetChain) || ChainName.ETHEREUM));
       if (_dAppOption === DAppOptions.LPAdd || _dAppOption === DAppOptions.LPDrain) {
         dispatch(setSourceChain((transactionOption === null || transactionOption === void 0 ? void 0 : transactionOption.targetChain) || ChainName.ETHEREUM));
-        dispatch(setTargetCurrency((transactionOption === null || transactionOption === void 0 ? void 0 : transactionOption.currency) || 'USDK'));
       } else {
         (async function () {
           try {
             const networks = await fetchWrapper.get(`${kimaNodeProviderQuery}/kima-finance/kima-blockchain/chains/get_available_chains/${(transactionOption === null || transactionOption === void 0 ? void 0 : transactionOption.targetChain) || ChainName.ETHEREUM}`);
+            console.log("networks available: ", networks);
             dispatch(setSourceChain(networks.Chains[0]));
           } catch (e) {
             toast.error('rpc disconnected!');
@@ -11883,6 +12379,12 @@ const KimaTransactionWidget = ({
       dispatch(setSourceChain('ETH'));
     }
   }, [_dAppOption, mode]);
+  useEffect(() => {
+    if (mode === ModeOptions.onramp) {
+      dispatch(setTargetChain(""));
+      dispatch(setSourceChain("FIAT"));
+    }
+  }, [mode]);
   return submitted ? React.createElement(TransactionWidget, {
     theme: theme
   }) : React.createElement(TransferWidget, {
@@ -11938,7 +12440,7 @@ const polygon = {
   name: 'Polygon Mainnet',
   currency: 'MATIC',
   explorerUrl: 'https://polygonscan.com',
-  rpcUrl: 'https://polygon-rpc.com/'
+  rpcUrl: 'https://polygon.llamarpc.com'
 };
 const arbitrumSepolia = {
   chainId: 421614,
@@ -11952,7 +12454,7 @@ const arbitrum = {
   name: 'Arbitrum Mainnet',
   currency: 'ETH',
   explorerUrl: 'https://arbiscan.io',
-  rpcUrl: 'https://arb1.arbitrum.io/rpc'
+  rpcUrl: 'https://arbitrum.llamarpc.com'
 };
 const optimismSepola = {
   chainId: 11155420,
@@ -11966,7 +12468,7 @@ const optimism = {
   name: 'OP Mainnet',
   currency: 'ETH',
   explorerUrl: 'https://optimistic.etherscan.io',
-  rpcUrl: 'https://mainnet.optimism.io'
+  rpcUrl: 'https://optimism.llamarpc.com'
 };
 const avalancheFuji = {
   chainId: 43113,
@@ -11995,6 +12497,13 @@ const zkEVM = {
   currency: 'ETH',
   explorerUrl: 'https://zkevm.polygonscan.com',
   rpcUrl: 'https://zkevm-rpc.com'
+};
+const agung = {
+  chainId: 9990,
+  name: 'Peaq Agung',
+  currency: 'AGNG',
+  explorerUrl: 'https://agung.subscan.io',
+  rpcUrl: 'https://rpcpc1-qa.agung.peaq.network'
 };
 const metadata = {
   name: 'Kima Transaction Widget',
@@ -12034,7 +12543,7 @@ const KimaProvider = ({
     ethersConfig: defaultConfig({
       metadata
     }),
-    chains: _networkOption === NetworkOptions.mainnet ? [ethereum, bsc, polygon, arbitrum, optimism, avalanche, zkEVM] : [ethereumSepolia, bscTestnet, polygonAmoy, arbitrumSepolia, optimismSepola, avalancheFuji, zkEVMTestnet],
+    chains: _networkOption === NetworkOptions.mainnet ? [ethereum, bsc, polygon, arbitrum, optimism, avalanche, zkEVM] : [ethereumSepolia, bscTestnet, polygonAmoy, arbitrumSepolia, optimismSepola, avalancheFuji, zkEVMTestnet, agung],
     projectId: walletConnectProjectId || 'e579511a495b5c312b572b036e60555a',
     enableAnalytics: false,
     featuredWalletIds: ['c57ca95b47569778a828d19178114f4db188b89b763c899ba0be274e97267d96', 'a797aa35c0fadbfc1a53e7f675162ed5226968b44a19ee3d24385c64d1d3c393', '4622a2b2d6af1c9844944291e5e7351a6aa24cd7b23099efac1b2fd875da31a0']

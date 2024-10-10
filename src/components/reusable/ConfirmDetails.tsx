@@ -16,8 +16,7 @@ import {
   selectTheme,
   selectTransactionOption,
   selectDappOption,
-  selectSourceCurrency,
-  selectTargetCurrency
+  selectSelectedToken
 } from '../../store/selectors'
 import { ChainName, networkOptions } from '../../utils/constants'
 import { getShortenedAddress } from '../../utils/functions'
@@ -51,8 +50,7 @@ const ConfirmDetails = ({ isApproved }: { isApproved: boolean }) => {
       )[0],
     [networkOptions, originNetwork]
   )
-  const sourceCurrency = useSelector(selectSourceCurrency)
-  const targetCurrency = useSelector(selectTargetCurrency)
+  const selectedCoin = useSelector(selectSelectedToken)
 
   const sourceWalletAddress = useMemo(() => {
     return getShortenedAddress(walletAddress || '')
@@ -124,7 +122,7 @@ const ConfirmDetails = ({ isApproved }: { isApproved: boolean }) => {
       <div className='detail-item'>
         <span className='label'>Amount:</span>
         <p>
-          {amountToShow} {sourceCurrency} → {targetCurrency}
+          {amountToShow} {selectedCoin}
         </p>
       </div>
       {targetNetwork === ChainName.FIAT ? (
@@ -142,7 +140,7 @@ const ConfirmDetails = ({ isApproved }: { isApproved: boolean }) => {
             <p>{bankDetails.recipient}</p>
           </div>
         </div>
-      ) : (
+      ) : mode !== ModeOptions.onramp ? (
         <div className='detail-item'>
           <span className='label'>Target wallet:</span>
           <p>
@@ -155,7 +153,7 @@ const ConfirmDetails = ({ isApproved }: { isApproved: boolean }) => {
             {targetNetworkOption.label}
           </span>
         </div>
-      )}
+      ): ''}
     </div>
   )
 }

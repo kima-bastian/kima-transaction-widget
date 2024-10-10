@@ -57,7 +57,7 @@ const Network = ({ isOriginChain = true }: Props) => {
   }, [networkOptions, isOriginChain, availableNetworks, dAppOption])
 
   useEffect(() => {
-    if (!nodeProviderQuery || mode !== ModeOptions.bridge) return
+    if (!nodeProviderQuery || (mode !== ModeOptions.bridge && mode !== ModeOptions.onramp)) return
     ;(async function () {
       try {
         const networks: any = await fetchWrapper.get(

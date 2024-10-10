@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+// import { Tooltip } from 'react-tooltip'
 import { CrossIcon, FooterLogo, MinimizeIcon } from '../assets/icons'
 import Progressbar from './reusable/Progressbar'
 import { ExternalLink, NetworkLabel, StepBox } from './reusable'
@@ -18,7 +19,7 @@ import { useSelector } from 'react-redux'
 import {
   selectCloseHandler,
   selectDappOption,
-  selectGraphqlProviderQuery,
+  selectNodeProviderQuery,
   selectSuccessHandler,
   selectTxId
 } from '../store/selectors'
@@ -40,106 +41,60 @@ export const TransactionWidget = ({ theme }: { theme: ThemeOptions }) => {
   const dAppOption = useSelector(selectDappOption)
   const closeHandler = useSelector(selectCloseHandler)
   const successHandler = useSelector(selectSuccessHandler)
-  const graphqlProviderQuery = useSelector(selectGraphqlProviderQuery)
+  const nodeProviderQuery = useSelector(selectNodeProviderQuery)
 
   useEffect(() => {
-    if (!graphqlProviderQuery || txId < 0) return
-
-    const updateTxData = async () => {
+    if (!nodeProviderQuery || txId < 0) return
+    const timerId = setInterval(async () => {
+      // Monitor last transaction for now until transaction_data endpoint is ready
       try {
         let data
-        // let result: any
+        let result: any
         const isLP =
           dAppOption === DAppOptions.LPAdd || dAppOption === DAppOptions.LPDrain
 
-        const result: any = await fetchWrapper.post(
-          graphqlProviderQuery,
-          JSON.stringify({
-            query: isLP
-              ? `query TransactionDetailsKima($txId: String) {
-                  liquidity_transaction_data(where: { tx_id: { _eq: ${txId.toString()} } }, limit: 1) {
-                    failreason
-                    pullfailcount
-                    pullhash
-                    releasefailcount
-                    releasehash
-                    txstatus
-                    amount
-                    creator
-                    chain
-                    providerchainaddress
-                    symbol
-                    tx_id
-                    kimahash
-                  }
-                }`
-              : `query TransactionDetailsKima($txId: String) {
-                  transaction_data(where: { tx_id: { _eq: ${txId.toString()} } }, limit: 1) {
-                    failreason
-                    pullfailcount
-                    pullhash
-                    releasefailcount
-                    releasehash
-                    txstatus
-                    amount
-                    creator
-                    originaddress
-                    originchain
-                    originsymbol
-                    targetsymbol
-                    targetaddress
-                    targetchain
-                    tx_id
-                    kimahash
-                  }
-                }`
-          })
-        )
-
-        if (
-          (isLP && !result?.data?.liquidity_transaction_data?.length) ||
-          (!isLP && !result?.data?.transaction_data?.length)
-        ) {
-          return
-        }
+        // add onramp option
 
         if (isLP) {
-          data = result?.data.liquidity_transaction_data[0]
+          result = await fetchWrapper.get(
+            `${nodeProviderQuery}/kima-finance/kima-blockchain/transaction/liquidity_transaction_data/${txId}`
+          )
+          data = result?.LiquidityTransactionData
         } else {
-          data = result?.data.transaction_data[0]
+          result = await fetchWrapper.get(
+            `${nodeProviderQuery}/kima-finance/kima-blockchain/transaction/transaction_data/${txId}`
+          )
+          data = result?.transactionData
         }
 
-        console.log(data)
         if (!data) return
 
         // Status of last transaction
         if (isLP) {
           setData({
-            status: data.txstatus,
+            status: data.status,
             sourceChain: data.chain,
             targetChain: data.chain,
             tssPullHash:
-              dAppOption === DAppOptions.LPAdd ? data.releasehash : '',
+              dAppOption === DAppOptions.LPAdd ? data.tssReleaseHash : '',
             tssReleaseHash:
-              dAppOption === DAppOptions.LPDrain ? data.releasehash : '',
-            failReason: data.failreason,
+              dAppOption === DAppOptions.LPDrain ? data.tssReleaseHash : '',
+            failReason: data.failReason,
             amount: +data.amount,
-            sourceSymbol: data.symbol,
-            targetSymbol: data.symbol,
-            kimaTxHash: data.kimahash
+            symbol: data.symbol,
+            kimaTxHash: data.kimaTxHash
           })
         } else {
           setData({
-            status: data.txstatus,
-            sourceChain: data.originchain,
-            targetChain: data.targetchain,
-            tssPullHash: data.pullhash,
-            tssReleaseHash: data.releasehash,
-            failReason: data.failreason,
+            status: data.status,
+            sourceChain: data.originChain,
+            targetChain: data.targetChain,
+            tssPullHash: data.tssPullHash,
+            tssReleaseHash: data.tssReleaseHash,
+            failReason: data.failReason,
             amount: +data.amount,
-            sourceSymbol: data.originsymbol,
-            targetSymbol: data.targetsymbol,
-            kimaTxHash: data.kimahash
+            symbol: data.symbol,
+            kimaTxHash: data.kimaTxHash
           })
         }
 
@@ -155,19 +110,12 @@ export const TransactionWidget = ({ theme }: { theme: ThemeOptions }) => {
         toast.error('rpc disconnected')
         console.log('rpc disconnected', e)
       }
-    }
-
-    const timerId = setInterval(() => {
-      // Monitor last transaction for now until transaction_data endpoint is ready
-      updateTxData()
     }, 10000)
-
-    updateTxData()
 
     return () => {
       clearInterval(timerId)
     }
-  }, [graphqlProviderQuery, txId, dAppOption])
+  }, [nodeProviderQuery, txId, dAppOption])
 
   useEffect(() => {
     if (!data) {
@@ -249,8 +197,7 @@ export const TransactionWidget = ({ theme }: { theme: ThemeOptions }) => {
             <div className='title'>
               <h3>
                 Transferring {formatterFloat.format(data?.amount || 0)}{' '}
-                {`${data?.sourceSymbol || 'USDK'} → ${data?.targetSymbol || 'USDK'}`}
-                &nbsp;&nbsp;
+                {data?.symbol || 'USDK'}&nbsp;&nbsp;
                 {`(${percent}%)`}
               </h3>
             </div>

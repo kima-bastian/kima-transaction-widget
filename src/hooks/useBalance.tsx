@@ -16,13 +16,13 @@ import {
 } from '../utils/constants'
 import ERC20ABI from '../utils/ethereum/erc20ABI.json'
 import {
+  selectSelectedToken,
   selectErrorHandler,
   selectSourceChain,
   selectTokenOptions,
   selectBitcoinAddress,
   selectBackendUrl,
-  selectNetworkOption,
-  selectSourceCurrency
+  selectNetworkOption
 } from '../store/selectors'
 import { getOrCreateAssociatedTokenAccount } from '../utils/solana/getOrCreateAssociatedTokenAccount'
 import { PublicKey } from '@solana/web3.js'
@@ -88,20 +88,20 @@ export default function useBalance() {
   const btcAddress = useSelector(selectBitcoinAddress)
   const { connection } = useConnection()
   const kimaBackendUrl = useSelector(selectBackendUrl)
-  const sourceCurrency = useSelector(selectSourceCurrency)
+  const selectedCoin = useSelector(selectSelectedToken)
   const tokenOptions = useSelector(selectTokenOptions)
   const tokenAddress = useMemo(() => {
     if (isEmptyObject(tokenOptions) || sourceChain === ChainName.FIAT) return ''
 
     if (tokenOptions && typeof tokenOptions === 'object') {
-      const coinOptions = tokenOptions[sourceCurrency]
+      const coinOptions = tokenOptions[selectedCoin]
       if (coinOptions && typeof coinOptions === 'object') {
-        return tokenOptions[sourceCurrency][sourceChain]
+        return tokenOptions[selectedCoin][sourceChain]
       }
     }
 
     return ''
-  }, [sourceCurrency, sourceChain, tokenOptions])
+  }, [selectedCoin, sourceChain, tokenOptions])
 
   useEffect(() => {
     setBalance(0)
