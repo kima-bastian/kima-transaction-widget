@@ -1053,7 +1053,8 @@ const initialState = {
   expireTime: '1 hour',
   accounts: [],
   selectedAccount: null,
-  selectedBankAccount: null
+  selectedBankAccount: null,
+  validTransactionOptionTargetNetwork: null
 };
 const optionSlice = createSlice({
   name: 'option',
@@ -1235,6 +1236,9 @@ const optionSlice = createSlice({
     },
     setRedirectUrl: (state, action) => {
       state.redirectUrl = action.payload;
+    },
+    setValidTransactionOptionTransactionOption: (state, action) => {
+      state.validTransactionOptionTargetNetwork = action.payload;
     }
   }
 });
@@ -1292,7 +1296,8 @@ const {
   setDepasifyAccounts,
   setSelectedAccount,
   setSelectedBankAccount,
-  setRedirectUrl
+  setRedirectUrl,
+  setValidTransactionOptionTransactionOption
 } = optionSlice.actions;
 var optionReducer = optionSlice.reducer;
 
@@ -1355,6 +1360,7 @@ const selectPendingTxData = state => state.option.pendingTxData;
 const selectSelectedAccount = state => state.option.selectedAccount;
 const selectSelectedBankAccount = state => state.option.selectedBankAccount;
 const selectAccounts = state => state.option.accounts;
+const selectValidTransactionOptionTargetNetwork = state => state.option.validTransactionOptionTargetNetwork;
 
 const Loading180Ring = ({
   width: _width = 24,
@@ -1538,13 +1544,18 @@ function useNetworkOptions() {
   const dispatch = useDispatch();
   const useFIAT = useSelector(selectUseFIAT);
   const nodeProviderQuery = useSelector(selectNodeProviderQuery);
+  const mode = useSelector(selectMode);
   const [options, setOptions] = useState(networkOptions);
   useEffect(() => {
     if (!nodeProviderQuery) return;
     (async function () {
       try {
         const networks = await fetchWrapper.get(`${nodeProviderQuery}/kima-finance/kima-blockchain/chains/chain`);
-        setOptions(networkOptions.filter(network => networks.Chain.findIndex(chain => chain.symbol === network.id && !chain.disabled) >= 0 || network.id === ChainName.FIAT && useFIAT));
+        if (mode === ModeOptions.onramp) {
+          setOptions(networkOptions.filter(network => networks.Chain.some(chain => !chain.disabled && chain.modes.includes('onramp') && chain.symbol === network.id)));
+        } else {
+          setOptions(networkOptions.filter(network => networks.Chain.findIndex(chain => chain.symbol === network.id && !chain.disabled) >= 0 || network.id === ChainName.FIAT && useFIAT));
+        }
         let tokenOptions = {};
         for (const network of networks.Chain) {
           for (const token of network.tokens) {
@@ -1560,7 +1571,7 @@ function useNetworkOptions() {
         toast.error('rpc disconnected');
       }
     })();
-  }, [nodeProviderQuery]);
+  }, [nodeProviderQuery, mode]);
   return useMemo(() => ({
     options
   }), [options]);
@@ -2556,15 +2567,14 @@ const NetworkDropdown = React.memo(({
   const dAppOption = useSelector(selectDappOption);
   const originNetwork = useSelector(selectSourceChain);
   const targetNetwork = useSelector(selectTargetChain);
+  const validTransactionOptionTargetNetwork = useSelector(selectValidTransactionOptionTargetNetwork);
   const nodeProviderQuery = useSelector(selectNodeProviderQuery);
   const {
     options: networkOptions
   } = useNetworkOptions();
   const selectedNetwork = useMemo(() => {
     const index = networkOptions.findIndex(option => option.id === (_isOriginChain ? originNetwork : targetNetwork));
-    console.log('network: ', networkOptions[index]);
     if (index >= 0) return networkOptions[index];
-    console.log('network 3: ', networkOptions[3]);
     if (availableNetworks.length !== 0) {
       return networkOptions.find(networkOption => networkOption.id === availableNetworks[0]);
     }
@@ -2583,11 +2593,12 @@ const NetworkDropdown = React.memo(({
     (async function () {
       try {
         let chains = [];
-        const networks = await fetchWrapper.get(`${nodeProviderQuery}/kima-finance/kima-blockchain/chains/get_available_chains/${originNetwork}`);
+        const networks = await fetchWrapper.get(`${nodeProviderQuery}/kima-finance/kima-blockchain/chains/get_available_chains/FIAT`);
         chains = networks.Chains;
         if (useFIAT) chains.push(ChainName.FIAT);
         setAvailableNetworks(chains);
-        if (_isOriginChain && !targetNetwork) {
+        if (validTransactionOptionTargetNetwork === "invalid") {
+          console.log("targetChain from network dropdown ue");
           dispatch(setTargetChain(chains[0]));
         }
         if (sourceChangeRef.current) {
@@ -2600,7 +2611,7 @@ const NetworkDropdown = React.memo(({
         toast.error('rpc disconnected');
       }
     })();
-  }, [nodeProviderQuery, targetNetwork, mode, _isOriginChain, useFIAT]);
+  }, [nodeProviderQuery, targetNetwork, mode, _isOriginChain, useFIAT, validTransactionOptionTargetNetwork]);
   useEffect(() => {
     if (!nodeProviderQuery || mode !== ModeOptions.bridge) return;
     (async function () {
@@ -11476,12 +11487,14 @@ const OnrampForm = ({
   const targetNetwork = useSelector(selectTargetChain);
   const targetAddress = useSelector(selectTargetAddress);
   const selectedBankAccount = useSelector(selectSelectedBankAccount);
+  const validTransactionOptionTargetNetwork = useSelector(selectValidTransactionOptionTargetNetwork);
   const [amountValue, setAmountValue] = useState('');
   const amount = useSelector(selectAmount);
   const {
     isReady
   } = useIsWalletReady();
   const Icon = ((_COIN_LIST = COIN_LIST[selectedCoin || 'USDK']) === null || _COIN_LIST === void 0 ? void 0 : _COIN_LIST.icon) || COIN_LIST['USDK'].icon;
+  console.log('target network: ', targetNetwork);
   const errorMessage = useMemo(() => compliantOption && targetCompliant !== 'low' ? `Target address has ${targetCompliant} risk` : '', [compliantOption, targetCompliant]);
   useEffect(() => {
     if (!errorMessage) return;
@@ -11491,6 +11504,7 @@ const OnrampForm = ({
     if (amountValue) return;
     setAmountValue(amount);
   }, [amount]);
+  const targetNetworkOption = useMemo(() => networkOptions.filter(network => network.id === targetNetwork)[0], [networkOptions, targetNetwork]);
   return React.createElement("div", {
     className: 'single-form'
   }, React.createElement("p", {
@@ -11500,11 +11514,15 @@ const OnrampForm = ({
     className: 'form-item'
   }, React.createElement("span", {
     className: 'label'
-  }, "Target Network"), React.createElement(NetworkDropdown, null)), transactionOption ? React.createElement("div", {
+  }, "Target Network"), (!transactionOption || validTransactionOptionTargetNetwork === "invalid") && React.createElement(NetworkDropdown, {
+    isOriginChain: false
+  }), transactionOption && validTransactionOptionTargetNetwork === "valid" && React.createElement("span", {
+    className: 'kima-card-network-label'
+  }, targetNetwork ? React.createElement(targetNetworkOption.icon, null) : '', targetNetwork ? targetNetworkOption.label : '...')), transactionOption ? React.createElement("div", {
     className: `form-item ${theme.colorMode}`
   }, React.createElement("span", {
     className: 'label'
-  }, "Target Address:"), React.createElement("strong", null, targetAddress || "...")) : React.createElement("div", {
+  }, "Target Address:"), React.createElement("strong", null, targetAddress || '...')) : React.createElement("div", {
     className: 'form-item wallet-button-item'
   }, React.createElement("span", {
     className: 'label'
@@ -12369,8 +12387,12 @@ const KimaTransactionWidget = ({
           if (transactionOption) {
             const networks = await fetchWrapper.get(`${kimaNodeProviderQuery}/kima-finance/kima-blockchain/chains/get_available_chains/FIAT`);
             if (!networks.Chains.includes(transactionOption.targetChain)) {
+              console.log("dispatch target chain from KimaTransactionWidget default");
+              dispatch(setValidTransactionOptionTransactionOption("invalid"));
               return toast.error("Specified network not supported!");
             }
+            console.log("dispatch target chain from KimaTransactionWidget txoption");
+            dispatch(setValidTransactionOptionTransactionOption("valid"));
             dispatch(setTargetChain(transactionOption.targetChain));
           }
         } catch (error) {

@@ -42,7 +42,8 @@ import {
   setDepasifyAccounts,
   setSelectedAccount,
   setSelectedBankAccount,
-  setRedirectUrl
+  setRedirectUrl,
+  setValidTransactionOptionTransactionOption
 } from '../store/optionSlice'
 import '../index.css'
 import { selectSubmitted } from '../store/selectors'
@@ -169,9 +170,13 @@ export const KimaTransactionWidget = ({
             )
 
             if(!networks.Chains.includes(transactionOption.targetChain)){
+              console.log("dispatch target chain from KimaTransactionWidget default")
+              dispatch(setValidTransactionOptionTransactionOption("invalid"))
               return toast.error("Specified network not supported!")
             }
 
+            console.log("dispatch target chain from KimaTransactionWidget txoption")
+            dispatch(setValidTransactionOptionTransactionOption("valid"))
             dispatch(setTargetChain(transactionOption.targetChain))
           }
 

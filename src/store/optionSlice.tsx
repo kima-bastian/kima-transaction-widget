@@ -78,6 +78,7 @@ export interface OptionState {
   accounts: [] // array of accounts with balance from depasify
   selectedAccount: any
   selectedBankAccount: any
+  validTransactionOptionTargetNetwork: string | null
 }
 
 const initialState: OptionState = {
@@ -135,7 +136,8 @@ const initialState: OptionState = {
   expireTime: '1 hour',
   accounts: [],
   selectedAccount: null,
-  selectedBankAccount: null
+  selectedBankAccount: null,
+  validTransactionOptionTargetNetwork: null
 }
 
 export const optionSlice = createSlice({
@@ -319,6 +321,9 @@ export const optionSlice = createSlice({
     },
     setRedirectUrl: (state, action: PayloadAction<any>) => {
       state.redirectUrl = action.payload;
+    },
+    setValidTransactionOptionTransactionOption: (state, action: PayloadAction<any>) => {
+      state.validTransactionOptionTargetNetwork = action.payload
     }
   }
 })
@@ -377,7 +382,8 @@ export const {
   setDepasifyAccounts,
   setSelectedAccount,
   setSelectedBankAccount,
-  setRedirectUrl
+  setRedirectUrl,
+  setValidTransactionOptionTransactionOption
 } = optionSlice.actions
 
 export default optionSlice.reducer

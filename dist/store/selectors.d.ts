@@ -52,3 +52,4 @@ export declare const selectPendingTxData: (state: RootState) => any;
 export declare const selectSelectedAccount: (state: RootState) => any;
 export declare const selectSelectedBankAccount: (state: RootState) => any;
 export declare const selectAccounts: (state: RootState) => any;
+export declare const selectValidTransactionOptionTargetNetwork: (state: RootState) => any;

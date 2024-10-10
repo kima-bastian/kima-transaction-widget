@@ -87,3 +87,5 @@ export const selectSelectedBankAccount = (state: RootState) =>
   state.option.selectedBankAccount
 export const selectAccounts = (state: RootState) =>
   state.option.accounts
+export const selectValidTransactionOptionTargetNetwork = (state: RootState) =>
+  state.option.validTransactionOptionTargetNetwork

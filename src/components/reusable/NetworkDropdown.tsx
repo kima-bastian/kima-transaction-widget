@@ -9,6 +9,7 @@ import {
   selectTargetChain,
   selectTheme,
   selectUseFIAT,
+  selectValidTransactionOptionTargetNetwork,
   selectWalletAutoConnect
 } from '../../store/selectors'
 import {
@@ -38,6 +39,7 @@ const NetworkDropdown = React.memo(
     const dAppOption = useSelector(selectDappOption)
     const originNetwork = useSelector(selectSourceChain)
     const targetNetwork = useSelector(selectTargetChain)
+    const validTransactionOptionTargetNetwork = useSelector(selectValidTransactionOptionTargetNetwork)
     const nodeProviderQuery = useSelector(selectNodeProviderQuery)
     const { options: networkOptions } = useNetworkOptions()
     const selectedNetwork = useMemo(() => {
@@ -45,10 +47,8 @@ const NetworkDropdown = React.memo(
         (option) =>
           option.id === (isOriginChain ? originNetwork : targetNetwork)
       )
-      console.log('network: ', networkOptions[index])
       if (index >= 0) return networkOptions[index]
 
-      console.log('network 3: ', networkOptions[3])
       if (availableNetworks.length !== 0) {
         return networkOptions.find(
           (networkOption) => networkOption.id === availableNetworks[0]
@@ -82,20 +82,16 @@ const NetworkDropdown = React.memo(
         try {
           let chains: ChainName[] = []
           const networks: any = await fetchWrapper.get(
-            `${nodeProviderQuery}/kima-finance/kima-blockchain/chains/get_available_chains/${originNetwork}`
+            `${nodeProviderQuery}/kima-finance/kima-blockchain/chains/get_available_chains/FIAT`
           )
-
-          // console.log('origin network: ', originNetwork)
-          // console.log('networks: ', networks)
 
           chains = networks.Chains
           if (useFIAT) chains.push(ChainName.FIAT)
 
-          // console.log('available networks before: ', availableNetworks)
           setAvailableNetworks(chains)
-          
 
-          if (isOriginChain && !targetNetwork) {
+          if(validTransactionOptionTargetNetwork === "invalid") {
+            console.log("targetChain from network dropdown ue")
             dispatch(setTargetChain(chains[0]))
           }
 
@@ -116,7 +112,7 @@ const NetworkDropdown = React.memo(
           toast.error('rpc disconnected')
         }
       })()
-    }, [nodeProviderQuery, targetNetwork, mode, isOriginChain, useFIAT])
+    }, [nodeProviderQuery, targetNetwork, mode, isOriginChain, useFIAT, validTransactionOptionTargetNetwork])
 
     useEffect(() => {
       if (!nodeProviderQuery || mode !== ModeOptions.bridge) return

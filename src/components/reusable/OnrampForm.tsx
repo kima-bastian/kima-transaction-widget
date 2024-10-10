@@ -14,13 +14,14 @@ import {
   selectFeeDeduct,
   selectAmount,
   selectSelectedBankAccount,
-  selectTargetAddress
+  selectTargetAddress,
+  selectValidTransactionOptionTargetNetwork
 } from '../../store/selectors'
 import { AddressInput, CoinDropdown, CustomCheckbox, WalletButton } from '.'
 import { setAmount, setFeeDeduct } from '../../store/optionSlice'
 import { ModeOptions, PaymentTitleOption } from '../../interface'
 import NetworkDropdown from './NetworkDropdown'
-import { COIN_LIST, ChainName } from '../../utils/constants'
+import { COIN_LIST, ChainName, networkOptions } from '../../utils/constants'
 import { formatterFloat } from '../../helpers/functions'
 import ExpireTimeDropdown from './ExpireTimeDropdown'
 import useIsWalletReady from '../../hooks/useIsWalletReady'
@@ -45,10 +46,15 @@ const OnrampForm = ({
   const targetNetwork = useSelector(selectTargetChain)
   const targetAddress = useSelector(selectTargetAddress)
   const selectedBankAccount = useSelector(selectSelectedBankAccount)
+  const validTransactionOptionTargetNetwork = useSelector(
+    selectValidTransactionOptionTargetNetwork
+  )
   const [amountValue, setAmountValue] = useState('')
   const amount = useSelector(selectAmount)
   const { isReady } = useIsWalletReady()
   const Icon = COIN_LIST[selectedCoin || 'USDK']?.icon || COIN_LIST['USDK'].icon
+
+  console.log('target network: ', targetNetwork)
 
   const errorMessage = useMemo(
     () =>
@@ -68,6 +74,11 @@ const OnrampForm = ({
     setAmountValue(amount)
   }, [amount])
 
+  const targetNetworkOption = useMemo(
+    () => networkOptions.filter((network) => network.id === targetNetwork)[0],
+    [networkOptions, targetNetwork]
+  )
+
   return (
     <div className='single-form'>
       <p className='payment-title' style={paymentTitleOption?.style}>
@@ -76,12 +87,22 @@ const OnrampForm = ({
 
       <div className='form-item'>
         <span className='label'>Target Network</span>
-          <NetworkDropdown />
+        {
+          (!transactionOption || validTransactionOptionTargetNetwork === "invalid") && 
+            (<NetworkDropdown isOriginChain={false} />)
+        }
+
+        { transactionOption && validTransactionOptionTargetNetwork === "valid" && 
+          <span className='kima-card-network-label'>
+            {targetNetwork ? <targetNetworkOption.icon /> : ''}
+            {targetNetwork ? targetNetworkOption.label : '...'}
+          </span>
+        }
       </div>
       {transactionOption ? (
         <div className={`form-item ${theme.colorMode}`}>
           <span className='label'>Target Address:</span>
-          <strong>{targetAddress || "..."}</strong>
+          <strong>{targetAddress || '...'}</strong>
         </div>
       ) : (
         <div className='form-item wallet-button-item'>

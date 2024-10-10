@@ -1084,7 +1084,8 @@ var initialState = {
   expireTime: '1 hour',
   accounts: [],
   selectedAccount: null,
-  selectedBankAccount: null
+  selectedBankAccount: null,
+  validTransactionOptionTargetNetwork: null
 };
 var optionSlice = createSlice({
   name: 'option',
@@ -1266,6 +1267,9 @@ var optionSlice = createSlice({
     },
     setRedirectUrl: function setRedirectUrl(state, action) {
       state.redirectUrl = action.payload;
+    },
+    setValidTransactionOptionTransactionOption: function setValidTransactionOptionTransactionOption(state, action) {
+      state.validTransactionOptionTargetNetwork = action.payload;
     }
   }
 });
@@ -1319,7 +1323,8 @@ var _optionSlice$actions = optionSlice.actions,
   setDepasifyAccounts = _optionSlice$actions.setDepasifyAccounts,
   setSelectedAccount = _optionSlice$actions.setSelectedAccount,
   setSelectedBankAccount = _optionSlice$actions.setSelectedBankAccount,
-  setRedirectUrl = _optionSlice$actions.setRedirectUrl;
+  setRedirectUrl = _optionSlice$actions.setRedirectUrl,
+  setValidTransactionOptionTransactionOption = _optionSlice$actions.setValidTransactionOptionTransactionOption;
 var optionReducer = optionSlice.reducer;
 
 var configureStore = toolkitRaw.configureStore;
@@ -1640,6 +1645,9 @@ var selectSelectedBankAccount = function selectSelectedBankAccount(state) {
 var selectAccounts = function selectAccounts(state) {
   return state.option.accounts;
 };
+var selectValidTransactionOptionTargetNetwork = function selectValidTransactionOptionTargetNetwork(state) {
+  return state.option.validTransactionOptionTargetNetwork;
+};
 
 var Loading180Ring = function Loading180Ring(_ref) {
   var _ref$width = _ref.width,
@@ -1829,6 +1837,7 @@ function useNetworkOptions() {
   var dispatch = reactRedux.useDispatch();
   var useFIAT = reactRedux.useSelector(selectUseFIAT);
   var nodeProviderQuery = reactRedux.useSelector(selectNodeProviderQuery);
+  var mode = reactRedux.useSelector(selectMode);
   var _useState = React.useState(networkOptions),
     options = _useState[0],
     setOptions = _useState[1];
@@ -1838,11 +1847,19 @@ function useNetworkOptions() {
       try {
         var _temp = _catch(function () {
           return Promise.resolve(fetchWrapper.get(nodeProviderQuery + "/kima-finance/kima-blockchain/chains/chain")).then(function (networks) {
-            setOptions(networkOptions.filter(function (network) {
-              return networks.Chain.findIndex(function (chain) {
-                return chain.symbol === network.id && !chain.disabled;
-              }) >= 0 || network.id === exports.SupportNetworks.FIAT && useFIAT;
-            }));
+            if (mode === exports.ModeOptions.onramp) {
+              setOptions(networkOptions.filter(function (network) {
+                return networks.Chain.some(function (chain) {
+                  return !chain.disabled && chain.modes.includes('onramp') && chain.symbol === network.id;
+                });
+              }));
+            } else {
+              setOptions(networkOptions.filter(function (network) {
+                return networks.Chain.findIndex(function (chain) {
+                  return chain.symbol === network.id && !chain.disabled;
+                }) >= 0 || network.id === exports.SupportNetworks.FIAT && useFIAT;
+              }));
+            }
             var tokenOptions = {};
             for (var _iterator = _createForOfIteratorHelperLoose(networks.Chain), _step; !(_step = _iterator()).done;) {
               var network = _step.value;
@@ -1865,7 +1882,7 @@ function useNetworkOptions() {
         Promise.reject(e);
       }
     })();
-  }, [nodeProviderQuery]);
+  }, [nodeProviderQuery, mode]);
   return React.useMemo(function () {
     return {
       options: options
@@ -3016,6 +3033,7 @@ var NetworkDropdown = React__default.memo(function (_ref) {
   var dAppOption = reactRedux.useSelector(selectDappOption);
   var originNetwork = reactRedux.useSelector(selectSourceChain);
   var targetNetwork = reactRedux.useSelector(selectTargetChain);
+  var validTransactionOptionTargetNetwork = reactRedux.useSelector(selectValidTransactionOptionTargetNetwork);
   var nodeProviderQuery = reactRedux.useSelector(selectNodeProviderQuery);
   var _useNetworkOptions = useNetworkOptions(),
     networkOptions = _useNetworkOptions.options;
@@ -3023,9 +3041,7 @@ var NetworkDropdown = React__default.memo(function (_ref) {
     var index = networkOptions.findIndex(function (option) {
       return option.id === (isOriginChain ? originNetwork : targetNetwork);
     });
-    console.log('network: ', networkOptions[index]);
     if (index >= 0) return networkOptions[index];
-    console.log('network 3: ', networkOptions[3]);
     if (availableNetworks.length !== 0) {
       return networkOptions.find(function (networkOption) {
         return networkOption.id === availableNetworks[0];
@@ -3051,11 +3067,12 @@ var NetworkDropdown = React__default.memo(function (_ref) {
       try {
         var _temp = _catch(function () {
           var chains = [];
-          return Promise.resolve(fetchWrapper.get(nodeProviderQuery + "/kima-finance/kima-blockchain/chains/get_available_chains/" + originNetwork)).then(function (networks) {
+          return Promise.resolve(fetchWrapper.get(nodeProviderQuery + "/kima-finance/kima-blockchain/chains/get_available_chains/FIAT")).then(function (networks) {
             chains = networks.Chains;
             if (useFIAT) chains.push(exports.SupportNetworks.FIAT);
             setAvailableNetworks(chains);
-            if (isOriginChain && !targetNetwork) {
+            if (validTransactionOptionTargetNetwork === "invalid") {
+              console.log("targetChain from network dropdown ue");
               dispatch(setTargetChain(chains[0]));
             }
             if (sourceChangeRef.current) {
@@ -3075,7 +3092,7 @@ var NetworkDropdown = React__default.memo(function (_ref) {
         Promise.reject(e);
       }
     })();
-  }, [nodeProviderQuery, targetNetwork, mode, isOriginChain, useFIAT]);
+  }, [nodeProviderQuery, targetNetwork, mode, isOriginChain, useFIAT, validTransactionOptionTargetNetwork]);
   React.useEffect(function () {
     if (!nodeProviderQuery || mode !== exports.ModeOptions.bridge) return;
     (function () {
@@ -12227,6 +12244,7 @@ var OnrampForm = function OnrampForm(_ref) {
   var targetNetwork = reactRedux.useSelector(selectTargetChain);
   var targetAddress = reactRedux.useSelector(selectTargetAddress);
   var selectedBankAccount = reactRedux.useSelector(selectSelectedBankAccount);
+  var validTransactionOptionTargetNetwork = reactRedux.useSelector(selectValidTransactionOptionTargetNetwork);
   var _useState = React.useState(''),
     amountValue = _useState[0],
     setAmountValue = _useState[1];
@@ -12234,6 +12252,7 @@ var OnrampForm = function OnrampForm(_ref) {
   var _useIsWalletReady = useIsWalletReady(),
     isReady = _useIsWalletReady.isReady;
   var Icon = ((_COIN_LIST = COIN_LIST[selectedCoin || 'USDK']) === null || _COIN_LIST === void 0 ? void 0 : _COIN_LIST.icon) || COIN_LIST['USDK'].icon;
+  console.log('target network: ', targetNetwork);
   var errorMessage = React.useMemo(function () {
     return compliantOption && targetCompliant !== 'low' ? "Target address has " + targetCompliant + " risk" : '';
   }, [compliantOption, targetCompliant]);
@@ -12245,6 +12264,11 @@ var OnrampForm = function OnrampForm(_ref) {
     if (amountValue) return;
     setAmountValue(amount);
   }, [amount]);
+  var targetNetworkOption = React.useMemo(function () {
+    return networkOptions.filter(function (network) {
+      return network.id === targetNetwork;
+    })[0];
+  }, [networkOptions, targetNetwork]);
   return React__default.createElement("div", {
     className: 'single-form'
   }, React__default.createElement("p", {
@@ -12254,11 +12278,15 @@ var OnrampForm = function OnrampForm(_ref) {
     className: 'form-item'
   }, React__default.createElement("span", {
     className: 'label'
-  }, "Target Network"), React__default.createElement(NetworkDropdown, null)), transactionOption ? React__default.createElement("div", {
+  }, "Target Network"), (!transactionOption || validTransactionOptionTargetNetwork === "invalid") && React__default.createElement(NetworkDropdown, {
+    isOriginChain: false
+  }), transactionOption && validTransactionOptionTargetNetwork === "valid" && React__default.createElement("span", {
+    className: 'kima-card-network-label'
+  }, targetNetwork ? React__default.createElement(targetNetworkOption.icon, null) : '', targetNetwork ? targetNetworkOption.label : '...')), transactionOption ? React__default.createElement("div", {
     className: "form-item " + theme.colorMode
   }, React__default.createElement("span", {
     className: 'label'
-  }, "Target Address:"), React__default.createElement("strong", null, targetAddress || "...")) : React__default.createElement("div", {
+  }, "Target Address:"), React__default.createElement("strong", null, targetAddress || '...')) : React__default.createElement("div", {
     className: 'form-item wallet-button-item'
   }, React__default.createElement("span", {
     className: 'label'
@@ -13272,8 +13300,12 @@ var KimaTransactionWidget = function KimaTransactionWidget(_ref) {
                 if (transactionOption) {
                   return Promise.resolve(fetchWrapper.get(kimaNodeProviderQuery + "/kima-finance/kima-blockchain/chains/get_available_chains/FIAT")).then(function (networks) {
                     if (!networks.Chains.includes(transactionOption.targetChain)) {
+                      console.log("dispatch target chain from KimaTransactionWidget default");
+                      dispatch(setValidTransactionOptionTransactionOption("invalid"));
                       return toast__default.error("Specified network not supported!");
                     }
+                    console.log("dispatch target chain from KimaTransactionWidget txoption");
+                    dispatch(setValidTransactionOptionTransactionOption("valid"));
                     dispatch(setTargetChain(transactionOption.targetChain));
                   });
                 }
